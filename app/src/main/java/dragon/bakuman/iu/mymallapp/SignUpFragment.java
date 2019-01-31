@@ -1,6 +1,7 @@
 package dragon.bakuman.iu.mymallapp;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +20,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -171,6 +176,48 @@ public class SignUpFragment extends Fragment {
     private void checkEmailAndPassword() {
 
 
+        //regular expression!!?
+        if (email.getText().toString().matches(emailPattern)) {
+
+            if (password.getText().toString().equals(confirmpassword.getText().toString())) {
+
+                progressBar.setVisibility(View.VISIBLE);
+                signUpBtn.setEnabled(false);
+                signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+
+                firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(mainIntent);
+                            getActivity().finish();
+
+                        } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            signUpBtn.setEnabled(true);
+                            signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+            } else {
+
+                confirmpassword.setError("Password does not match");
+
+
+            }
+
+        } else {
+
+            email.setError("Invalid Email");
+
+
+        }
 
     }
 
