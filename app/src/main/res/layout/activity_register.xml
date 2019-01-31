@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
+    <FrameLayout
+        android:id="@+id/register_frameLayout"
+        android:layout_width="395dp"
+        android:layout_height="715dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>
