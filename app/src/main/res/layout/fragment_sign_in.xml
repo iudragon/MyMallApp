@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".SignUpFragment">
+    tools:context=".SignInFragment">
 
 
     <android.support.constraint.ConstraintLayout
@@ -41,7 +41,7 @@
             app:layout_constraintVertical_bias="0.037" />
 
         <EditText
-            android:id="@+id/sign_up_name"
+            android:id="@+id/sign_in_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <EditText
-            android:id="@+id/sign_up_email"
+            android:id="@+id/sign_in_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -72,7 +72,7 @@
             android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_name" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_email" />
 
         <TextView
             android:id="@+id/sign_in_forgot_password"
@@ -81,11 +81,11 @@
             android:layout_marginStart="4dp"
             android:text="Forgot Password?"
             android:textColor="#ffffff"
-            app:layout_constraintStart_toStartOf="@+id/sign_up_email"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_email" />
+            app:layout_constraintStart_toStartOf="@+id/sign_in_password"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_password" />
 
         <Button
-            android:id="@+id/sign_up_btn"
+            android:id="@+id/sign_in_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,9 +93,10 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:background="@color/btnRed"
+            android:enabled="false"
             android:text="Sign In"
             android:textAllCaps="false"
-            android:textColor="#ffffff"
+            android:textColor="#50ffffff"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +116,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
 
         <TextView
             android:id="@+id/tv_dont_have_an_account"
@@ -160,10 +161,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/sign_up_btn"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_up_email" />
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_password" />
 
     </android.support.constraint.ConstraintLayout>
 

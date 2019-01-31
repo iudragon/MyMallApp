@@ -3,6 +3,7 @@ package dragon.bakuman.iu.mymallapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -52,6 +58,8 @@ public class SignUpFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
 
+    private FirebaseFirestore firebaseFirestore;
+
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
     @Override
@@ -75,6 +83,7 @@ public class SignUpFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         return view;
     }
@@ -176,6 +185,10 @@ public class SignUpFragment extends Fragment {
     private void checkEmailAndPassword() {
 
 
+        Drawable customErrorIcon = getResources().getDrawable(R.drawable.ic_fitness);
+        customErrorIcon.setBounds(0, 0, customErrorIcon.getIntrinsicWidth(), customErrorIcon.getIntrinsicHeight());
+
+
         //regular expression!!?
         if (email.getText().toString().matches(emailPattern)) {
 
@@ -190,9 +203,28 @@ public class SignUpFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(mainIntent);
-                            getActivity().finish();
+                            Map<Object, String> userData = new HashMap<>();
+                            userData.put("fullname", fullname.getText().toString());
+
+                            firebaseFirestore.collection("USERS").add(userData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(mainIntent);
+                                        getActivity().finish();
+
+                                    } else {
+                                        progressBar.setVisibility(View.INVISIBLE);
+                                        signUpBtn.setEnabled(true);
+                                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+
 
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -207,14 +239,14 @@ public class SignUpFragment extends Fragment {
 
             } else {
 
-                confirmpassword.setError("Password does not match");
+                confirmpassword.setError("Password does not match", customErrorIcon);
 
 
             }
 
         } else {
 
-            email.setError("Invalid Email");
+            email.setError("Invalid Email", customErrorIcon);
 
 
         }
