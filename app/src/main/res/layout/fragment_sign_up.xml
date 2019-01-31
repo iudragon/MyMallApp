@@ -23,7 +23,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="#70ffffff"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Password ; atleast 8 chars"
             android:inputType="textPassword"
             android:textColor="#ffffff"
             android:textColorHint="#70ffffff"
@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/sign_up_password" />
 
         <ImageButton
-            android:id="@+id/sign_in_close_btn"
+            android:id="@+id/sign_up_close_btn"
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
@@ -122,8 +122,9 @@
             android:layout_marginBottom="8dp"
             android:background="@color/btnRed"
             android:text="Sign Up"
+            android:enabled="false"
             android:textAllCaps="false"
-            android:textColor="#ffffff"
+            android:textColor="#50ffffff"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

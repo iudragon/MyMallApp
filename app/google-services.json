@@ -1,0 +1,55 @@
+ {
+  "project_info": {
+    "project_number": "778250730693",
+    "firebase_url": "https://mymallapp.firebaseio.com",
+    "project_id": "mymallapp",
+    "storage_bucket": "mymallapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778250730693:android:d8165e275f495b38",
+        "android_client_info": {
+          "package_name": "dragon.bakuman.iu.mymallapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778250730693-v3efopdmievdl2f7rc1kc3kqtngsgdec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dragon.bakuman.iu.mymallapp",
+            "certificate_hash": "12fb8aeff6dafc00932b64c7ae6207f6aaa2f2e8"
+          }
+        },
+        {
+          "client_id": "778250730693-jgivrh8sckj64fube9its3u53bcq0dbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrhMvi7qWp1uizR43pC23iuRUPNLVjUlE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778250730693-jgivrh8sckj64fube9its3u53bcq0dbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
