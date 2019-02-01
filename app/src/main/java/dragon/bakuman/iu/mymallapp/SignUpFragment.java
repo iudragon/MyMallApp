@@ -99,6 +99,15 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mainIntent();
+
+            }
+        });
+
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -210,9 +219,7 @@ public class SignUpFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentReference> task) {
                                     if (task.isSuccessful()) {
-                                        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                                        startActivity(mainIntent);
-                                        getActivity().finish();
+                                        mainIntent();
 
                                     } else {
                                         progressBar.setVisibility(View.INVISIBLE);
@@ -302,4 +309,13 @@ public class SignUpFragment extends Fragment {
 
 
     }
+
+    private void mainIntent(){
+
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(mainIntent);
+        getActivity().finish();
+
+    }
+
 }

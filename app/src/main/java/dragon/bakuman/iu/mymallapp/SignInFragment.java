@@ -46,6 +46,7 @@ public class SignInFragment extends Fragment {
     private EditText email;
     private EditText password;
     private ProgressBar progressBar;
+    private TextView forgotPassword;
 
     private ImageButton closeBtn;
     private Button signInBtn;
@@ -67,6 +68,7 @@ public class SignInFragment extends Fragment {
         email = view.findViewById(R.id.sign_in_email);
         password = view.findViewById(R.id.sign_in_password);
         progressBar = view.findViewById(R.id.sign_in_progress_bar);
+        forgotPassword = view.findViewById(R.id.sign_in_forgot_password);
 
         closeBtn = view.findViewById(R.id.sign_in_close_btn);
         signInBtn = view.findViewById(R.id.sign_in_btn);
@@ -83,6 +85,20 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 setFragment(new SignUpFragment());
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(new ResetPasswordFragment());
+            }
+        });
+
+        closeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainIntent();
             }
         });
 
@@ -143,9 +159,7 @@ public class SignInFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-                            startActivity(mainIntent);
-                            getActivity().finish();
+                            mainIntent();
 
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -200,6 +214,14 @@ public class SignInFragment extends Fragment {
         fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
         fragmentTransaction.commit();
 
+
+    }
+
+    private void mainIntent() {
+
+        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+        startActivity(mainIntent);
+        getActivity().finish();
 
     }
 }
