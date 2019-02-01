@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_mall"
+            android:icon="@drawable/ic_mall"
+            android:title="My Mall" />
         <item
             android:id="@+id/nav_my_orders"
             android:icon="@drawable/ic_shopping"
@@ -25,6 +29,11 @@
             android:icon="@drawable/ic_person"
             android:title="My Account" />
     </group>
+
+    <item
+        android:id="@+id/nav_sign_out"
+        android:icon="@drawable/ic_add_circle"
+        android:title="Sign Out" />
 
 
 </menu>
