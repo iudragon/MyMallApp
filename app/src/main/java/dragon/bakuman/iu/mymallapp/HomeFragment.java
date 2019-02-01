@@ -3,6 +3,7 @@ package dragon.bakuman.iu.mymallapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +26,13 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView categoryRecyclerView;
     private CategoryAdapter categoryAdapter;
+
+    ///////// Banner Slider
+
+    private ViewPager bannerSliderViewPager;
+    private List<SliderModel> sliderModelList;
+    private int currentPage = 2;
+    ///////// Banner Slider
 
 
     @Override
@@ -54,9 +62,80 @@ public class HomeFragment extends Fragment {
         categoryRecyclerView.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
 
+        ///////// Banner Slider
+
+        bannerSliderViewPager = view.findViewById(R.id.banner_slider_view_pager);
+        sliderModelList = new ArrayList<>();
+
+        sliderModelList.add(new SliderModel(R.drawable.ic_person_outline));
+        sliderModelList.add(new SliderModel(R.drawable.ic_sign_out));
+
+        sliderModelList.add(new SliderModel(R.drawable.farmer));
+        sliderModelList.add(new SliderModel(R.drawable.ic_add_circle));
+        sliderModelList.add(new SliderModel(R.drawable.connect));
+        sliderModelList.add(new SliderModel(R.drawable.ic_shopping));
+        sliderModelList.add(new SliderModel(R.drawable.ic_favorite));
+        sliderModelList.add(new SliderModel(R.drawable.ic_person));
+        sliderModelList.add(new SliderModel(R.drawable.ic_person_outline));
+        sliderModelList.add(new SliderModel(R.drawable.ic_sign_out));
+
+        sliderModelList.add(new SliderModel(R.drawable.farmer));
+        sliderModelList.add(new SliderModel(R.drawable.ic_add_circle));
+
+        SliderAdapter sliderAdapter = new SliderAdapter(sliderModelList);
+
+        bannerSliderViewPager.setClipToPadding(false);
+        bannerSliderViewPager.setPageMargin(20);
+
+
+        ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                currentPage = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+                if (i == ViewPager.SCROLL_STATE_IDLE) {
+
+                    pageLooper();
+                }
+
+            }
+        };
+
+
+        bannerSliderViewPager.addOnPageChangeListener(onPageChangeListener);
+
+        ///////// Banner Slider
+
         return view;
     }
+    ///////// Banner Slider
 
+    private void pageLooper() {
+
+        if (currentPage == sliderModelList.size() - 2) {
+
+            currentPage = 2;
+            bannerSliderViewPager.setCurrentItem(currentPage, false);
+        }
+
+        if (currentPage == 1) {
+
+            currentPage = sliderModelList.size() - 3;
+            bannerSliderViewPager.setCurrentItem(currentPage, false);
+        }
+
+    }
+
+    ///////// Banner Slider
 }
 
 
