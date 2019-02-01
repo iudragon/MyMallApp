@@ -29,6 +29,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
+import static dragon.bakuman.iu.mymallapp.RegisterActivity.onResetPasswordFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,6 +93,9 @@ public class SignInFragment extends Fragment {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                onResetPasswordFragment = true;
+
                 setFragment(new ResetPasswordFragment());
             }
         });
