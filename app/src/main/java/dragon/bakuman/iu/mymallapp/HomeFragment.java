@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,15 @@ public class HomeFragment extends Fragment {
     private ConstraintLayout stripAdContainer;
 
     ///////// Strip Ad
+
+
+    ///////// Horizontal Product Layout
+
+    private Button horizontalLayoutViewAllBtn;
+    private TextView horizontalLayoutTitle;
+    private RecyclerView horizontalRecyclerView;
+
+    ///////// Horizontal Product Layout
 
 
     @Override
@@ -145,7 +156,7 @@ public class HomeFragment extends Fragment {
                 pageLooper();
                 stopBannerSlideShow();
 
-                if (event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
 
                     startBannerSlideShow();
 
@@ -167,6 +178,36 @@ public class HomeFragment extends Fragment {
         stripAdContainer.setBackgroundColor(Color.parseColor("#000000"));
 
         ///////// Strip Ad
+
+
+        ///////// Horizontal Product Layout
+
+        horizontalLayoutTitle = view.findViewById(R.id.horizontal_scroll_layout_title);
+        horizontalLayoutViewAllBtn = view.findViewById(R.id.horizontal_scroll_view_all_button);
+        horizontalRecyclerView = view.findViewById(R.id.horizontal_product_scroll_layout_recyclerview);
+
+        List<HorizontalProductScrollModel> horizontalProductScrollModelList = new ArrayList<>();
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.farmer, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_add_circle, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_card_giftcard, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_favorite, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_mail_green, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_mail_red, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_fitness, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_close, "Redmi 6", "Niiiiice", "Rs. 6699"));
+
+        HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductScrollModelList);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        horizontalRecyclerView.setLayoutManager(linearLayoutManager);
+
+        horizontalRecyclerView.setAdapter(horizontalProductScrollAdapter);
+        horizontalProductScrollAdapter.notifyDataSetChanged();
+
+
+
+        ///////// Horizontal Product Layout
 
         return view;
     }
@@ -216,7 +257,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void stopBannerSlideShow(){
+    private void stopBannerSlideShow() {
 
         timer.cancel();
 
