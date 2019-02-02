@@ -195,6 +195,8 @@ public class HomeFragment extends Fragment {
         horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_mail_green, "Redmi 6", "Niiiiice", "Rs. 6699"));
         horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_mail_red, "Redmi 6", "Niiiiice", "Rs. 6699"));
         horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_fitness, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_fitness, "Redmi 6", "Niiiiice", "Rs. 6699"));
+        horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_fitness, "Redmi 6", "Niiiiice", "Rs. 6699"));
         horizontalProductScrollModelList.add(new HorizontalProductScrollModel(R.drawable.ic_close, "Redmi 6", "Niiiiice", "Rs. 6699"));
 
         HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductScrollModelList);
@@ -231,10 +233,14 @@ public class HomeFragment extends Fragment {
         List<HomePageModel> homePageModelList = new ArrayList<>();
         homePageModelList.add(new HomePageModel(0, sliderModelList));
         homePageModelList.add(new HomePageModel(1, R.drawable.farmer, "#000000"));
-        homePageModelList.add(new HomePageModel(0, sliderModelList));
+        homePageModelList.add(new HomePageModel(2,"Deals of the day!!!" ,horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3,"Deals of the day!!!" ,horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(1, R.drawable.connect, "#0ddd00"));
+        homePageModelList.add(new HomePageModel(3,"Deals of the day!!!" ,horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(2,"Deals of the day!!!" ,horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(0, sliderModelList));
         homePageModelList.add(new HomePageModel(1, R.drawable.ic_favorite, "#fff000"));
+        homePageModelList.add(new HomePageModel(0, sliderModelList));
 
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);

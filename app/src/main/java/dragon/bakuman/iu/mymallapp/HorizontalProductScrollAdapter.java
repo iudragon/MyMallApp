@@ -27,7 +27,6 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_item_layout, viewGroup, false);
 
 
-
         return new ViewHolder(view);
     }
 
@@ -44,14 +43,23 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
         viewHolder.setProductImage(resource);
         viewHolder.setProductTitle(title);
         viewHolder.setProductDescription(description);
-        viewHolder.setProductPrice(price    );
+        viewHolder.setProductPrice(price);
 
 
     }
 
     @Override
     public int getItemCount() {
-        return horizontalProductScrollModelList.size();
+
+        if (horizontalProductScrollModelList.size() > 8) {
+
+            return 8;
+        } else {
+
+            return horizontalProductScrollModelList.size();
+        }
+
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,36 +74,34 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-             productImage = itemView.findViewById(R.id.h_s_product_image);
-             productTitle = itemView.findViewById(R.id.h_s_product_title);
-             productDescription = itemView.findViewById(R.id.h_s_product_description);
-             productPrice = itemView.findViewById(R.id.h_s_product_price);
+            productImage = itemView.findViewById(R.id.h_s_product_image);
+            productTitle = itemView.findViewById(R.id.h_s_product_title);
+            productDescription = itemView.findViewById(R.id.h_s_product_description);
+            productPrice = itemView.findViewById(R.id.h_s_product_price);
 
         }
 
-        private void setProductImage(int resource){
+        private void setProductImage(int resource) {
 
 
             productImage.setImageResource(resource);
 
         }
 
-        private void setProductTitle(String title){
+        private void setProductTitle(String title) {
 
             productTitle.setText(title);
         }
 
-        private void setProductDescription(String description){
+        private void setProductDescription(String description) {
 
             productDescription.setText(description);
         }
 
-        private void setProductPrice(String price){
+        private void setProductPrice(String price) {
 
             productPrice.setText(price);
         }
-
-
 
 
     }
