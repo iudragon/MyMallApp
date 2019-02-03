@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
+    private static final int ORDERS_FRAGMENT = 2;
 
     private static int currentFragment = -1;
 
@@ -95,25 +96,26 @@ public class MainActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.main_cart_icon) {
 
-            myCart();
-
-            return true;
+            gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void myCart() {
+    private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
 
 
         actionBarLogo.setVisibility(View.GONE);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setTitle("My Cart");
+        getSupportActionBar().setTitle(title);
 
         invalidateOptionsMenu();
-        setFragment(new MyCartFragment(), CART_FRAGMENT);
-        navigationView.getMenu().getItem(3).setChecked(true);
+        setFragment(fragment, fragmentNo);
 
+        if (fragmentNo == CART_FRAGMENT) {
+
+            navigationView.getMenu().getItem(3).setChecked(true);
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -125,7 +127,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_my_mall) {
 
 
-
             actionBarLogo.setVisibility(View.VISIBLE);
 
             invalidateOptionsMenu();
@@ -134,11 +135,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_my_orders) {
 
+            gotoFragment("My Orders", new MyOrdersFragment(), ORDERS_FRAGMENT);
+
         } else if (id == R.id.nav_my_rewards) {
 
         } else if (id == R.id.nav_my_cart) {
 
-            myCart();
+            gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
 
         } else if (id == R.id.nav_my_wishlist) {
 
