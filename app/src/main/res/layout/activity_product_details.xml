@@ -42,6 +42,7 @@
             <include layout="@layout/product_images_layout" />
             <include layout="@layout/reward_with_product_layout" />
             <include layout="@layout/product_description_layout" />
+            <include layout="@layout/product_details_only_layout" />
 
         </LinearLayout>
     </ScrollView>
