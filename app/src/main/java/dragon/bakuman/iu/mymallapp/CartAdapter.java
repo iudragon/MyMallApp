@@ -124,6 +124,8 @@ public class CartAdapter extends RecyclerView.Adapter {
             couponsApplied = itemView.findViewById(R.id.coupons_applied);
             productQuantity = itemView.findViewById(R.id.product_quantity);
 
+            freeCouponIcon = itemView.findViewById(R.id.free_icon_coupon);
+
 
         }
 
@@ -135,7 +137,7 @@ public class CartAdapter extends RecyclerView.Adapter {
 
             if (freeCouponsNo > 0) {
 
-//                freeCouponIcon.setVisibility(View.VISIBLE);
+                freeCouponIcon.setVisibility(View.VISIBLE);
                 freeCoupons.setVisibility(View.VISIBLE);
                 if (freeCouponsNo == 1) {
 
@@ -147,7 +149,7 @@ public class CartAdapter extends RecyclerView.Adapter {
 
             } else {
 
-//                freeCouponIcon.setVisibility(View.INVISIBLE);
+                freeCouponIcon.setVisibility(View.INVISIBLE);
                 freeCoupons.setVisibility(View.INVISIBLE);
             }
 

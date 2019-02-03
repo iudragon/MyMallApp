@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:background="#ffffff"
     android:elevation="3dp">
 
@@ -34,6 +36,7 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:tint="#ff00fe"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_free_icon"
         app:layout_constraintStart_toStartOf="@+id/product_title"
         app:layout_constraintTop_toBottomOf="@+id/product_title"
         app:srcCompat="@drawable/ic_card_giftcard" />
@@ -67,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Rs. 69999/-"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_price"
         app:layout_constraintEnd_toStartOf="@+id/product_price" />
 
