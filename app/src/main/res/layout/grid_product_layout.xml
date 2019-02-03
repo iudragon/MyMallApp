@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="326dp"
         android:layout_marginBottom="8dp"
-        android:background="#E9E6E6"
+        android:background="#ffffff"
         android:horizontalSpacing="1dp"
         android:numColumns="2"
         android:verticalSpacing="1dp"

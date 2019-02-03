@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private ViewPager productDetailsViewPager;
     private TabLayout productDetailsTabLayout;
+
+
+    ///// ratings layout
+
+    private LinearLayout rateNowContainer;
+
+    ///// ratings layout
 
 
     @Override
@@ -102,8 +111,37 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+        ///// ratings layout
 
+        rateNowContainer = findViewById(R.id.rate_now_container);
 
+        for (int x = 0; x < rateNowContainer.getChildCount(); x++){
+
+            final int startPosition = x;
+            rateNowContainer.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setRating(startPosition);
+                }
+            });
+        }
+
+        ///// ratings layout
+
+    }
+
+    private void setRating(int startPosition) {
+
+        for (int x = 0; x <rateNowContainer.getChildCount(); x++){
+
+            ImageView starButton = (ImageView)rateNowContainer.getChildAt(x);
+            starButton.setImageTintList(ColorStateList.valueOf(Color.parseColor("#8F8989")));
+            if (x <= startPosition){
+
+                starButton.setImageTintList(ColorStateList.valueOf(Color.parseColor("#D6D60B")));
+
+            }
+        }
     }
 
     @Override
