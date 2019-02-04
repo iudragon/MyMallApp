@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView18"
@@ -14,15 +14,15 @@
         android:background="@drawable/slider_background"
         android:elevation="6dp"
         android:padding="5dp"
-        android:textStyle="bold"
         android:text="Your current order status"
         android:textColor="#000000"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/current_order_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
 
@@ -38,15 +38,105 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/tv_current_order_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:background="@drawable/slider_background"
+        android:backgroundTint="#6b01ff"
+        android:elevation="6dp"
+        android:padding="16dp"
+        android:text="Out for delivery"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/current_order_image" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/slider_background"
+        android:elevation="6dp"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_order_text">
+
+        <ImageView
+            android:id="@+id/ordered_indicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/selected_dot"
+            android:tint="#C6F6FF"
+            android:translationX="12dp" />
+
+        <ProgressBar
+            android:id="@+id/order_packed_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:progress="0"
+            android:progressBackgroundTint="#C6F6FF"
+            android:progressTint="@color/colorPrimary"
+            android:translationX="8dp" />
+
+        <ImageView
+            android:id="@+id/packed_indicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/selected_dot"
+            android:tint="#C6F6FF"
+            android:translationX="4dp" />
+
+        <ProgressBar
+            android:id="@+id/packed_shipped_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:progress="0"
+            android:progressBackgroundTint="#C6F6FF"
+            android:progressTint="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/shipped_indicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/selected_dot"
+            android:tint="#C6F6FF"
+            android:translationX="-4dp" />
+
+        <ProgressBar
+            android:id="@+id/shipped_delivered_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:progress="0"
+            android:progressBackgroundTint="#C6F6FF"
+            android:progressTint="@color/colorPrimary"
+            android:translationX="-8dp" />
+
+        <ImageView
+            android:id="@+id/delivered_indicator"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/selected_dot"
+            android:tint="#C6F6FF"
+            android:translationX="-12dp" />
+
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
