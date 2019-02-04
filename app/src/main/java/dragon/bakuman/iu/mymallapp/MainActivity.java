@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -28,20 +31,28 @@ public class MainActivity extends AppCompatActivity
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
     public static final int WISHLIST_FRAGMENT = 3;
+    public static final int REWARDS_FRAGMENT = 4;
 
     private static int currentFragment = -1;
 
     private NavigationView navigationView;
 
+    private Window window;
+
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         actionBarLogo = findViewById(R.id.actionbar_logo);
 
         setSupportActionBar(toolbar);
+
+        window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -65,7 +76,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (currentFragment == HOME_FRAGMENT){
+            if (currentFragment == HOME_FRAGMENT) {
                 super.onBackPressed();
             } else {
                 actionBarLogo.setVisibility(View.VISIBLE);
@@ -147,6 +158,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_my_rewards) {
 
+            gotoFragment("My Rewards", new MyRewardsFragment(), REWARDS_FRAGMENT);
         } else if (id == R.id.nav_my_cart) {
 
             gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
@@ -167,7 +179,15 @@ public class MainActivity extends AppCompatActivity
     private void setFragment(Fragment fragment, int fragmentNo) {
 
         if (fragmentNo != currentFragment) {
+            if (fragmentNo == REWARDS_FRAGMENT) {
+                window.setStatusBarColor(getResources().getColor(R.color.btnRed));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.btnRed));
+            } else {
 
+                window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+                toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+            }
             currentFragment = fragmentNo;
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
