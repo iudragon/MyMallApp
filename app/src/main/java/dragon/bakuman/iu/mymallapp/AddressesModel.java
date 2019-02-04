@@ -6,10 +6,21 @@ public class AddressesModel {
     private String address;
     private String pincode;
 
-    public AddressesModel(String fullname, String address, String pincode) {
+    private Boolean selected;
+
+    public AddressesModel(String fullname, String address, String pincode, Boolean selected) {
         this.fullname = fullname;
         this.address = address;
         this.pincode = pincode;
+        this.selected = selected;
+    }
+
+    public Boolean getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Boolean selected) {
+        this.selected = selected;
     }
 
     public String getFullname() {

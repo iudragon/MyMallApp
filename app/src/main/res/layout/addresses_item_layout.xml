@@ -6,6 +6,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:background="#ffffff"
+    android:foreground="?attr/selectableItemBackground"
     android:elevation="3dp">
 
     <TextView
