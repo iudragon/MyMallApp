@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -54,7 +55,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         private TextView deliveryStatus;
         private LinearLayout rateNowContainer;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             productImage = itemView.findViewById(R.id.product_image);
@@ -63,6 +64,14 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             deliveryStatus = itemView.findViewById(R.id.ordered_delivered_date);
 
             rateNowContainer = itemView.findViewById(R.id.rate_now_container);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent orderDetailsIntent = new Intent(itemView.getContext(), OrderDetailsActivity.class);
+                    itemView.getContext().startActivity(orderDetailsIntent);
+                }
+            });
 
         }
 

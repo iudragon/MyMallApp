@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         frameLayout = findViewById(R.id.main_framelayout);
-        setFragment(new OrderDetailsFragment(), HOME_FRAGMENT);
+        setFragment(new HomeFragment(), HOME_FRAGMENT);
     }
 
     @Override
