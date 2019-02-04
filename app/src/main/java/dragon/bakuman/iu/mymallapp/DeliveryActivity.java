@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,7 +51,13 @@ public class DeliveryActivity extends AppCompatActivity {
         deliveryRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
         changeOrAddNewAddressButton.setVisibility(View.VISIBLE);
-
+        changeOrAddNewAddressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myAddressIntent = new Intent(DeliveryActivity.this, MyAddressesActivity.class);
+                startActivity(myAddressIntent);
+            }
+        });
     }
 
     @Override
