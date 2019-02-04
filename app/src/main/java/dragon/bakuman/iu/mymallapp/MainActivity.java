@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     private static final int HOME_FRAGMENT = 0;
     private static final int CART_FRAGMENT = 1;
     private static final int ORDERS_FRAGMENT = 2;
+    public static final int WISHLIST_FRAGMENT = 3;
 
     private static int currentFragment = -1;
 
@@ -64,7 +65,14 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (currentFragment == HOME_FRAGMENT){
+                super.onBackPressed();
+            } else {
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new HomeFragment(), HOME_FRAGMENT);
+                navigationView.getMenu().getItem(0).setChecked(true);
+            }
         }
     }
 
@@ -144,7 +152,7 @@ public class MainActivity extends AppCompatActivity
             gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
 
         } else if (id == R.id.nav_my_wishlist) {
-
+            gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
         } else if (id == R.id.nav_my_account) {
 
         } else if (id == R.id.nav_sign_out) {

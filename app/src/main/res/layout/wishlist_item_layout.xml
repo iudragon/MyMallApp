@@ -67,7 +67,7 @@
             android:id="@+id/tv_product_rating_miniview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
+            android:layout_marginStart="3dp"
             android:layout_marginEnd="2dp"
             android:text="4.5"
             android:textSize="12sp"
@@ -79,7 +79,7 @@
             android:layout_height="10dp"
             android:layout_gravity="center"
             android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="3dp"
             android:src="@drawable/ic_favorite"
             android:tint="#ffffff" />
 
@@ -145,7 +145,7 @@
         app:srcCompat="@drawable/ic_fitness" />
 
     <View
-        android:id="@+id/divider12"
+        android:id="@+id/price_cut"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#5C5858"
