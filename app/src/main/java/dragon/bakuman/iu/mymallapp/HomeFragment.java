@@ -110,6 +110,14 @@ public class HomeFragment extends Fragment {
         homePageModelList.add(new HomePageModel(3, "Deals of the day!!!", horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(2, "Deals of the day!!!", horizontalProductScrollModelList));
         homePageModelList.add(new HomePageModel(1, R.drawable.ic_favorite, "#fff000"));
+        homePageModelList.add(new HomePageModel(0, sliderModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.farmer, "#000000"));
+        homePageModelList.add(new HomePageModel(2, "Deals of the day!!!", horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(3, "Deals of the day!!!", horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.connect, "#0ddd00"));
+        homePageModelList.add(new HomePageModel(3, "Deals of the day!!!", horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(2, "Deals of the day!!!", horizontalProductScrollModelList));
+        homePageModelList.add(new HomePageModel(1, R.drawable.ic_favorite, "#fff000"));
 
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
