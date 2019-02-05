@@ -15,6 +15,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FrameLayout mFrameLayout;
 
     public static boolean onResetPasswordFragment = false;
+    public static boolean setSignUpFragment = false;
 
 
     @Override
@@ -26,8 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // this will set our Fragment as soon as Register Activity is created.
 
-        setDefaultFragment(new SignInFragment());
-
+        if (setSignUpFragment) {
+            setSignUpFragment = false;
+            setDefaultFragment(new SignUpFragment());
+        } else {
+            setDefaultFragment(new SignInFragment());
+        }
     }
 
     @Override
