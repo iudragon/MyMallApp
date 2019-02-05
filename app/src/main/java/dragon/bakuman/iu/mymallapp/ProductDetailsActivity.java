@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dragon.bakuman.iu.mymallapp.MainActivity.showCart;
+
 public class ProductDetailsActivity extends AppCompatActivity {
 
 
@@ -120,7 +122,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         rateNowContainer = findViewById(R.id.rate_now_container);
 
-        for (int x = 0; x < rateNowContainer.getChildCount(); x++){
+        for (int x = 0; x < rateNowContainer.getChildCount(); x++) {
 
             final int startPosition = x;
             rateNowContainer.getChildAt(x).setOnClickListener(new View.OnClickListener() {
@@ -145,11 +147,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void setRating(int startPosition) {
 
-        for (int x = 0; x <rateNowContainer.getChildCount(); x++){
+        for (int x = 0; x < rateNowContainer.getChildCount(); x++) {
 
-            ImageView starButton = (ImageView)rateNowContainer.getChildAt(x);
+            ImageView starButton = (ImageView) rateNowContainer.getChildAt(x);
             starButton.setImageTintList(ColorStateList.valueOf(Color.parseColor("#8F8989")));
-            if (x <= startPosition){
+            if (x <= startPosition) {
 
                 starButton.setImageTintList(ColorStateList.valueOf(Color.parseColor("#D6D60B")));
 
@@ -179,6 +181,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         } else if (id == R.id.main_search_icon) {
             return true;
         } else if (id == R.id.main_cart_icon) {
+
+            Intent cartIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+            showCart = true;
+            startActivity(cartIntent);
+
             return true;
         }
 

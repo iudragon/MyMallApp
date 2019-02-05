@@ -59,9 +59,6 @@ public class HomeFragment extends Fragment {
 
         List<SliderModel> sliderModelList = new ArrayList<>();
 
-        sliderModelList.add(new SliderModel(R.drawable.ic_person_outline, "#ddaaee"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_sign_out, "#ddaaee"));
-
         sliderModelList.add(new SliderModel(R.drawable.farmer, "#ddaaee"));
         sliderModelList.add(new SliderModel(R.drawable.ic_add_circle, "#ddaaee"));
         sliderModelList.add(new SliderModel(R.drawable.connect, "#ddaaee"));
@@ -70,10 +67,6 @@ public class HomeFragment extends Fragment {
         sliderModelList.add(new SliderModel(R.drawable.ic_person, "#ddaaee"));
         sliderModelList.add(new SliderModel(R.drawable.ic_person_outline, "#ddaaee"));
         sliderModelList.add(new SliderModel(R.drawable.ic_sign_out, "#ddaaee"));
-
-        sliderModelList.add(new SliderModel(R.drawable.farmer, "#ddaaee"));
-        sliderModelList.add(new SliderModel(R.drawable.ic_add_circle, "#ddaaee"));
-
 
         ///////// Banner Slider
 
