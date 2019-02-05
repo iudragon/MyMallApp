@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +17,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     private List<WishlistModel> wishlistModelList;
 
-    public WishlistAdapter(List<WishlistModel> wishlistModelList) {
+    private Boolean wishlist;
+
+    public WishlistAdapter(List<WishlistModel> wishlistModelList, Boolean wishlist) {
         this.wishlistModelList = wishlistModelList;
+        this.wishlist = wishlist;
     }
 
     @NonNull
@@ -101,10 +105,26 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             cuttedPrice.setText(cuttedPricevValue);
             paymentMethod.setText(payMethod);
 
+            if (wishlist){
+
+                deleteBtn.setVisibility(View.VISIBLE);
+            } else {
+
+                deleteBtn.setVisibility(View.GONE);
+            }
+
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(itemView.getContext(), "delete", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                    itemView.getContext().startActivity(productDetailsIntent);
                 }
             });
         }
