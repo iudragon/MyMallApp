@@ -13,15 +13,24 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
 
     private List<RewardModel> rewardModelList;
 
-    public MyRewardsAdapter(List<RewardModel> rewardModelList) {
+    private Boolean useMiniLayout = false;
+
+    public MyRewardsAdapter(List<RewardModel> rewardModelList, Boolean useMiniLayout) {
         this.rewardModelList = rewardModelList;
+        this.useMiniLayout = useMiniLayout;
     }
 
     @NonNull
     @Override
     public MyRewardsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rewards_item_layout, viewGroup, false);
+        View view;
+
+        if (useMiniLayout) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mini_rewards_item_layout, viewGroup, false);
+        } else {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rewards_item_layout, viewGroup, false);
+        }
 
         return new ViewHolder(view);
 
@@ -56,10 +65,23 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
 
         }
 
-        private void setData(String title, String date, String body) {
+        private void setData(final String title, final String date, final String body) {
             couponTitle.setText(title);
             couponExpirydDate.setText(date);
             couponBody.setText(body);
+
+            if (useMiniLayout){
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ProductDetailsActivity.couponTitle.setText(title);
+                        ProductDetailsActivity.couponExpiryDate.setText(date);
+                        ProductDetailsActivity.couponBody.setText(body);
+                        ProductDetailsActivity.showDialogRecyclerView();
+                    }
+                });
+            }
+
         }
     }
 }
