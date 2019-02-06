@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_details_tab_container"
     android:layout_width="match_parent"
-    android:elevation="3dp"
+    android:layout_height="match_parent"
     android:background="#ffffff"
-    android:layout_height="match_parent">
+    android:elevation="3dp">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/product_details_tablayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tabTextColor="#b3b3b3"
-        app:tabSelectedTextColor="@color/colorAccent"
         android:background="#eeffff"
-        app:tabIndicatorColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="#b3b3b3">
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"

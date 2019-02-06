@@ -55,7 +55,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private Button couponRedeemBtn;
 
-
+    private TextView rewardTitle;
+    private TextView rewardBody;
 
     ///// coupon dialog
 
@@ -111,6 +112,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tvCodIndicator = findViewById(R.id.tv_cod_indicator);
         codIndicator = findViewById(R.id.cod_indicator_imageview);
 
+        rewardTitle = findViewById(R.id.reward_title);
+        rewardBody = findViewById(R.id.reward_body);
+
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         final List<String> productImages = new ArrayList<>();
@@ -149,6 +154,16 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     } else {
                         codIndicator.setVisibility(View.INVISIBLE);
                         tvCodIndicator.setVisibility(View.INVISIBLE);
+                    }
+
+                    rewardTitle.setText((long) documentSnapshot.get("free_coupons") + documentSnapshot.get("free_coupon_title").toString());
+
+
+                    rewardBody.setText(documentSnapshot.get("free_coupon_body").toString());
+
+                    if ((boolean)documentSnapshot.get("use_tab+layout")){
+
+
                     }
 
                 } else {
