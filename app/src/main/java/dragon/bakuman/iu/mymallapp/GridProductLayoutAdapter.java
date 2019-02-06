@@ -69,6 +69,8 @@ public class GridProductLayoutAdapter extends BaseAdapter {
             productDescription.setText(horizontalProductScrollModelList.get(position).getProductDescription());
             productPrice.setText("Rs. " + horizontalProductScrollModelList.get(position).getProductPrice() + "/-");
 
+            
+
         } else {
 
             view = convertView;

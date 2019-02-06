@@ -23,8 +23,6 @@ public class DBqueries {
     public static List<HomePageModel> homePageModelList = new ArrayList<>();
 
 
-
-
     public static void loadCategories(final CategoryAdapter categoryAdapter, final Context context) {
 
         firebaseFirestore.collection("CATEGORIES").orderBy("index").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -76,6 +74,7 @@ public class DBqueries {
 
                                 } else if ((long) documentSnapshot.get("view_type") == 2) {
 
+                                    List<WishlistModel> viewAllProductlist = new ArrayList<>();
                                     List<HorizontalProductScrollModel> horizontalProductScrollModelList = new ArrayList<>();
 
 
@@ -84,9 +83,12 @@ public class DBqueries {
                                     for (long x = 1; x < no_of_products + 1; x++) {
                                         horizontalProductScrollModelList.add(new HorizontalProductScrollModel(documentSnapshot.get("product_ID_" + x).toString(), documentSnapshot.get("product_image_" + x).toString(), documentSnapshot.get("product_title_" + x).toString(), documentSnapshot.get("product_subtitle_" + x).toString(), documentSnapshot.get("product_price_" + x).toString()));
 
+
+                                        viewAllProductlist.add(new WishlistModel(documentSnapshot.get("product_image_" + x).toString(), documentSnapshot.get("product_full_title_" + x).toString(), (long) documentSnapshot.get("free_coupons_" + x), documentSnapshot.get("average_rating_" + x).toString(), (long) documentSnapshot.get("total_ratings_" + x), documentSnapshot.get("product_price_" + x).toString(), documentSnapshot.get("cutted_price_" + x).toString(), (boolean) documentSnapshot.get("COD_" + x)));
+
                                     }
 
-                                    homePageModelList.add(new HomePageModel(2, documentSnapshot.get("layout_title").toString(), documentSnapshot.get("layout_background").toString(), horizontalProductScrollModelList));
+                                    homePageModelList.add(new HomePageModel(2, documentSnapshot.get("layout_title").toString(), documentSnapshot.get("layout_background").toString(), horizontalProductScrollModelList, viewAllProductlist));
 
 
                                 } else if ((long) documentSnapshot.get("view_type") == 3) {

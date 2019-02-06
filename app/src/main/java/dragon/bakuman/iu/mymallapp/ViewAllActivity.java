@@ -17,6 +17,8 @@ public class ViewAllActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridView gridView;
 
+    public static List<WishlistModel> wishlistModelList;
+
     public static List<HorizontalProductScrollModel> horizontalProductScrollModelList;
 
     @Override
@@ -41,19 +43,6 @@ public class ViewAllActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
-
-            List<WishlistModel> wishlistModelList = new ArrayList<>();
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 1, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 0, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 3, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 4, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 3, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 1, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 0, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 3, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 4, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-            wishlistModelList.add(new WishlistModel(R.drawable.farmer, "Pixel 222", 3, "3", 133, "Rs. 4999/-", "Rs. 5999/-", "Cash on Delivery"));
-
 
             WishlistAdapter adapter = new WishlistAdapter(wishlistModelList, false);
             recyclerView.setAdapter(adapter);
