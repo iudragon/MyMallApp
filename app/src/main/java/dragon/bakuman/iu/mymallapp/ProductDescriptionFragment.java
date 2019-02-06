@@ -24,6 +24,7 @@ public class ProductDescriptionFragment extends Fragment {
     }
 
     private TextView descriptionBody;
+    public String body;
 
 
     @Override
@@ -33,15 +34,8 @@ public class ProductDescriptionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_description, container, false);
 
         descriptionBody = view.findViewById(R.id.tv_product_description);
+        descriptionBody.setText(body);
 
-        if (tabPosition == 0) {
-
-            descriptionBody.setText(productDescription);
-
-        } else {
-
-            descriptionBody.setText(productOtherDetails);
-        }
 
 
 

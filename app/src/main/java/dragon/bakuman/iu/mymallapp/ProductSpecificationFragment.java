@@ -24,6 +24,7 @@ public class ProductSpecificationFragment extends Fragment {
     }
 
     private RecyclerView productSpecificationRecyclerView;
+    public List<ProductSpecificationModel> productSpecificationModelList;
 
 
     @Override
@@ -83,7 +84,7 @@ public class ProductSpecificationFragment extends Fragment {
 */
 
 
-        ProductSpecificationAdapter productSpecificationAdapter = new ProductSpecificationAdapter(ProductDetailsActivity.productSpecificationModelList);
+        ProductSpecificationAdapter productSpecificationAdapter = new ProductSpecificationAdapter(productSpecificationModelList);
 
         productSpecificationRecyclerView.setAdapter(productSpecificationAdapter);
 

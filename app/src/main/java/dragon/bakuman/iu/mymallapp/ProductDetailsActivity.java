@@ -46,7 +46,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageView codIndicator;
     private TextView tvCodIndicator;
 
-    public static List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
 
 
     private ViewPager productImagesViewPager;
@@ -63,10 +62,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private TextView productOnlyDescriptionBody;
 
-    public static String productDescription;
-    public static String productOtherDetails;
+    private String productDescription;
+    private String productOtherDetails;
 
-    public static int tabPosition = -1;
+    private List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
+
 
     ///// product description
 
@@ -229,21 +229,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
                     totalRatings.setText((long) documentSnapshot.get("total_ratings") + "ratings");
-                    for (int x = 1; x < 6; x++) {
+                    for (int x = 0; x < 5; x++) {
 
                         TextView rating = (TextView) ratingsNoContainer.getChildAt(x);
-                        rating.setText(String.valueOf((long) documentSnapshot.get((6 - x) + "_star")));
+                        rating.setText(String.valueOf((long) documentSnapshot.get((5 - x) + "_star")));
 
                         ProgressBar progressBar = (ProgressBar) ratingsProgressBarContainer.getChildAt(x);
 
                         int maxProgress = Integer.parseInt(String.valueOf((long) documentSnapshot.get("total_ratings")));
 
                         progressBar.setMax(maxProgress);
-                        progressBar.setProgress(Integer.parseInt(String.valueOf((long) documentSnapshot.get((6 - x) + "_star"))));
+                        progressBar.setProgress(Integer.parseInt(String.valueOf((long) documentSnapshot.get((5 - x) + "_star"))));
 
                     }
 
                     totalRatingsFigure.setText(String.valueOf((long) documentSnapshot.get("total_ratings")));
+
+                    productDetailsViewPager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount()));
 
 
                 } else {
@@ -276,7 +278,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-        productDetailsViewPager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount()));
+
 
 
         productDetailsViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTabLayout));
