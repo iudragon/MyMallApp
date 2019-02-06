@@ -16,10 +16,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 import static dragon.bakuman.iu.mymallapp.DBqueries.categoryModelList;
-import static dragon.bakuman.iu.mymallapp.DBqueries.homePageModelList;
+import static dragon.bakuman.iu.mymallapp.DBqueries.lists;
 import static dragon.bakuman.iu.mymallapp.DBqueries.loadCategories;
 import static dragon.bakuman.iu.mymallapp.DBqueries.loadFragmentData;
+import static dragon.bakuman.iu.mymallapp.DBqueries.loadedCategoriesNames;
 
 
 /**
@@ -83,20 +86,20 @@ public class HomeFragment extends Fragment {
             LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
             testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             homePageRecyclerView.setLayoutManager(testingLayoutManager);
-            adapter = new HomePageAdapter(homePageModelList);
-            homePageRecyclerView.setAdapter(adapter);
 
-
-            if (homePageModelList.size() == 0) {
-
-                loadFragmentData(adapter, getContext());
+            if (lists.size() == 0) {
+                loadedCategoriesNames.add("HOME");
+                lists.add(new ArrayList<HomePageModel>());
+                adapter = new HomePageAdapter(lists.get(0));
+                loadFragmentData(adapter, getContext(), 0, "Home");
             } else {
+                adapter = new HomePageAdapter(lists.get(0));
 
-                categoryAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
-                ////// WOAH IS THIS RIGHT? CHECK IT DOUBT
             }
 
+            homePageRecyclerView.setAdapter(adapter);
 
         } else {
 

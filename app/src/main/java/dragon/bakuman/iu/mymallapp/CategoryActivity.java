@@ -11,9 +11,14 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static dragon.bakuman.iu.mymallapp.DBqueries.lists;
+import static dragon.bakuman.iu.mymallapp.DBqueries.loadFragmentData;
+import static dragon.bakuman.iu.mymallapp.DBqueries.loadedCategoriesNames;
+
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private HomePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +38,26 @@ public class CategoryActivity extends AppCompatActivity {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-        List<HomePageModel> homePageModelList = new ArrayList<>();
+        int listPosition = 0;
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
+        for (int x = 0; x < loadedCategoriesNames.size(); x++) {
+
+            if (loadedCategoriesNames.get(x).equals(title.toUpperCase())) {
+
+                listPosition = x;
+            }
+        }
+
+        if (listPosition == 0) {
+
+            loadedCategoriesNames.add(title.toUpperCase());
+            lists.add(new ArrayList<HomePageModel>());
+            adapter = new HomePageAdapter(lists.get(loadedCategoriesNames.size() - 1));
+            loadFragmentData(adapter, this, loadedCategoriesNames.size() - 1, title);
+        } else {
+            adapter = new HomePageAdapter(lists.get(listPosition));
+        }
+
 
         categoryRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
