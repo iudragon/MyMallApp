@@ -2,24 +2,34 @@ package dragon.bakuman.iu.mymallapp;
 
 public class HorizontalProductScrollModel {
 
-    private int productImage;
+    private String productID;
+    private String productImage;
     private String productTitle;
     private String productDescription;
     private String productPrice;
 
-    public HorizontalProductScrollModel(int productImage, String productTitle, String productDescription, String productPrice) {
+    public HorizontalProductScrollModel(String productID, String productImage, String productTitle, String productDescription, String productPrice) {
+
+        this.productID = productID;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
     }
 
+    public String getProductID() {
+        return productID;
+    }
 
-    public int getProductImage() {
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
