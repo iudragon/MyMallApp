@@ -53,12 +53,9 @@ public class HomeFragment extends Fragment {
         categoryRecyclerView.setLayoutManager(layoutManager);
 
         categoryModelList = new ArrayList<>();
-
         categoryAdapter = new CategoryAdapter(categoryModelList);
         categoryRecyclerView.setAdapter(categoryAdapter);
-
         firebaseFirestore = FirebaseFirestore.getInstance();
-
         firebaseFirestore.collection("CATEGORIES").orderBy("index").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -79,6 +76,7 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
 
         ///////// Banner Slider
 
