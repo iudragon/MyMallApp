@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -116,7 +119,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             case HomePageModel.STRIP_AD_BANNER:
 
-                int resource = homePageModelList.get(position).getResource();
+                String resource = homePageModelList.get(position).getResource();
                 String color = homePageModelList.get(position).getBackgroundColor();
 
                 ((StripAdBannerViewHoler) viewHolder).setStripAd(resource, color);
@@ -319,9 +322,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         }
 
 
-        private void setStripAd(int resource, String color) {
+        private void setStripAd(String resource, String color) {
 
-            stripAdImage.setImageResource(resource);
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.ic_favorite)).into(stripAdImage);
+
             stripAdContainer.setBackgroundColor(Color.parseColor(color));
 
         }

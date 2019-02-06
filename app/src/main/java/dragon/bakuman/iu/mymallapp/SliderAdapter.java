@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class SliderAdapter extends PagerAdapter {
@@ -30,7 +33,9 @@ public class SliderAdapter extends PagerAdapter {
         bannerContainer.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(sliderModelList.get(position).getBackgroundColor())));
 
         ImageView banner = view.findViewById(R.id.banner_slide);
-        banner.setImageResource(sliderModelList.get(position).getBanner());
+
+        Glide.with(container.getContext()).load(sliderModelList.get(position).getBanner()).apply(new RequestOptions().placeholder(R.drawable.ic_favorite)).into(banner);
+
         container.addView(view, 0);
 
         return view;
