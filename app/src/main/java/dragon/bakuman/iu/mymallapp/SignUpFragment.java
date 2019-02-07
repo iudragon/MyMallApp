@@ -87,7 +87,7 @@ public class SignUpFragment extends Fragment {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        if (disableCloseBtn){
+        if (disableCloseBtn) {
 
             closeBtn.setVisibility(View.GONE);
         } else {
@@ -222,19 +222,42 @@ public class SignUpFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Map<Object, String> userData = new HashMap<>();
+                            Map<String, Object> userData = new HashMap<>();
                             userData.put("fullname", fullname.getText().toString());
 
-                            firebaseFirestore.collection("USERS").add(userData).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                            firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
+                                    .set(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<DocumentReference> task) {
+                                public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        mainIntent();
+
+
+                                        ///// DOUBT WAS LONG BEFORE<???
+
+                                        Map<String, Object> listSize = new HashMap<>();
+                                        listSize.put("list_size", (long) 0);
+
+                                        firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA").document("MY_WISHLIST").set(listSize).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+
+                                                    mainIntent();
+
+                                                } else {
+
+                                                    progressBar.setVisibility(View.INVISIBLE);
+                                                    signUpBtn.setEnabled(true);
+                                                    signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+                                                    String error = task.getException().getMessage();
+                                                    Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
 
                                     } else {
-                                        progressBar.setVisibility(View.INVISIBLE);
-                                        signUpBtn.setEnabled(true);
-                                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+
                                         String error = task.getException().getMessage();
                                         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
 
@@ -320,7 +343,7 @@ public class SignUpFragment extends Fragment {
 
     }
 
-    private void mainIntent(){
+    private void mainIntent() {
 
         if (disableCloseBtn) {
             disableCloseBtn = false;
