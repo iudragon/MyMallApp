@@ -62,6 +62,8 @@ public class SignUpFragment extends Fragment {
 
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
+    public static boolean disableCloseBtn = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +86,14 @@ public class SignUpFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        if (disableCloseBtn){
+
+            closeBtn.setVisibility(View.GONE);
+        } else {
+
+            closeBtn.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -312,8 +322,17 @@ public class SignUpFragment extends Fragment {
 
     private void mainIntent(){
 
-        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-        startActivity(mainIntent);
+        if (disableCloseBtn) {
+            disableCloseBtn = false;
+
+
+        } else {
+
+            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+            startActivity(mainIntent);
+
+        }
+
         getActivity().finish();
 
     }

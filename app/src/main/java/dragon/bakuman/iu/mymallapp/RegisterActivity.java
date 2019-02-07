@@ -40,6 +40,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
 
+            SignUpFragment.disableCloseBtn = false;
+            SignInFragment.disableCloseBtn = false;
+
+            ///// MAYBE DOUBT HE SET SAME SIGNUP.. TWICE???
+
             if (onResetPasswordFragment) {
 
 

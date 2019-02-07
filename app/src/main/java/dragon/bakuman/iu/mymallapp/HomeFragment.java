@@ -12,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,6 +60,8 @@ public class HomeFragment extends Fragment {
 
     private ImageView noInternetConnection;
 
+    private Button retryButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class HomeFragment extends Fragment {
         categoryRecyclerView = view.findViewById(R.id.category_recyclerview);
 
         homePageRecyclerView = view.findViewById(R.id.home_page_recyclerview);
+
+        retryButton = view.findViewById(R.id.retry_button);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -138,7 +144,9 @@ public class HomeFragment extends Fragment {
         if (networkInfo != null && networkInfo.isConnected() == true) {
 
             noInternetConnection.setVisibility(View.GONE);
-
+            retryButton.setVisibility(View.GONE);
+            categoryRecyclerView.setVisibility(View.VISIBLE);
+            homePageRecyclerView.setVisibility(View.VISIBLE);
 
             if (categoryModelList.size() == 0) {
 
@@ -164,8 +172,13 @@ public class HomeFragment extends Fragment {
             homePageRecyclerView.setAdapter(adapter);
         } else {
 
+            categoryRecyclerView.setVisibility(View.GONE);
+            homePageRecyclerView.setVisibility(View.GONE);
+
             Glide.with(this).load(R.drawable.ic_favorite).into(noInternetConnection);
             noInternetConnection.setVisibility(View.VISIBLE);
+
+            retryButton.setVisibility(View.VISIBLE);
         }
 
         ///// refresh layout
@@ -175,40 +188,68 @@ public class HomeFragment extends Fragment {
             public void onRefresh() {
 
                 swipeRefreshLayout.setRefreshing(true);
+                reloadPage();
 
-                categoryModelList.clear();
-                lists.clear();
-                loadedCategoriesNames.clear();
 
-                if (networkInfo != null && networkInfo.isConnected() == true) {
-
-                    noInternetConnection.setVisibility(View.GONE);
-
-                    categoryAdapter = new CategoryAdapter(categoryModelFakeList);
-
-                    adapter = new HomePageAdapter(homePageModelFakeList);
-
-                    categoryRecyclerView.setAdapter(categoryAdapter);
-
-                    homePageRecyclerView.setAdapter(adapter);
-
-                    loadCategories(categoryRecyclerView, getContext());
-
-                    loadedCategoriesNames.add("HOME");
-                    lists.add(new ArrayList<HomePageModel>());
-                    loadFragmentData(homePageRecyclerView, getContext(), 0, "Home");
-
-                } else {
-
-                    Glide.with(getContext()).load(R.drawable.ic_favorite).into(noInternetConnection);
-                    noInternetConnection.setVisibility(View.VISIBLE);
-                }
             }
         });
 
         ///// refresh layout
 
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reloadPage();
+            }
+        });
+
         return view;
+    }
+
+    private void reloadPage() {
+
+
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        categoryModelList.clear();
+        lists.clear();
+        loadedCategoriesNames.clear();
+
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+
+            noInternetConnection.setVisibility(View.GONE);
+
+            retryButton.setVisibility(View.GONE);
+
+            categoryRecyclerView.setVisibility(View.VISIBLE);
+            homePageRecyclerView.setVisibility(View.VISIBLE);
+
+            categoryAdapter = new CategoryAdapter(categoryModelFakeList);
+
+            adapter = new HomePageAdapter(homePageModelFakeList);
+
+            categoryRecyclerView.setAdapter(categoryAdapter);
+
+            homePageRecyclerView.setAdapter(adapter);
+
+            loadCategories(categoryRecyclerView, getContext());
+
+            loadedCategoriesNames.add("HOME");
+            lists.add(new ArrayList<HomePageModel>());
+            loadFragmentData(homePageRecyclerView, getContext(), 0, "Home");
+
+        } else {
+
+            Toast.makeText(getContext(), "No Internet NP Connection", Toast.LENGTH_SHORT).show();
+            categoryRecyclerView.setVisibility(View.GONE);
+            homePageRecyclerView.setVisibility(View.GONE);
+            Glide.with(getContext()).load(R.drawable.ic_favorite).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+            retryButton.setVisibility(View.VISIBLE);
+
+            swipeRefreshLayout.setRefreshing(false);
+        }
+
     }
 
 }
