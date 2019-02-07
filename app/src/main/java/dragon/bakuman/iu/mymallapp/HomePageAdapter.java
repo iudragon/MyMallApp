@@ -453,10 +453,13 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 if (!title.equals("")) {
 
 
+                    final int finalX = x;
                     gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+
+                            productDetailsIntent.putExtra("PRODUCT_ID", horizontalProductScrollModelList.get(finalX).getProductID());
                             itemView.getContext().startActivity(productDetailsIntent);
                         }
                     });

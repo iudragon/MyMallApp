@@ -143,6 +143,8 @@ public class HomeFragment extends Fragment {
 
         if (networkInfo != null && networkInfo.isConnected() == true) {
 
+            MainActivity.drawer.setDrawerLockMode(0);
+
             noInternetConnection.setVisibility(View.GONE);
             retryButton.setVisibility(View.GONE);
             categoryRecyclerView.setVisibility(View.VISIBLE);
@@ -171,6 +173,8 @@ public class HomeFragment extends Fragment {
             }
             homePageRecyclerView.setAdapter(adapter);
         } else {
+
+            MainActivity.drawer.setDrawerLockMode(1);
 
             categoryRecyclerView.setVisibility(View.GONE);
             homePageRecyclerView.setVisibility(View.GONE);
@@ -217,6 +221,8 @@ public class HomeFragment extends Fragment {
 
         if (networkInfo != null && networkInfo.isConnected() == true) {
 
+            MainActivity.drawer.setDrawerLockMode(0);
+
             noInternetConnection.setVisibility(View.GONE);
 
             retryButton.setVisibility(View.GONE);
@@ -239,6 +245,8 @@ public class HomeFragment extends Fragment {
             loadFragmentData(homePageRecyclerView, getContext(), 0, "Home");
 
         } else {
+
+            MainActivity.drawer.setDrawerLockMode(1);
 
             Toast.makeText(getContext(), "No Internet NP Connection", Toast.LENGTH_SHORT).show();
             categoryRecyclerView.setVisibility(View.GONE);

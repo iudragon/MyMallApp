@@ -1,18 +1,11 @@
 package dragon.bakuman.iu.mymallapp;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,9 +21,9 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import static dragon.bakuman.iu.mymallapp.DBqueries.currentUser;
 import static dragon.bakuman.iu.mymallapp.RegisterActivity.setSignUpFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -58,6 +52,10 @@ public class MainActivity extends AppCompatActivity
 
     private Toolbar toolbar;
 
+    private FirebaseUser currentUser;
+
+    public static DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -93,14 +91,6 @@ public class MainActivity extends AppCompatActivity
             drawer.addDrawerListener(toggle);
             toggle.syncState();
             setFragment(new HomeFragment(), HOME_FRAGMENT);
-        }
-
-        if (currentUser == null) {
-
-            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(false);
-        } else {
-            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
-
         }
 
         signInDialog = new Dialog(MainActivity.this);
@@ -140,6 +130,21 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        currentUser  = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser == null) {
+
+            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(false);
+        } else {
+            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
+
+        }
     }
 
     @Override
@@ -268,7 +273,10 @@ public class MainActivity extends AppCompatActivity
             } else if (id == R.id.nav_my_account) {
                 gotoFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
             } else if (id == R.id.nav_sign_out) {
-
+                FirebaseAuth.getInstance().signOut();
+                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(registerIntent);
+                finish();
             }
 
             drawer.closeDrawer(GravityCompat.START);
