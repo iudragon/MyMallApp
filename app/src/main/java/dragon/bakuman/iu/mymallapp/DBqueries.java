@@ -2,6 +2,8 @@ package dragon.bakuman.iu.mymallapp;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +26,7 @@ public class DBqueries {
 
     public static List<String> loadedCategoriesNames = new ArrayList<>();
 
-    public static void loadCategories(final CategoryAdapter categoryAdapter, final Context context) {
+    public static void loadCategories(final RecyclerView categoryRecyclerView, final Context context) {
 
         firebaseFirestore.collection("CATEGORIES").orderBy("index").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -36,6 +38,10 @@ public class DBqueries {
                         categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
 
                     }
+
+                    CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModelList);
+
+                    categoryRecyclerView.setAdapter(categoryAdapter);
 
                     categoryAdapter.notifyDataSetChanged();
 
@@ -49,7 +55,7 @@ public class DBqueries {
     }
 
 
-    public static void loadFragmentData(final HomePageAdapter adapter, final Context context, final int index, String categoryName) {
+    public static void loadFragmentData(final RecyclerView homePageRecyclerView, final Context context, final int index, String categoryName) {
 
         firebaseFirestore.collection("CATEGORIES").document(categoryName.toUpperCase()).collection("TOP_DEALS").orderBy("index").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -110,7 +116,12 @@ public class DBqueries {
 
                             }
 
-                            adapter.notifyDataSetChanged();
+                            HomePageAdapter homePageAdapter = new HomePageAdapter(lists.get(index));
+
+                            homePageRecyclerView.setAdapter(homePageAdapter);
+
+                            homePageAdapter.notifyDataSetChanged();
+                            HomeFragment.swipeRefreshLayout.setRefreshing(false);
 
                         } else {
 
