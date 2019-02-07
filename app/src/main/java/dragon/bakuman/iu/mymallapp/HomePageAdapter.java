@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,6 +33,8 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     private List<HomePageModel> homePageModelList;
 
     private RecyclerView.RecycledViewPool recycledViewPool;
+
+    private int lastPosition = -1;
 
     public HomePageAdapter(List<HomePageModel> homePageModelList) {
         this.homePageModelList = homePageModelList;
@@ -153,7 +157,13 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             default:
                 return;
 
+        }
 
+        if (lastPosition < position) {
+
+            Animation animation = AnimationUtils.loadAnimation(viewHolder.itemView.getContext(), R.anim.fade_in);
+            viewHolder.itemView.setAnimation(animation);
+            lastPosition = position;
         }
 
     }
@@ -331,7 +341,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         private void setStripAd(String resource, String color) {
 
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.ic_favorite)).into(stripAdImage);
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericon)).into(stripAdImage);
 
             stripAdContainer.setBackgroundColor(Color.parseColor(color));
 
@@ -432,38 +442,49 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 TextView productPrice = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_price);
 
 
-                Glide.with(itemView.getContext()).load(horizontalProductScrollModelList.get(x).getProductImage()).apply(new RequestOptions().placeholder(R.drawable.ic_favorite)).into(productImage);
+                Glide.with(itemView.getContext()).load(horizontalProductScrollModelList.get(x).getProductImage()).apply(new RequestOptions().placeholder(R.drawable.placeholdericon)).into(productImage);
 
                 productTitle.setText(horizontalProductScrollModelList.get(x).getProductTitle());
                 productDescription.setText(horizontalProductScrollModelList.get(x).getProductDescription());
                 productPrice.setText("Rs. " + horizontalProductScrollModelList.get(x).getProductPrice() + "/-");
                 gridProductLayout.getChildAt(x).setBackgroundColor(itemView.getContext().getResources().getColor(R.color.btnRed));
 
-                gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
-                        itemView.getContext().startActivity(productDetailsIntent);
-                    }
-                });
+
+                if (!title.equals("")) {
+
+
+                    gridProductLayout.getChildAt(x).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                            itemView.getContext().startActivity(productDetailsIntent);
+                        }
+                    });
+
+                }
+
 
             }
 
-            gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    ViewAllActivity.horizontalProductScrollModelList = horizontalProductScrollModelList;
+            if (!title.equals("")) {
 
-                    Intent viewAllIntent = new Intent(itemView.getContext(), ViewAllActivity.class);
-                    viewAllIntent.putExtra("layout_code", 1);
 
-                    viewAllIntent.putExtra("title", title);
+                gridLayoutViewAllButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    itemView.getContext().startActivity(viewAllIntent);
-                }
-            });
+                        ViewAllActivity.horizontalProductScrollModelList = horizontalProductScrollModelList;
 
+                        Intent viewAllIntent = new Intent(itemView.getContext(), ViewAllActivity.class);
+                        viewAllIntent.putExtra("layout_code", 1);
+
+                        viewAllIntent.putExtra("title", title);
+
+                        itemView.getContext().startActivity(viewAllIntent);
+                    }
+                });
+            }
         }
 
 
