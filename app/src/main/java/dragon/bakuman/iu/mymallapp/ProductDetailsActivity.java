@@ -47,7 +47,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView tvCodIndicator;
 
 
-
     private ViewPager productImagesViewPager;
     private TabLayout viewPagerIndicator;
     private static boolean ALREADY_ADDED_TO_WISHLIST = false;
@@ -76,7 +75,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView rewardBody;
 
 
-
     ///// ratings layout
 
     private LinearLayout rateNowContainer;
@@ -84,6 +82,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private LinearLayout ratingsNoContainer;
     private TextView totalRatingsFigure;
     private LinearLayout ratingsProgressBarContainer;
+
+    private TextView averageRating;
 
     ///// ratings layout
 
@@ -152,6 +152,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         ratingsProgressBarContainer = findViewById(R.id.ratings_progressbar_container);
 
+
+        averageRating = findViewById(R.id.average_rating);
+
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         final List<String> productImages = new ArrayList<>();
@@ -175,7 +178,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productTitle.setText(documentSnapshot.get("product_title").toString());
                     averageRatingMiniView.setText(documentSnapshot.get("average_rating").toString());
 
-                    totalRatingMiniView.setText("(" + (long) documentSnapshot.get("total_ratings") + ")ratings");
+                    totalRatingMiniView.setText("(" + documentSnapshot.get("total_ratings") + ")ratings");
 
                     productPrice.setText("Rs. " + documentSnapshot.get("product_price").toString() + "/-");
 
@@ -197,7 +200,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     rewardBody.setText(documentSnapshot.get("free_coupon_body").toString());
 
-                    if ((boolean) documentSnapshot.get("use_tab+layout")) {
+                    if ((boolean) documentSnapshot.get("use_tab_layout")) {
                         productDetailsTabsContainer.setVisibility(View.VISIBLE);
                         productDetailsOnlyContainer.setVisibility(View.GONE);
 
@@ -210,15 +213,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             productSpecificationModelList.add(new ProductSpecificationModel(0, documentSnapshot.get("spec_title_" + x).toString()));
 
                             for (long y = 1; y < (long) documentSnapshot.get("spec_title_" + x + "_total_fields") + 1; y++) {
-
-
                                 productSpecificationModelList.add(new ProductSpecificationModel(1, documentSnapshot.get("spec_title_" + x + "_field_" + y + "_name").toString(),
                                         documentSnapshot.get("spec_title_" + x + "_field_" + y + "_value").toString()));
 
-
                             }
-
-
                         }
 
                     } else {
@@ -245,7 +243,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     totalRatingsFigure.setText(String.valueOf((long) documentSnapshot.get("total_ratings")));
 
-                    productDetailsViewPager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount()));
+                    averageRating.setText(documentSnapshot.get("average_rating").toString());
+
+                    productDetailsViewPager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount(), productDescription, productOtherDetails, productSpecificationModelList));
 
 
                 } else {
@@ -265,7 +265,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     ALREADY_ADDED_TO_WISHLIST = false;
 
-                    addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(Color.parseColor("#C9ABAB")));
+                    addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnRed)));
 
                 } else {
 
@@ -278,15 +278,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
-
-
         productDetailsViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTabLayout));
         productDetailsTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                tabPosition = tab.getPosition();
                 productDetailsViewPager.setCurrentItem(tab.getPosition());
 
 
