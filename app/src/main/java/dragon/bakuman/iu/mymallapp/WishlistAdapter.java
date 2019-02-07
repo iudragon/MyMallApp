@@ -6,10 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -21,6 +22,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     private List<WishlistModel> wishlistModelList;
 
     private Boolean wishlist;
+
+    private int lastPosition = -1;
 
     public WishlistAdapter(List<WishlistModel> wishlistModelList, Boolean wishlist) {
         this.wishlistModelList = wishlistModelList;
@@ -48,7 +51,14 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishlistModelList.get(position).isCOD();
 
-        viewHolder.setData(resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod);
+        viewHolder.setData(resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position);
+
+        if (lastPosition < position) {
+
+            Animation animation = AnimationUtils.loadAnimation(viewHolder.itemView.getContext(), R.anim.fade_in);
+            viewHolder.itemView.setAnimation(animation);
+            lastPosition = position;
+        }
 
     }
 
@@ -87,9 +97,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         }
 
-        private void setData(String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String cuttedPricevValue, boolean COD) {
+        private void setData(String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String cuttedPricevValue, boolean COD, final int index) {
 
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.ic_favorite)).into(productImage);
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericonmini)).into(productImage);
 
             productTitle.setText(title);
             if (freeCouponsNo != 0) {
@@ -126,7 +136,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "delete", Toast.LENGTH_SHORT).show();
+                    deleteBtn.setEnabled(false);
+                    DBqueries.removeFromWishlist(index, itemView.getContext());
                 }
             });
 

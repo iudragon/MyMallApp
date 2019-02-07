@@ -2,22 +2,23 @@ package dragon.bakuman.iu.mymallapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DBqueries {
 
@@ -30,6 +31,9 @@ public class DBqueries {
     public static List<String> loadedCategoriesNames = new ArrayList<>();
 
     public static List<String> wishlist = new ArrayList<>();
+
+    public static List<WishlistModel> wishlistModelList = new ArrayList<>();
+
 
     public static void loadCategories(final RecyclerView categoryRecyclerView, final Context context) {
 
@@ -137,7 +141,7 @@ public class DBqueries {
                 });
     }
 
-    public static void loadWishlist(final Context context, final Dialog dialog) {
+    public static void loadWishlist(final Context context, final Dialog dialog, final boolean loadProductData) {
 
         firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_WISHLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -145,7 +149,50 @@ public class DBqueries {
                 if (task.isSuccessful()) {
                     for (long x = 0; x < (long) task.getResult().get("list_size"); x++) {
 
-                        wishlist.add(task.getResult().get("product_ID_"+x).toString());
+                        wishlist.add(task.getResult().get("product_ID_" + x).toString());
+
+                        if (DBqueries.wishlist.contains(ProductDetailsActivity.productID)) {
+
+                            ProductDetailsActivity.ALREADY_ADDED_TO_WISHLIST = true;
+
+                            if (ProductDetailsActivity.addToWishlistBtn != null) {
+
+                                ProductDetailsActivity.addToWishlistBtn.setSupportImageTintList(context.getResources().getColorStateList(R.color.colorAccent));
+
+                            }
+
+
+                        } else {
+
+                            if (ProductDetailsActivity.addToWishlistBtn != null) {
+
+
+                                ProductDetailsActivity.addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.colorPrimary)));
+
+                            }
+
+                            ProductDetailsActivity.ALREADY_ADDED_TO_WISHLIST = false;
+                        }
+
+                        if (loadProductData) {
+
+                            firebaseFirestore.collection("PRODUCTS").document(task.getResult().get("product_ID_" + x).toString()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+
+                                        wishlistModelList.add(new WishlistModel(task.getResult().get("product_image_1").toString(), task.getResult().get("product_title").toString(), (long) task.getResult().get("free_coupons"), task.getResult().get("average_rating").toString(), (long) task.getResult().get("total_ratings"), task.getResult().get("product_price").toString(), task.getResult().get("cutted_price").toString(), (boolean) task.getResult().get("COD")));
+
+                                        MyWishlistFragment.wishlistAdapter.notifyDataSetChanged();
+
+                                    } else {
+
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
                     }
 
                 } else {
@@ -159,4 +206,63 @@ public class DBqueries {
         });
     }
 
+    public static void removeFromWishlist(final int index, final Context context) {
+
+        wishlist.remove(index);
+        Map<String, Object> updateWishlist = new HashMap<>();
+
+        for (int x = 0; x < wishlist.size(); x++) {
+
+            updateWishlist.put("product_ID_" + x, wishlist.get(x));
+        }
+
+        updateWishlist.put("list_size", (long) wishlist.size());
+
+        firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_WISHLIST").set(updateWishlist).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()) {
+                    if (wishlistModelList.size() != 0) {
+
+                        wishlistModelList.remove(index);
+
+                        MyWishlistFragment.wishlistAdapter.notifyDataSetChanged();
+                    }
+
+                    ProductDetailsActivity.ALREADY_ADDED_TO_WISHLIST = false;
+
+                    Toast.makeText(context, "Removed successfully", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    if (ProductDetailsActivity.addToWishlistBtn != null) {
+
+                        ProductDetailsActivity.addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.btnRed)));
+                    }
+                    String error = task.getException().getMessage();
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                }
+
+                if (ProductDetailsActivity.addToWishlistBtn != null) {
+
+                    ProductDetailsActivity.addToWishlistBtn.setEnabled(true);
+                }
+            }
+        });
+    }
+
+    public static void clearData() {
+
+        categoryModelList.clear();
+        lists.clear();
+        loadedCategoriesNames.clear();
+        wishlist.clear();
+        wishlistModelList.clear();
+    }
+
 }
+
+
+
+
