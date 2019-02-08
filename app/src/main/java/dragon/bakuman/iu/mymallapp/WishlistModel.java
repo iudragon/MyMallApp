@@ -2,6 +2,7 @@ package dragon.bakuman.iu.mymallapp;
 
 public class WishlistModel {
 
+    private String productId;
     private String productImage;
     private String productTitle;
     private long freeCoupons;
@@ -11,7 +12,8 @@ public class WishlistModel {
     private String cuttedPrice;
     private boolean COD;
 
-    public WishlistModel(String productImage, String productTitle, long freeCoupons, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+    public WishlistModel(String productId, String productImage, String productTitle, long freeCoupons, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD) {
+        this.productId = productId;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.freeCoupons = freeCoupons;
@@ -24,6 +26,14 @@ public class WishlistModel {
 
     public String getProductImage() {
         return productImage;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public void setProductImage(String productImage) {

@@ -42,6 +42,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull WishlistAdapter.ViewHolder viewHolder, int position) {
 
+        String productId = wishlistModelList.get(position).getProductId();
         String resource = wishlistModelList.get(position).getProductImage();
         String title = wishlistModelList.get(position).getProductTitle();
         long freeCoupons = wishlistModelList.get(position).getFreeCoupons();
@@ -51,7 +52,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
         boolean paymentMethod = wishlistModelList.get(position).isCOD();
 
-        viewHolder.setData(resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position);
+        viewHolder.setData(productId, resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position);
 
         if (lastPosition < position) {
 
@@ -97,7 +98,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         }
 
-        private void setData(String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String cuttedPricevValue, boolean COD, final int index) {
+        private void setData(final String productId, String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String cuttedPricevValue, boolean COD, final int index) {
 
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericonmini)).into(productImage);
 
@@ -136,8 +137,12 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteBtn.setEnabled(false);
-                    DBqueries.removeFromWishlist(index, itemView.getContext());
+
+                    if (!ProductDetailsActivity.running_wishlist_query) {
+
+                        ProductDetailsActivity.running_wishlist_query = true;
+                        DBqueries.removeFromWishlist(index, itemView.getContext());
+                    }
                 }
             });
 
@@ -145,6 +150,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+
+                    productDetailsIntent.putExtra("PRODUCT_ID", productId);
+
                     itemView.getContext().startActivity(productDetailsIntent);
                 }
             });
