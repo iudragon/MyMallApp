@@ -236,7 +236,7 @@ public class SignUpFragment extends Fragment {
 
                                         CollectionReference userDataReference = firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA");
 
-                                        ///// Maps
+                                        ///// Mapss
 
                                         Map<String, Object> wishlistMap = new HashMap<>();
                                         wishlistMap.put("list_size", (long) 0);
@@ -244,7 +244,7 @@ public class SignUpFragment extends Fragment {
                                         Map<String, Object> ratingsMap = new HashMap<>();
                                         ratingsMap.put("list_size", (long) 0);
 
-                                        ///// Maps
+                                        ///// Mapss
 
 
                                         final List<String> documentNames = new ArrayList<>();
