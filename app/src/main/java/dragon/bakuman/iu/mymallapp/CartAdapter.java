@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter {
@@ -67,14 +70,16 @@ public class CartAdapter extends RecyclerView.Adapter {
 
             case CartItemModel.CART_ITEM:
 
-                int resource = cartItemModelList.get(position).getProductImage();
+                String productID = cartItemModelList.get(position).getProductID();
+
+                String resource = cartItemModelList.get(position).getProductImage();
                 String title = cartItemModelList.get(position).getProductTitle();
-                int freeCoupons = cartItemModelList.get(position).getFreeCoupons();
+                long freeCoupons = cartItemModelList.get(position).getFreeCoupons();
                 String productPrice = cartItemModelList.get(position).getProductPrice();
                 String cuttedPrice = cartItemModelList.get(position).getCuttedPrice();
-                int offersApplied = cartItemModelList.get(position).getOffersApplied();
+                long offersApplied = cartItemModelList.get(position).getOffersApplied();
 
-                ((CartItemViewHolder) viewHolder).setItemDetails(resource, title, freeCoupons, productPrice, cuttedPrice, offersApplied);
+                ((CartItemViewHolder) viewHolder).setItemDetails(productID, resource, title, freeCoupons, productPrice, cuttedPrice, offersApplied);
 
                 break;
 
@@ -133,9 +138,10 @@ public class CartAdapter extends RecyclerView.Adapter {
         }
 
 
-        private void setItemDetails(int resource, String title, int freeCouponsNo, String productPriceText, String cuttedPriceText, int offersAppliedNo) {
+        private void setItemDetails(String productID, String resource, String title, long freeCouponsNo, String productPriceText, String cuttedPriceText, long offersAppliedNo) {
 
-            productImage.setImageResource(resource);
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericonmini)).into(productImage);
+
             productTitle.setText(title);
 
             if (freeCouponsNo > 0) {

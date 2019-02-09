@@ -1,6 +1,7 @@
 package dragon.bakuman.iu.mymallapp;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,11 +31,30 @@ public class MyCartFragment extends Fragment {
     private Button continueBtn;
 
 
+    private Dialog loadingDialog;
+
+    public static CartAdapter cartAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_cart, container, false);
+
+        ///// loading dialog
+
+        loadingDialog = new Dialog(getContext());
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+
+        loadingDialog.setCancelable(false);
+
+        loadingDialog.getWindow().setBackgroundDrawable(getContext().getDrawable(R.drawable.slider_background));
+
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        loadingDialog.show();
+
+        ///// loading dialog
 
         cartItemsRecyclerView = view.findViewById(R.id.cart_items_recyclerview);
 
@@ -45,19 +65,20 @@ public class MyCartFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         cartItemsRecyclerView.setLayoutManager(layoutManager);
 
-        List<CartItemModel> cartItemModelList = new ArrayList<>();
-        cartItemModelList.add(new CartItemModel(0, R.drawable.connect, "Pixel 222", 2, "Rs. 49999/-", "Rs. 59999/-", 1, 0, 0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.connect, "Pixel 222", 0, "Rs. 49999/-", "Rs. 59999/-", 1, 1, 0));
-        cartItemModelList.add(new CartItemModel(0, R.drawable.connect, "Pixel 222", 2, "Rs. 49999/-", "Rs. 59999/-", 1, 2, 0));
+        if (DBqueries.cartItemModelList.size() == 0){
+
+            DBqueries.cartList.clear();
+
+            DBqueries.loadCartList(getContext(), loadingDialog, true);
+        } else {
+            loadingDialog.dismiss();
+        }
 
 
-        cartItemModelList.add(new CartItemModel(1, "Price (3 items", "Rs. 330040/-", "Free", "Rs. 330040/-", "Rs. 5999/-"));
 
-
-        CartAdapter cartAdapter = new CartAdapter(cartItemModelList);
+        cartAdapter = new CartAdapter(DBqueries.cartItemModelList);
         cartItemsRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
-
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
