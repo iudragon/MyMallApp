@@ -69,9 +69,9 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:gravity="start"
-                android:isScrollContainer="true"
                 android:hint="Locality, area or street*"
                 android:inputType="textMultiLine"
+                android:isScrollContainer="true"
                 android:lines="3"
                 android:textColor="@color/colorPrimary" />
 
@@ -80,13 +80,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:isScrollContainer="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:gravity="start"
                 android:hint="Flat No, Building Name*"
                 android:inputType="textMultiLine"
+                android:isScrollContainer="true"
                 android:lines="3"
                 android:textColor="@color/colorPrimary" />
 
@@ -107,15 +107,15 @@
                     android:inputType="number"
                     android:textColor="@color/colorPrimary" />
 
-                <EditText
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/state_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
-                    android:hint="state*"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorPrimary" />
+                    android:background="@drawable/border_background"
+                    android:backgroundTint="#CCC1C0" />
 
 
             </LinearLayout>
