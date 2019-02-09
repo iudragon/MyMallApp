@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseUser currentUser;
 
+    private TextView badgeCount;
+
     public static DrawerLayout drawer;
 
     @Override
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
-       drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -136,7 +139,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        currentUser  = FirebaseAuth.getInstance().getCurrentUser();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser == null) {
 
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
 
         }
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -180,6 +184,45 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getMenuInflater().inflate(R.menu.main, menu);
 
+            MenuItem cartItem = menu.findItem(R.id.main_cart_icon);
+
+            cartItem.setActionView(R.layout.badge_layout);
+
+            ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
+            badgeIcon.setImageResource(R.drawable.ic_shopping_cart_white);
+
+            badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
+
+            if (currentUser != null) {
+                if (DBqueries.cartList.size() == 0) {
+                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount);
+
+                } else {
+
+                    badgeCount.setVisibility(View.VISIBLE);
+
+                    if (DBqueries.cartList.size() < 99) {
+
+                        badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+                    } else {
+                        badgeCount.setText("99");
+
+                    }
+                }
+            }
+
+            cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (currentUser == null) {
+                        signInDialog.show();
+
+                    } else {
+
+                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
+                    }
+                }
+            });
 
         }
         return true;
