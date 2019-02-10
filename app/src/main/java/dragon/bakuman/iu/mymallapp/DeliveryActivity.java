@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,9 @@ public class DeliveryActivity extends AppCompatActivity {
     private Dialog loadingDialog;
     private Dialog paymentMethodDialog;
     private ImageButton paytm;
+    private ConstraintLayout orderConfirmationLayout;
+    private TextView orderId;
+    private ImageButton continueShoppingBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,9 @@ public class DeliveryActivity extends AppCompatActivity {
         fullAddress = findViewById(R.id.address);
         pincode = findViewById(R.id.pincode);
         continueBtn = findViewById(R.id.cart_continue_btn);
-
+        orderConfirmationLayout = findViewById(R.id.order_confirmation_layout);
+        continueShoppingBtn = findViewById(R.id.continue_shopping_btn);
+        orderId = findViewById(R.id.order_id);
         ///// loading dialog
 
         loadingDialog = new Dialog(DeliveryActivity.this);
@@ -181,7 +187,33 @@ public class DeliveryActivity extends AppCompatActivity {
                                 paytmPGService.startPaymentTransaction(DeliveryActivity.this, true, true, new PaytmPaymentTransactionCallback() {
                                     @Override
                                     public void onTransactionResponse(Bundle inResponse) {
-                                        Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+//                                        Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+
+                                        if (inResponse.getString("STATUS").equals("TXN_SUCCESS")){
+
+                                            if (MainActivity.mainActivity != null){
+
+                                                MainActivity.mainActivity.finish();
+                                                MainActivity.mainActivity = null;
+                                                MainActivity.showCart = false;
+                                            }
+
+                                            if (ProductDetailsActivity.productDetailsActivity != null){
+
+                                                ProductDetailsActivity.productDetailsActivity.finish();
+                                                ProductDetailsActivity.productDetailsActivity = null;
+                                            }
+
+                                            orderId.setText("Order ID " + inResponse.getString("ORDERID"));
+                                            orderConfirmationLayout.setVisibility(View.VISIBLE);
+                                            continueShoppingBtn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    finish();
+                                                }
+                                            });
+
+                                        }
                                     }
 
                                     @Override

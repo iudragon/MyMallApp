@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -45,7 +46,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public static boolean running_wishlist_query = false;
     public static boolean running_rating_query = false;
     public static boolean running_cart_query = false;
-
+    public static Activity productDetailsActivity;
 
     private TextView productTitle;
     private TextView averageRatingMiniView;
@@ -59,6 +60,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private ViewPager productImagesViewPager;
     private TabLayout viewPagerIndicator;
+
+
     public static boolean ALREADY_ADDED_TO_WISHLIST = false;
     public static FloatingActionButton addToWishlistBtn;
 
@@ -384,7 +387,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                                         if (DBqueries.cartItemModelList.size() != 0) {
 
-                                                            DBqueries.cartItemModelList.add(0,new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock")));
+                                                            DBqueries.cartItemModelList.add(0, new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock")));
 
                                                         }
 
@@ -677,11 +680,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                loadingDialog.show();
 
                 if (currentUser == null) {
                     signInDialog.show();
                 } else {
+
+                    loadingDialog.show();
+                    productDetailsActivity = ProductDetailsActivity.this;
+
                     DeliveryActivity.cartItemModelList = new ArrayList<>();
 
                     DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock")));
@@ -895,7 +901,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private String calculateAverageRating(long currentUserRating, boolean update) {
 
-            Double totalStars = Double.valueOf(0);
+        Double totalStars = Double.valueOf(0);
         for (int x = 1; x < 6; x++) {
 
             TextView ratingNo = (TextView) ratingsNoContainer.getChildAt(5 - x);
@@ -976,7 +982,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
-
+            productDetailsActivity = null;
             finish();
             return true;
         } else if (id == R.id.main_search_icon) {
@@ -997,5 +1003,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        productDetailsActivity = null;
+
+        super.onBackPressed();
     }
 }

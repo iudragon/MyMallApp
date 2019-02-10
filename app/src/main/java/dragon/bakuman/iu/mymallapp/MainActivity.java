@@ -1,5 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     public static final int ACCOUNT_FRAGMENT = 5;
 
     public static Boolean showCart = false;
+
+    public static Activity mainActivity;
 
     private int currentFragment = -1;
 
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity
 
         if (showCart) {
 
+            mainActivity = this;
             drawer.setDrawerLockMode(1);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             gotoFragment("My Cart", new MyCartFragment(), -2);
@@ -172,6 +176,7 @@ public class MainActivity extends AppCompatActivity
             } else {
 
                 if (showCart) {
+                    mainActivity = null;
                     showCart = false;
                     finish();
                 } else {
@@ -263,7 +268,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == android.R.id.home) {
 
             if (showCart) {
-
+                mainActivity = null;
                 showCart = false;
                 finish();
                 return true;
