@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity
 
             if (currentUser != null) {
                 if (DBqueries.cartList.size() == 0) {
-                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount);
+                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount, new TextView(MainActivity.this));
 
                 } else {
 
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-        private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
+    private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
 
 
         actionBarLogo.setVisibility(View.GONE);
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity
         invalidateOptionsMenu();
         setFragment(fragment, fragmentNo);
 
-        if (fragmentNo == CART_FRAGMENT) {
+        if (fragmentNo == CART_FRAGMENT || showCart) {
 
             navigationView.getMenu().getItem(3).setChecked(true);
             params.setScrollFlags(0);
@@ -292,55 +292,69 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    MenuItem menuItem;
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        drawer.closeDrawer(GravityCompat.START);
+
+        menuItem = item;
+
         if (currentUser != null) {
 
-            int id = item.getItemId();
+            drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+                    int id = menuItem.getItemId();
 
-            if (id == R.id.nav_my_mall) {
+                    if (id == R.id.nav_my_mall) {
 
 
-                actionBarLogo.setVisibility(View.VISIBLE);
+                        actionBarLogo.setVisibility(View.VISIBLE);
 
-                invalidateOptionsMenu();
+                        invalidateOptionsMenu();
 
-                setFragment(new HomeFragment(), HOME_FRAGMENT);
+                        setFragment(new HomeFragment(), HOME_FRAGMENT);
 
-            } else if (id == R.id.nav_my_orders) {
+                    } else if (id == R.id.nav_my_orders) {
 
-                gotoFragment("My Orders", new MyOrdersFragment(), ORDERS_FRAGMENT);
+                        gotoFragment("My Orders", new MyOrdersFragment(), ORDERS_FRAGMENT);
 
-            } else if (id == R.id.nav_my_rewards) {
+                    } else if (id == R.id.nav_my_rewards) {
 
-                gotoFragment("My Rewards", new MyRewardsFragment(), REWARDS_FRAGMENT);
-            } else if (id == R.id.nav_my_cart) {
+                        gotoFragment("My Rewards", new MyRewardsFragment(), REWARDS_FRAGMENT);
+                    } else if (id == R.id.nav_my_cart) {
 
-                gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
+                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
 
-            } else if (id == R.id.nav_my_wishlist) {
-                gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
-            } else if (id == R.id.nav_my_account) {
-                gotoFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
-            } else if (id == R.id.nav_sign_out) {
-                FirebaseAuth.getInstance().signOut();
+                    } else if (id == R.id.nav_my_wishlist) {
+                        gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                    } else if (id == R.id.nav_my_account) {
+                        gotoFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
+                    } else if (id == R.id.nav_sign_out) {
+                        FirebaseAuth.getInstance().signOut();
 
-                DBqueries.clearData();
+                        DBqueries.clearData();
 
-                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-                finish();
-            }
+                        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                        startActivity(registerIntent);
+                        finish();
+                    }
 
-            drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+
+
             return true;
 
         } else {
-            drawer.closeDrawer(GravityCompat.START);
+
             signInDialog.show();
             return false;
         }

@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -319,7 +320,7 @@ public class DBqueries {
         }
     }
 
-    public static void loadCartList(final Context context, final Dialog dialog, final boolean loadProductData, final TextView badgeCount) {
+    public static void loadCartList(final Context context, final Dialog dialog, final boolean loadProductData, final TextView badgeCount, final TextView cartTotalAmount) {
         cartList.clear();
 
         firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_CART").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -359,6 +360,8 @@ public class DBqueries {
 
                                         if (cartList.size() == 1) {
                                             cartItemModelList.add(new CartItemModel(CartItemModel.TOTAL_AMOUNT));
+                                            LinearLayout parent = (LinearLayout) cartTotalAmount.getParent().getParent();
+                                            parent.setVisibility(View.VISIBLE);
                                         }
                                         if (cartList.size() == 0) {
                                             cartItemModelList.clear();
@@ -401,7 +404,7 @@ public class DBqueries {
 
     }
 
-    public static void removeFromCart(final int index, final Context context) {
+    public static void removeFromCart(final int index, final Context context, final TextView cartTotalAmount) {
 
         final String removeProductId = cartList.get(index);
 
@@ -428,6 +431,10 @@ public class DBqueries {
                     }
 
                     if (cartList.size() == 0) {
+
+                        LinearLayout parent = (LinearLayout) cartTotalAmount.getParent().getParent();
+                        parent.setVisibility(View.GONE);
+
                         cartItemModelList.clear();
                     }
 
