@@ -353,6 +353,78 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         ALREADY_ADDED_TO_WISHLIST = false;
                     }
 
+                    if ((boolean) documentSnapshot.get("in_stock")) {
+                        addToCartBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (currentUser == null) {
+                                    signInDialog.show();
+                                } else {
+
+                                    if (!running_cart_query) {
+
+                                        running_cart_query = true;
+
+                                        if (ALREADY_ADDED_TO_CART) {
+                                            running_cart_query = false;
+                                            Toast.makeText(ProductDetailsActivity.this, "Already added to cart", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+
+                                            Map<String, Object> addProduct = new HashMap<>();
+                                            addProduct.put("product_ID_" + String.valueOf(DBqueries.cartList.size()), productID);
+                                            addProduct.put("list_size", (long) (DBqueries.cartList.size() + 1));
+                                            firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_CART")
+
+                                                    .update(addProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+
+
+                                                        if (DBqueries.cartItemModelList.size() != 0) {
+
+                                                            DBqueries.cartItemModelList.add(new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock")));
+
+                                                        }
+
+                                                        ALREADY_ADDED_TO_CART = true;
+
+                                                        DBqueries.cartList.add(productID);
+                                                        Toast.makeText(ProductDetailsActivity.this, "Added to cart success", Toast.LENGTH_SHORT).show();
+                                                        invalidateOptionsMenu();
+                                                        running_cart_query = false;
+
+                                                    } else {
+                                                        running_cart_query = false;
+
+                                                        String error = task.getException().getMessage();
+                                                        Toast.makeText(ProductDetailsActivity.this, error, Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }
+                                            });
+
+                                        }
+                                    }
+
+
+                                }
+                            }
+                        });
+
+                    } else {
+                        buyNowBtn.setVisibility(View.GONE);
+
+
+                        TextView outOfStock = (TextView) addToCartBtn.getChildAt(0);
+                        outOfStock.setText("Out of stock");
+                        outOfStock.setTextColor(getResources().getColor(R.color.colorAccent));
+                        outOfStock.setCompoundDrawables(null, null, null, null);
+
+
+                    }
+
 
                 } else {
                     loadingDialog.dismiss();
@@ -617,64 +689,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
-        addToCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentUser == null) {
-                    signInDialog.show();
-                } else {
-
-                    if (!running_cart_query) {
-
-                        running_cart_query = true;
-
-                        if (ALREADY_ADDED_TO_CART) {
-                            running_cart_query = false;
-                            Toast.makeText(ProductDetailsActivity.this, "Already added to cart", Toast.LENGTH_SHORT).show();
-
-                        } else {
-
-                            Map<String, Object> addProduct = new HashMap<>();
-                            addProduct.put("product_ID_" + String.valueOf(DBqueries.cartList.size()), productID);
-                            addProduct.put("list_size", (long) (DBqueries.cartList.size() + 1));
-                            firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_CART")
-
-                                    .update(addProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-
-
-                                        if (DBqueries.cartItemModelList.size() != 0) {
-
-                                            DBqueries.cartItemModelList.add(new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0));
-
-                                        }
-
-                                        ALREADY_ADDED_TO_CART = true;
-
-                                        DBqueries.cartList.add(productID);
-                                        Toast.makeText(ProductDetailsActivity.this, "Added to cart success", Toast.LENGTH_SHORT).show();
-                                        invalidateOptionsMenu();
-                                        running_cart_query = false;
-
-                                    } else {
-                                        running_cart_query = false;
-
-                                        String error = task.getException().getMessage();
-                                        Toast.makeText(ProductDetailsActivity.this, error, Toast.LENGTH_SHORT).show();
-
-                                    }
-                                }
-                            });
-
-                        }
-                    }
-
-
-                }
-            }
-        });
 
 ///// coupon dialog
 
