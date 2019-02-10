@@ -461,6 +461,8 @@ public class DBqueries {
                     if ((long)task.getResult().get("list_size") == 0) {
                         deliveryIntent = new Intent(context, AddAddressActivity.class);
 
+                        deliveryIntent.putExtra("INTENT", "deliveryIntent");
+
                     } else {
 
                         for (long x = 1; x < (long) task.getResult().get("list_size") + 1; x++) {

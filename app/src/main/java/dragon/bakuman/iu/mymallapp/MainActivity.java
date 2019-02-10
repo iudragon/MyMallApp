@@ -3,6 +3,7 @@ package dragon.bakuman.iu.mymallapp;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -49,6 +50,10 @@ public class MainActivity extends AppCompatActivity
 
     private Window window;
 
+    private int scrollFlags;
+
+    private AppBarLayout.LayoutParams params;
+
     private Dialog signInDialog;
 
     private Toolbar toolbar;
@@ -72,6 +77,9 @@ public class MainActivity extends AppCompatActivity
         window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
+        params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+
+        scrollFlags = params.getScrollFlags();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -265,7 +273,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
+        private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
 
 
         actionBarLogo.setVisibility(View.GONE);
@@ -278,6 +286,9 @@ public class MainActivity extends AppCompatActivity
         if (fragmentNo == CART_FRAGMENT) {
 
             navigationView.getMenu().getItem(3).setChecked(true);
+            params.setScrollFlags(0);
+        } else {
+            params.setScrollFlags(scrollFlags);
         }
     }
 

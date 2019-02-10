@@ -28,7 +28,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/addNewAddressButton"
+        android:id="@+id/add_new_address_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -62,7 +62,7 @@
         android:text="2 addresses saved"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewAddressButton" />
+        app:layout_constraintTop_toBottomOf="@+id/add_new_address_btn" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/addresses_recycler_view"
