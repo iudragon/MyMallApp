@@ -122,7 +122,7 @@ public class ResetPasswordFragment extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
-                            ScaleAnimation scaleAnimation = new ScaleAnimation(1,0,1,0,emailIcon.getWidth()/2,emailIcon.getHeight()/2);
+                            ScaleAnimation scaleAnimation = new ScaleAnimation(1, 0, 1, 0, emailIcon.getWidth() / 2, emailIcon.getHeight() / 2);
                             scaleAnimation.setDuration(100);
                             scaleAnimation.setInterpolator(new AccelerateInterpolator());
                             scaleAnimation.setRepeatMode(Animation.REVERSE);
