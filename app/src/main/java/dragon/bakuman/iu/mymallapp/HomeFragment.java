@@ -214,10 +214,12 @@ public class HomeFragment extends Fragment {
 
 
         networkInfo = connectivityManager.getActiveNetworkInfo();
+//
+//        categoryModelList.clear();
+//        lists.clear();
+//        loadedCategoriesNames.clear();
 
-        categoryModelList.clear();
-        lists.clear();
-        loadedCategoriesNames.clear();
+        DBqueries.clearData();
 
         if (networkInfo != null && networkInfo.isConnected() == true) {
 

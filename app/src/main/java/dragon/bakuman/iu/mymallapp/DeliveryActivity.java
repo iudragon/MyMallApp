@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -27,7 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.JsonObject;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
@@ -36,6 +40,7 @@ import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +63,9 @@ public class DeliveryActivity extends AppCompatActivity {
     private ConstraintLayout orderConfirmationLayout;
     private TextView orderId;
     private ImageButton continueShoppingBtn;
+    private boolean successResponse = false;
+    public static boolean fromCart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,20 +197,66 @@ public class DeliveryActivity extends AppCompatActivity {
                                     public void onTransactionResponse(Bundle inResponse) {
 //                                        Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
 
-                                        if (inResponse.getString("STATUS").equals("TXN_SUCCESS")){
+                                        if (inResponse.getString("STATUS").equals("TXN_SUCCESS")) {
 
-                                            if (MainActivity.mainActivity != null){
+                                            successResponse = true;
+
+                                            if (MainActivity.mainActivity != null) {
 
                                                 MainActivity.mainActivity.finish();
                                                 MainActivity.mainActivity = null;
                                                 MainActivity.showCart = false;
                                             }
 
-                                            if (ProductDetailsActivity.productDetailsActivity != null){
+                                            if (ProductDetailsActivity.productDetailsActivity != null) {
 
                                                 ProductDetailsActivity.productDetailsActivity.finish();
                                                 ProductDetailsActivity.productDetailsActivity = null;
                                             }
+
+                                            if (fromCart) {
+
+                                                Map<String, Object> updateCartList = new HashMap<>();
+
+                                                long cartListSize = 0;
+                                                final List<Integer> indexList = new ArrayList<>();
+
+                                                for (int x = 0; x < DBqueries.cartList.size(); x++) {
+
+                                                    if (!cartItemModelList.get(x).isInStock()) {
+
+                                                        updateCartList.put("product_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
+                                                        cartListSize++;
+                                                    } else {
+                                                        indexList.add(x);
+                                                    }
+
+                                                }
+
+                                                updateCartList.put("list_size", cartListSize);
+
+                                                FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_CART").set(updateCartList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()){
+
+                                                            for (int x = 0; x < indexList.size(); x++){
+
+                                                                DBqueries.cartList.remove(indexList.get(x).intValue());
+                                                                DBqueries.cartItemModelList.remove(indexList.get(x).intValue());
+                                                                DBqueries.cartItemModelList.remove(DBqueries.cartItemModelList.size() - 1);
+                                                            }
+                                                        } else {
+
+                                                            String error = task.getException().getMessage();
+                                                            Toast.makeText(DeliveryActivity.this, error, Toast.LENGTH_SHORT).show();
+                                                        }
+
+                                                        loadingDialog.dismiss();
+                                                    }
+                                                });
+                                            }
+
 
                                             orderId.setText("Order ID " + inResponse.getString("ORDERID"));
                                             orderConfirmationLayout.setVisibility(View.VISIBLE);
@@ -312,5 +366,17 @@ public class DeliveryActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         loadingDialog.dismiss();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (successResponse) {
+
+            finish();
+            return;
+        }
+
+        super.onBackPressed();
     }
 }
