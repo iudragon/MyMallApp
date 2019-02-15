@@ -97,7 +97,7 @@ public class OTPverificationActivity extends AppCompatActivity {
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                5000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
         RequestQueue requestQueue = Volley.newRequestQueue(OTPverificationActivity.this);
         requestQueue.add(stringRequest);

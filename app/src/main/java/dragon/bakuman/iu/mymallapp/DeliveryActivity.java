@@ -121,6 +121,8 @@ public class DeliveryActivity extends AppCompatActivity {
         cod = paymentMethodDialog.findViewById(R.id.cod_btn);
 
         ///// Payment dialog
+        order_id = UUID.randomUUID().toString().substring(0, 28);
+
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -174,7 +176,6 @@ public class DeliveryActivity extends AppCompatActivity {
 
                 final String M_id = "lwXdCh06196706964567";
                 final String customer_id = FirebaseAuth.getInstance().getUid();
-                order_id = UUID.randomUUID().toString().substring(0, 28);
                 String url = "https://mallpaytmapp.000webhostapp.com/paytm/generateChecksum.php";
                 final String callBackUrl = "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
                 RequestQueue requestQueue = Volley.newRequestQueue(DeliveryActivity.this);
