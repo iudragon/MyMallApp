@@ -32,7 +32,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.gson.JsonObject;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -54,12 +53,13 @@ public class DeliveryActivity extends AppCompatActivity {
     public static final int SELECT_ADDRESS = 0;
     private TextView totalAmount;
     private TextView fullname;
+    private String name, mobileNo;
     private TextView fullAddress;
     private TextView pincode;
     private Button continueBtn;
     private Dialog loadingDialog;
     private Dialog paymentMethodDialog;
-    private ImageButton paytm;
+    private ImageButton paytm, cod;
     private ConstraintLayout orderConfirmationLayout;
     private TextView orderId;
     private ImageButton continueShoppingBtn;
@@ -105,7 +105,7 @@ public class DeliveryActivity extends AppCompatActivity {
         ///// loading dialog
 
 
-        ///// loading dialog
+        ///// Payment dialog
 
         paymentMethodDialog = new Dialog(DeliveryActivity.this);
         paymentMethodDialog.setContentView(R.layout.payment_method);
@@ -117,7 +117,9 @@ public class DeliveryActivity extends AppCompatActivity {
         paymentMethodDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         paytm = paymentMethodDialog.findViewById(R.id.paytm);
-        ///// loading dialog
+        cod = paymentMethodDialog.findViewById(R.id.cod_btn);
+
+        ///// Payment dialog
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -144,6 +146,17 @@ public class DeliveryActivity extends AppCompatActivity {
                 paymentMethodDialog.show();
 
 
+            }
+        });
+
+        cod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent otpIntent = new Intent(DeliveryActivity.this, OTPverificationActivity.class);
+
+                otpIntent.putExtra("mobileNo", mobileNo.substring(0, 10));
+
+                startActivity(otpIntent);
             }
         });
 
@@ -238,9 +251,9 @@ public class DeliveryActivity extends AppCompatActivity {
                                                 FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_CART").set(updateCartList).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()){
+                                                        if (task.isSuccessful()) {
 
-                                                            for (int x = 0; x < indexList.size(); x++){
+                                                            for (int x = 0; x < indexList.size(); x++) {
 
                                                                 DBqueries.cartList.remove(indexList.get(x).intValue());
                                                                 DBqueries.cartItemModelList.remove(indexList.get(x).intValue());
@@ -346,7 +359,10 @@ public class DeliveryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        fullname.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullname());
+        name = DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullname();
+        mobileNo = DBqueries.addressesModelList.get(DBqueries.selectedAddress).getMobileNo();
+
+        fullname.setText(name + " - " + mobileNo);
         fullAddress.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getAddress());
         pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getPincode());
     }
