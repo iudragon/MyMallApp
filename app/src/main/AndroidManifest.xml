@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
@@ -17,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewAllActivity"></activity>
+        <activity android:name=".OTPverificationActivity"></activity>
+        <activity android:name=".ViewAllActivity" />
         <activity android:name=".MyAddressesActivity" />
         <activity
             android:name=".AddAddressActivity"
@@ -44,13 +44,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
-            android:theme="@style/Paytmtheme"
-            tools:replace="android:theme"
             android:configChanges="keyboardHidden|orientation|keyboard"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Paytmtheme"
+            tools:replace="android:theme" />
     </application>
 
 </manifest>
