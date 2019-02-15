@@ -257,7 +257,9 @@ public class DeliveryActivity extends AppCompatActivity {
                                                 });
                                             }
 
-
+                                            continueBtn.setEnabled(false);
+                                            changeOrAddNewAddressButton.setEnabled(false);
+                                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                                             orderId.setText("Order ID " + inResponse.getString("ORDERID"));
                                             orderConfirmationLayout.setVisibility(View.VISIBLE);
                                             continueShoppingBtn.setOnClickListener(new View.OnClickListener() {
