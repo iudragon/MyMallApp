@@ -65,7 +65,8 @@ public class DeliveryActivity extends AppCompatActivity {
     private ImageButton continueShoppingBtn;
     private boolean successResponse = false;
     public static boolean fromCart;
-
+    private String order_id;
+    public static boolean codOrderConfirmed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +153,7 @@ public class DeliveryActivity extends AppCompatActivity {
         cod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                paymentMethodDialog.dismiss();
                 Intent otpIntent = new Intent(DeliveryActivity.this, OTPverificationActivity.class);
 
                 otpIntent.putExtra("mobileNo", mobileNo.substring(0, 10));
@@ -172,7 +174,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                 final String M_id = "lwXdCh06196706964567";
                 final String customer_id = FirebaseAuth.getInstance().getUid();
-                final String order_id = UUID.randomUUID().toString().substring(0, 28);
+                order_id = UUID.randomUUID().toString().substring(0, 28);
                 String url = "https://mallpaytmapp.000webhostapp.com/paytm/generateChecksum.php";
                 final String callBackUrl = "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
                 RequestQueue requestQueue = Volley.newRequestQueue(DeliveryActivity.this);
@@ -211,77 +213,7 @@ public class DeliveryActivity extends AppCompatActivity {
 //                                        Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
 
                                         if (inResponse.getString("STATUS").equals("TXN_SUCCESS")) {
-
-                                            successResponse = true;
-
-                                            if (MainActivity.mainActivity != null) {
-
-                                                MainActivity.mainActivity.finish();
-                                                MainActivity.mainActivity = null;
-                                                MainActivity.showCart = false;
-                                            }
-
-                                            if (ProductDetailsActivity.productDetailsActivity != null) {
-
-                                                ProductDetailsActivity.productDetailsActivity.finish();
-                                                ProductDetailsActivity.productDetailsActivity = null;
-                                            }
-
-                                            if (fromCart) {
-
-                                                Map<String, Object> updateCartList = new HashMap<>();
-
-                                                long cartListSize = 0;
-                                                final List<Integer> indexList = new ArrayList<>();
-
-                                                for (int x = 0; x < DBqueries.cartList.size(); x++) {
-
-                                                    if (!cartItemModelList.get(x).isInStock()) {
-
-                                                        updateCartList.put("product_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
-                                                        cartListSize++;
-                                                    } else {
-                                                        indexList.add(x);
-                                                    }
-
-                                                }
-
-                                                updateCartList.put("list_size", cartListSize);
-
-                                                FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_CART").set(updateCartList).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-
-                                                            for (int x = 0; x < indexList.size(); x++) {
-
-                                                                DBqueries.cartList.remove(indexList.get(x).intValue());
-                                                                DBqueries.cartItemModelList.remove(indexList.get(x).intValue());
-                                                                DBqueries.cartItemModelList.remove(DBqueries.cartItemModelList.size() - 1);
-                                                            }
-                                                        } else {
-
-                                                            String error = task.getException().getMessage();
-                                                            Toast.makeText(DeliveryActivity.this, error, Toast.LENGTH_SHORT).show();
-                                                        }
-
-                                                        loadingDialog.dismiss();
-                                                    }
-                                                });
-                                            }
-
-                                            continueBtn.setEnabled(false);
-                                            changeOrAddNewAddressButton.setEnabled(false);
-                                            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                                            orderId.setText("Order ID " + inResponse.getString("ORDERID"));
-                                            orderConfirmationLayout.setVisibility(View.VISIBLE);
-                                            continueShoppingBtn.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    finish();
-                                                }
-                                            });
-
+                                            showConfirmationLayout();
                                         }
                                     }
 
@@ -365,6 +297,11 @@ public class DeliveryActivity extends AppCompatActivity {
         fullname.setText(name + " - " + mobileNo);
         fullAddress.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getAddress());
         pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getPincode());
+
+        if (codOrderConfirmed){
+
+            showConfirmationLayout();
+        }
     }
 
     @Override
@@ -396,5 +333,82 @@ public class DeliveryActivity extends AppCompatActivity {
         }
 
         super.onBackPressed();
+    }
+
+    private void showConfirmationLayout() {
+
+
+        successResponse = true;
+        codOrderConfirmed = false;
+
+        if (MainActivity.mainActivity != null) {
+
+            MainActivity.mainActivity.finish();
+            MainActivity.mainActivity = null;
+            MainActivity.showCart = false;
+        }
+
+        if (ProductDetailsActivity.productDetailsActivity != null) {
+
+            ProductDetailsActivity.productDetailsActivity.finish();
+            ProductDetailsActivity.productDetailsActivity = null;
+        }
+
+        if (fromCart) {
+
+            Map<String, Object> updateCartList = new HashMap<>();
+
+            long cartListSize = 0;
+            final List<Integer> indexList = new ArrayList<>();
+
+            for (int x = 0; x < DBqueries.cartList.size(); x++) {
+
+                if (!cartItemModelList.get(x).isInStock()) {
+
+                    updateCartList.put("product_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
+                    cartListSize++;
+                } else {
+                    indexList.add(x);
+                }
+
+            }
+
+            updateCartList.put("list_size", cartListSize);
+
+            FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_CART").set(updateCartList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+
+                        for (int x = 0; x < indexList.size(); x++) {
+
+                            DBqueries.cartList.remove(indexList.get(x).intValue());
+                            DBqueries.cartItemModelList.remove(indexList.get(x).intValue());
+                            DBqueries.cartItemModelList.remove(DBqueries.cartItemModelList.size() - 1);
+                        }
+                    } else {
+
+                        String error = task.getException().getMessage();
+                        Toast.makeText(DeliveryActivity.this, error, Toast.LENGTH_SHORT).show();
+                    }
+
+                    loadingDialog.dismiss();
+                }
+            });
+        }
+
+        continueBtn.setEnabled(false);
+        changeOrAddNewAddressButton.setEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        orderId.setText("Order ID " + order_id);
+        orderConfirmationLayout.setVisibility(View.VISIBLE);
+        continueShoppingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 }

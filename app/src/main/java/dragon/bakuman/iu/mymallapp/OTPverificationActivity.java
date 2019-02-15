@@ -2,15 +2,20 @@ package dragon.bakuman.iu.mymallapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,11 +50,27 @@ public class OTPverificationActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
+                verifyBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (otp.getText().toString().equals(String.valueOf(OTP_number))) {
+
+                            DeliveryActivity.codOrderConfirmed = true;
+                            finish();
+
+                        } else {
+
+                            Toast.makeText(OTPverificationActivity.this, "OTP is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                finish();
+                Toast.makeText(OTPverificationActivity.this, "you failed in OTP.lol", Toast.LENGTH_SHORT).show();
             }
         }) {
 
@@ -74,6 +95,12 @@ public class OTPverificationActivity extends AppCompatActivity {
                 return body;
             }
         };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        RequestQueue requestQueue = Volley.newRequestQueue(OTPverificationActivity.this);
+        requestQueue.add(stringRequest);
 
     }
 }
