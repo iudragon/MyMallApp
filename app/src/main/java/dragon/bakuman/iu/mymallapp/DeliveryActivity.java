@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -342,6 +343,52 @@ public class DeliveryActivity extends AppCompatActivity {
         successResponse = true;
         codOrderConfirmed = false;
 
+
+        String SMS_API = "https://www.fast2sms.com/dev/bulk";
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SMS_API, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("authorization", "tK0cvlNZGxW2LOQ76gjaUiTuBYCMR1EyJIhSXHofb5ks8de3FmNuA8C9Qtgf5wEFsJdaGHmp4RKveZxY");
+
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> body = new HashMap<>();
+                body.put("sender_id", "FSTSMS");
+                body.put("language", "english");
+                body.put("route", "qt");
+                body.put("numbers", mobileNo);
+                body.put("message", "6516");
+                body.put("variables", "{#BB#}"); // NEED #FF# HERE  DOUBT
+                body.put("variables_values", order_id);
+                return body;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        RequestQueue requestQueue = Volley.newRequestQueue(DeliveryActivity.this);
+        requestQueue.add(stringRequest);
+
+
         if (MainActivity.mainActivity != null) {
 
             MainActivity.mainActivity.finish();
@@ -366,7 +413,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                 if (!cartItemModelList.get(x).isInStock()) {
 
-                    updateCartList.put("product_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
+                    updateCartList.put("propduct_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
                     cartListSize++;
                 } else {
                     indexList.add(x);
