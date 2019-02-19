@@ -1,5 +1,8 @@
 package dragon.bakuman.iu.mymallapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartItemModel {
 
     public static final int CART_ITEM = 0;
@@ -32,6 +35,9 @@ public class CartItemModel {
     private long offersApplied;
     private long couponsApplied;
     private boolean inStock;
+    private List<String> qtyIDs;
+
+
 
     public CartItemModel(int type, String productID, String productImage, String productTitle, long freeCoupons, String productPrice, String cuttedPrice, long productQuantity, long offersApplied, long couponsApplied, boolean inStock, long maxQuantity) {
         this.type = type;
@@ -46,6 +52,15 @@ public class CartItemModel {
         this.couponsApplied = couponsApplied;
         this.inStock = inStock;
         this.maxQuantity = maxQuantity;
+        qtyIDs = new ArrayList<>();
+    }
+
+    public List<String> getQtyIDs() {
+        return qtyIDs;
+    }
+
+    public void setQtyIDs(List<String> qtyIDs) {
+        this.qtyIDs = qtyIDs;
     }
 
     public long getMaxQuantity() {
