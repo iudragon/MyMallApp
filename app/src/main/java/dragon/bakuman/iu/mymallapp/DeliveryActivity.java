@@ -33,6 +33,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -68,6 +71,8 @@ public class DeliveryActivity extends AppCompatActivity {
     public static boolean fromCart;
     private String order_id;
     public static boolean codOrderConfirmed = false;
+    private FirebaseFirestore firebaseFirestore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +127,9 @@ public class DeliveryActivity extends AppCompatActivity {
         cod = paymentMethodDialog.findViewById(R.id.cod_btn);
 
         ///// Payment dialog
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
         order_id = UUID.randomUUID().toString().substring(0, 28);
 
 
@@ -292,6 +300,34 @@ public class DeliveryActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        /////accessing quantity
+        for (int x = 0; x < cartItemModelList.size() - 1; x++) {
+
+            firebaseFirestore.collection("PRODUCTS").document(cartItemModelList.get(x).getProductID()).collection("QUANTITY").orderBy("available", Query.Direction.DESCENDING).limit(cartItemModelList.get(x).getProductQuantity()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+
+                        for (QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
+
+                            if ((boolean) queryDocumentSnapshot.get("available")){
+
+
+                            } else {
+
+                                ///// not available
+                            }
+                        }
+                    } else {
+
+
+                    }
+                }
+            });
+        }
+        /////accessing quantity
+
         name = DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullname();
         mobileNo = DBqueries.addressesModelList.get(DBqueries.selectedAddress).getMobileNo();
 

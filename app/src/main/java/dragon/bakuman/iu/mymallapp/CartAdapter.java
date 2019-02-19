@@ -250,15 +250,22 @@ public class CartAdapter extends RecyclerView.Adapter {
 
                                     if (Long.valueOf(quantityNo.getText().toString()) <= maxQuantity && Long.valueOf(quantityNo.getText().toString()) != 0) {
 
-
-                                        if (DeliveryActivity.fromCart) {
-
-
+                                        if (itemView.getContext() instanceof MainActivity) {
                                             DBqueries.cartItemModelList.get(position).setProductQuantity(Long.parseLong(quantityNo.getText().toString()));
+
+
                                         } else {
 
-                                            DeliveryActivity.cartItemModelList.get(position).setProductQuantity(Long.parseLong(quantityNo.getText().toString()));
+                                            if (DeliveryActivity.fromCart) {
+
+
+                                                DBqueries.cartItemModelList.get(position).setProductQuantity(Long.parseLong(quantityNo.getText().toString()));
+                                            } else {
+
+                                                DeliveryActivity.cartItemModelList.get(position).setProductQuantity(Long.parseLong(quantityNo.getText().toString()));
+                                            }
                                         }
+
 
                                         productQuantity.setText("Qty: " + quantityNo.getText());
                                     } else {
