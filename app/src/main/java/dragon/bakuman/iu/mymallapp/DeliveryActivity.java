@@ -460,7 +460,7 @@ public class DeliveryActivity extends AppCompatActivity {
             MainActivity.showCart = false;
         } else {
 
-
+            MainActivity.resetMainActivity = true;
         }
 
         if (ProductDetailsActivity.productDetailsActivity != null) {

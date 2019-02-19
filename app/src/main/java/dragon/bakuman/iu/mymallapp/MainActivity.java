@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
     public static Activity mainActivity;
 
+    public static boolean resetMainActivity = false;
+
     private int currentFragment = -1;
 
     private NavigationView navigationView;
@@ -160,6 +162,14 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
 
         }
+        if (resetMainActivity) {
+            resetMainActivity = false;
+            actionBarLogo.setVisibility(View.VISIBLE);
+            setFragment(new HomeFragment(), HOME_FRAGMENT);
+            navigationView.getMenu().getItem(0).setChecked(true);
+
+        }
+
         invalidateOptionsMenu();
     }
 
