@@ -676,7 +676,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         ///// ratings layout
 
-        buyNowBtn.setOnClickListener(new View.OnClickListener() {
+            buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
