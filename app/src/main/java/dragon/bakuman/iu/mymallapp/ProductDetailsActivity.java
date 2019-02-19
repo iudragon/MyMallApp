@@ -387,7 +387,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                                         if (DBqueries.cartItemModelList.size() != 0) {
 
-                                                            DBqueries.cartItemModelList.add(0, new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock"), (long) documentSnapshot.get("max-quantity")));
+                                                            DBqueries.cartItemModelList.add(0, new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock"), (long) documentSnapshot.get("max-quantity"), (long) documentSnapshot.get("stock_quantity")));
 
                                                         }
 
@@ -676,7 +676,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         ///// ratings layout
 
-            buyNowBtn.setOnClickListener(new View.OnClickListener() {
+        buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -692,7 +692,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                     DeliveryActivity.cartItemModelList = new ArrayList<>();
 
-                    DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock"), (long) documentSnapshot.get("max-quantity")));
+                    DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (long) 1, (long) 0, (long) 0, (boolean) documentSnapshot.get("in_stock"), (long) documentSnapshot.get("max-quantity"), (long) documentSnapshot.get("stock_quantity")));
 
                     DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.TOTAL_AMOUNT));
 
