@@ -125,7 +125,6 @@ public class DeliveryActivity extends AppCompatActivity {
         order_id = UUID.randomUUID().toString().substring(0, 28);
 
 
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         deliveryRecyclerView.setLayoutManager(layoutManager);
@@ -300,7 +299,7 @@ public class DeliveryActivity extends AppCompatActivity {
         fullAddress.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getAddress());
         pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getPincode());
 
-        if (codOrderConfirmed){
+        if (codOrderConfirmed) {
 
             showConfirmationLayout();
         }
@@ -369,14 +368,14 @@ public class DeliveryActivity extends AppCompatActivity {
             }
 
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> body = new HashMap<>();
                 body.put("sender_id", "FSTSMS");
                 body.put("language", "english");
                 body.put("route", "qt");
                 body.put("numbers", mobileNo);
                 body.put("message", "6516");
-                body.put("variables", "{#BB#}"); // NEED #FF# HERE  DOUBT
+                body.put("variables", "{#FF#}"); // NEED #FF# HERE  DOUBT
                 body.put("variables_values", order_id);
                 return body;
             }
@@ -413,7 +412,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                 if (!cartItemModelList.get(x).isInStock()) {
 
-                    updateCartList.put("propduct_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
+                    updateCartList.put("product_ID_" + cartListSize, cartItemModelList.get(x).getProductID());
                     cartListSize++;
                 } else {
                     indexList.add(x);
