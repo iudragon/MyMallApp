@@ -26,7 +26,6 @@ public class CartItemModel {
     private String productImage;
     private String productTitle;
 
-    ///// Doubt? should be long or Long
     private Long freeCoupons;
     private String productPrice;
     private String cuttedPrice;
@@ -37,6 +36,7 @@ public class CartItemModel {
     private Long couponsApplied;
     private boolean inStock;
     private List<String> qtyIDs;
+    private boolean qtyError;
 
 
     public CartItemModel(int type, String productID, String productImage, String productTitle, Long freeCoupons, String productPrice, String cuttedPrice, Long productQuantity, Long offersApplied, Long couponsApplied, boolean inStock, Long maxQuantity, Long stockQuantity) {
@@ -54,6 +54,15 @@ public class CartItemModel {
         this.maxQuantity = maxQuantity;
         this.stockQuantity = stockQuantity;
         qtyIDs = new ArrayList<>();
+        qtyError = false;
+    }
+
+    public boolean isQtyError() {
+        return qtyError;
+    }
+
+    public void setQtyError(boolean qtyError) {
+        this.qtyError = qtyError;
     }
 
     public String getProductID() {
