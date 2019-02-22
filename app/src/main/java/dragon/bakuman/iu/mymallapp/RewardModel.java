@@ -1,5 +1,7 @@
 package dragon.bakuman.iu.mymallapp;
 
+import com.google.firebase.Timestamp;
+
 import java.util.Date;
 
 public class RewardModel {
@@ -12,7 +14,7 @@ public class RewardModel {
     private Date timestamp;
 
 
-    public RewardModel(String type, String lowerLimit, String upperLimit, String discORamt, String couponBody, Date timestamp) {
+    public RewardModel(String type, String lowerLimit, String upperLimit, String discORamt, String couponBody, Date   timestamp) {
         this.type = type;
         this.lowerLimit = lowerLimit;
         this.upperLimit = upperLimit;
