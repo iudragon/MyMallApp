@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.ViewHolder> {
@@ -39,10 +41,14 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull MyRewardsAdapter.ViewHolder viewHolder, int position) {
 
-        String title = rewardModelList.get(position).getTitle();
-        String date = rewardModelList.get(position).getExpiryDate();
+        String type = rewardModelList.get(position).getType();
+        Date validity = rewardModelList.get(position).getTimestamp();
         String body = rewardModelList.get(position).getCouponBody();
-        viewHolder.setData(title, date, body);
+        String lowerLimit = rewardModelList.get(position).getLowerLimit();
+        String upperLimit = rewardModelList.get(position).getUpperLimit();
+        String discORamt = rewardModelList.get(position).getDiscORamt();
+
+        viewHolder.setData(type, validity, body, upperLimit, lowerLimit, discORamt);
     }
 
     @Override
@@ -65,17 +71,25 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
 
         }
 
-        private void setData(final String title, final String date, final String body) {
-            couponTitle.setText(title);
-            couponExpirydDate.setText(date);
+        private void setData(final String type, final Date validity, final String body, String upperLimit, String lowerLimit, String discORamt) {
+
+            if (type.equals("Discount")) {
+
+                couponTitle.setText(type);
+            } else {
+                couponTitle.setText("FLAT Rs." + discORamt + " OFF");
+            }
+
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM YYYY");
+            couponExpirydDate.setText("till " + simpleDateFormat.format(validity));
             couponBody.setText(body);
 
-            if (useMiniLayout){
+            if (useMiniLayout) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ProductDetailsActivity.couponTitle.setText(title);
-                        ProductDetailsActivity.couponExpiryDate.setText(date);
+                        ProductDetailsActivity.couponTitle.setText(type);
+                        ProductDetailsActivity.couponExpiryDate.setText(simpleDateFormat.format(validity));
                         ProductDetailsActivity.couponBody.setText(body);
                         ProductDetailsActivity.showDialogRecyclerView();
                     }

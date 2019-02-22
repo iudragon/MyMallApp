@@ -211,7 +211,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
                 final String M_id = "lwXdCh06196706964567";
                 final String customer_id = FirebaseAuth.getInstance().getUid();
-                String url = "https://mallpaytmapp.000webhostapp.com/paytm/generateChecksum.php";
+                String url = "http://npkimaki.website/paytm/generateChecksum.php";
                 final String callBackUrl = "https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
                 RequestQueue requestQueue = Volley.newRequestQueue(DeliveryActivity.this);
 

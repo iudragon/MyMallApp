@@ -217,6 +217,7 @@ public class MainActivity extends AppCompatActivity
             badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
 
             if (currentUser != null) {
+
                 if (DBqueries.cartList.size() == 0) {
                     DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount, new TextView(MainActivity.this));
 

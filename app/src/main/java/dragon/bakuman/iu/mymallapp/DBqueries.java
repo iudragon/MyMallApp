@@ -21,6 +21,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,8 @@ public class DBqueries {
     public static int selectedAddress = -1;
 
     public static List<AddressesModel> addressesModelList = new ArrayList<>();
+
+    public static List<RewardModel> rewardModelList = new ArrayList<>();
 
     public static void loadCategories(final RecyclerView categoryRecyclerView, final Context context) {
 
@@ -554,6 +557,45 @@ public class DBqueries {
         });
     }
 
+    public static void loadRewards(final Context context, final Dialog loadingDialog) {
+
+        rewardModelList.clear();
+        firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_REWARDS").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+
+                        if (documentSnapshot.get("type").toString().equals("Discount")) {
+                            rewardModelList.add(new RewardModel(documentSnapshot.get("type").toString(),
+                                    documentSnapshot.get("lower_limit").toString(),
+                                    documentSnapshot.get("upper_limit").toString(),
+                                    documentSnapshot.get("percentage").toString(),
+                                    documentSnapshot.get("body").toString(),
+                                    (Date) documentSnapshot.get("validity")));
+                        } else {
+                            rewardModelList.add(new RewardModel(documentSnapshot.get("type").toString(),
+                                    documentSnapshot.get("lower_limit").toString(),
+                                    documentSnapshot.get("upper_limit").toString(),
+                                    documentSnapshot.get("amount").toString(),
+                                    documentSnapshot.get("body").toString(),
+                                    (Date) documentSnapshot.get("validity")));
+                        }
+                    }
+
+                    MyRewardsFragment.myRewardsAdapter.notifyDataSetChanged();
+
+                } else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                }
+
+                loadingDialog.dismiss();
+            }
+        });
+    }
+
     public static void clearData() {
 
         categoryModelList.clear();
@@ -567,6 +609,7 @@ public class DBqueries {
         myRatedIds.clear();
         myRating.clear();
         addressesModelList.clear();
+        rewardModelList.clear();
     }
 
 }
