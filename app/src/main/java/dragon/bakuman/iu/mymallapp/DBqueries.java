@@ -573,14 +573,14 @@ public class DBqueries {
                                     documentSnapshot.get("upper_limit").toString(),
                                     documentSnapshot.get("percentage").toString(),
                                     documentSnapshot.get("body").toString(),
-                                    (Date) documentSnapshot.get("validity")));
+                                    (Date) documentSnapshot.getTimestamp("validity").toDate()));
                         } else {
                             rewardModelList.add(new RewardModel(documentSnapshot.get("type").toString(),
                                     documentSnapshot.get("lower_limit").toString(),
                                     documentSnapshot.get("upper_limit").toString(),
                                     documentSnapshot.get("amount").toString(),
                                     documentSnapshot.get("body").toString(),
-                                    (Date) documentSnapshot.get("validity")));
+                                    (Date) documentSnapshot.getTimestamp("validity").toDate()));
                         }
                     }
 
