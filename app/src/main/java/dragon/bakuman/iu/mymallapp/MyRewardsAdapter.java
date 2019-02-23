@@ -81,7 +81,7 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
                 couponTitle.setText("FLAT Rs." + discORamt + " OFF");
             }
 
-            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM YYYY");
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MMM/YYYY");
             couponExpirydDate.setText("till " + simpleDateFormat.format(validity));
             couponBody.setText(body);
 
