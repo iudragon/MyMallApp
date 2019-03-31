@@ -339,6 +339,8 @@ public class MainActivity extends AppCompatActivity
                     super.onDrawerClosed(drawerView);
                     int id = menuItem.getItemId();
 
+                    signInDialog.dismiss();
+
                     if (id == R.id.nav_my_mall) {
 
 
@@ -384,7 +386,9 @@ public class MainActivity extends AppCompatActivity
             drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
                 @Override
                 public void onDrawerClosed(View drawerView) {
+
                     super.onDrawerClosed(drawerView);
+
                     int id = menuItem.getItemId();
                     if (id == R.id.nav_my_mall) {
                         invalidateOptionsMenu();
@@ -396,10 +400,13 @@ public class MainActivity extends AppCompatActivity
                         signInDialog.dismiss();
                         gotoFragment("Home", new MyWishlistFragment(), WISHLIST_FRAGMENT);
                         navigationView.getMenu().getItem(WISHLIST_FRAGMENT + 1).setChecked(true);
-                    } else {
+                    } else if (id == R.id.nav_my_account || id == R.id.nav_my_cart || id == R.id.nav_my_rewards || id == R.id.nav_my_orders){
                         signInDialog.show();
 
+                    } else {
+                        signInDialog.dismiss();
                     }
+
                 }
             });
 
