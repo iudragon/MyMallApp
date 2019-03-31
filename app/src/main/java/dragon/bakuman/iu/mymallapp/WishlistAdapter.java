@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     private int lastPosition = -1;
 
+    private FirebaseUser currentUser;
+
+
     public WishlistAdapter(List<WishlistModel> wishlistModelList, Boolean wishlist) {
         this.wishlistModelList = wishlistModelList;
         this.wishlist = wishlist;
@@ -34,6 +39,9 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     @NonNull
     @Override
     public WishlistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.wishlist_item_layout, viewGroup, false);
 
@@ -154,8 +162,15 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
 
             if (wishlist) {
+                if (currentUser == null){
+                    deleteBtn.setVisibility(View.GONE);
+                } else if (currentUser != null){
+                    deleteBtn.setVisibility(View.VISIBLE);
 
-                deleteBtn.setVisibility(View.VISIBLE);
+                }
+
+
+
             } else {
 
                 deleteBtn.setVisibility(View.GONE);
@@ -185,6 +200,8 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
             });
         }
     }
+
+
 }
 
 

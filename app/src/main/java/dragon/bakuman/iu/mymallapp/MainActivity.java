@@ -381,18 +381,27 @@ public class MainActivity extends AppCompatActivity
             return true;
 
         } else {
-            int id = menuItem.getItemId();
-            if (id == R.id.nav_my_wishlist) {
-                signInDialog.dismiss();
-                gotoFragment("Guest Wish", new MyWishlistFragment(), WISHLIST_FRAGMENT);
-            } else if (id == R.id.nav_my_mall){
-                signInDialog.dismiss();
-                gotoFragment("Guest Wish", new HomeFragment(), HOME_FRAGMENT);
-            } else {
-                signInDialog.show();
+            drawer.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    super.onDrawerClosed(drawerView);
+                    int id = menuItem.getItemId();
+                    if (id == R.id.nav_my_mall) {
+                        invalidateOptionsMenu();
+                        signInDialog.dismiss();
+                        gotoFragment("Guest Wish", new HomeFragment(), HOME_FRAGMENT);
+                        navigationView.getMenu().getItem(0).setChecked(true);
 
+                    } else if (id == R.id.nav_my_wishlist) {
+                        signInDialog.dismiss();
+                        gotoFragment("Home", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                        navigationView.getMenu().getItem(WISHLIST_FRAGMENT + 1).setChecked(true);
+                    } else {
+                        signInDialog.show();
 
-            }
+                    }
+                }
+            });
 
 
             return false;
