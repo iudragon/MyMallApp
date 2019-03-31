@@ -30,13 +30,13 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
 
     @NonNull
     @Override
-    public AddressesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.addresses_item_layout, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AddressesAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         String name = addressesModelList.get(position).getFullname();
         String mobileNo = addressesModelList.get(position).getMobileNo();
         String address = addressesModelList.get(position).getAddress();

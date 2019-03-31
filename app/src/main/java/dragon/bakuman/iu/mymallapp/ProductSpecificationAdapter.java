@@ -43,7 +43,7 @@ public class ProductSpecificationAdapter extends RecyclerView.Adapter<ProductSpe
 
     @NonNull
     @Override
-    public ProductSpecificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         switch (viewType) {
 
@@ -75,7 +75,7 @@ public class ProductSpecificationAdapter extends RecyclerView.Adapter<ProductSpe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductSpecificationAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
 
         switch (productSpecificationModelList.get(position).getType()) {

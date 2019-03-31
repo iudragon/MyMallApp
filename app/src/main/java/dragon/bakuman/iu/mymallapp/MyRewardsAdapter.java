@@ -25,7 +25,7 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
 
     @NonNull
     @Override
-    public MyRewardsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view;
 
@@ -40,7 +40,7 @@ public class MyRewardsAdapter extends RecyclerView.Adapter<MyRewardsAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyRewardsAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         String type = rewardModelList.get(position).getType();
         Date validity = rewardModelList.get(position).getTimestamp();

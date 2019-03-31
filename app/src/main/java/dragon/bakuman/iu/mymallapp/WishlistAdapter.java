@@ -38,7 +38,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
     @NonNull
     @Override
-    public WishlistAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -49,7 +49,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WishlistAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         String productId = wishlistModelList.get(position).getProductId();
         String resource = wishlistModelList.get(position).getProductImage();

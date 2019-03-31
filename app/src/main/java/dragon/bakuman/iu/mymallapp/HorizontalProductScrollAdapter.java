@@ -26,7 +26,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
 
     @NonNull
     @Override
-    public HorizontalProductScrollAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_item_layout, viewGroup, false);
 
@@ -35,7 +35,7 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HorizontalProductScrollAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
         String resource = horizontalProductScrollModelList.get(position).getProductImage();
 
