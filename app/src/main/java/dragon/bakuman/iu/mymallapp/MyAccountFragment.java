@@ -33,15 +33,15 @@ public class MyAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_my_account, container, false);
 
-        viewAllAddressButton = view.findViewById(R.id.view_all_addresses_btn);
-        viewAllAddressButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myAddressIntent = new Intent(getContext(), MyAddressesActivity.class);
-                myAddressIntent.putExtra("MODE", MANAGE_ADDRESS);
-                startActivity(myAddressIntent);
-            }
-        });
+//        viewAllAddressButton = view.findViewById(R.id.view_all_addresses_btn);
+//        viewAllAddressButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent myAddressIntent = new Intent(getContext(), MyAddressesActivity.class);
+//                myAddressIntent.putExtra("MODE", MANAGE_ADDRESS);
+//                startActivity(myAddressIntent);
+//            }
+//        });
 
         return view;
     }

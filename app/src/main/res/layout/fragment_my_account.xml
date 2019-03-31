@@ -20,20 +20,20 @@
 
             <include layout="@layout/your_recent_orders_layour" />
 
-            <include layout="@layout/my_addresses_layout" />
+            <!--<include layout="@layout/my_addresses_layout" />-->
 
-            <Button
-                android:id="@+id/sign_out_btn"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/colorAccent"
-                android:text="Sign out"
-                android:textColor="#ffffff"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+            <!--<Button-->
+                <!--android:id="@+id/sign_out_btn"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="60dp"-->
+                <!--android:layout_marginStart="16dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:layout_marginBottom="16dp"-->
+                <!--android:backgroundTint="@color/colorAccent"-->
+                <!--android:text="Sign out"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textStyle="bold" />-->
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

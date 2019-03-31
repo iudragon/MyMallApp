@@ -350,22 +350,12 @@ public class MainActivity extends AppCompatActivity
 
                         setFragment(new HomeFragment(), HOME_FRAGMENT);
 
-                    } else if (id == R.id.nav_my_orders) {
-
-                        gotoFragment("My Orders", new MyOrdersFragment(), ORDERS_FRAGMENT);
-
-                    } else if (id == R.id.nav_my_rewards) {
-
-                        gotoFragment("My Rewards", new MyRewardsFragment(), REWARDS_FRAGMENT);
-                    } else if (id == R.id.nav_my_cart) {
-
-                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
-
-                    } else if (id == R.id.nav_my_wishlist) {
+                    }  else if (id == R.id.nav_my_wishlist) {
                         gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
 
-                    } else if (id == R.id.nav_my_account) {
-                        gotoFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
+                    }else if (id == R.id.nav_my_account) {
+                        gotoFragment("About", new MyAccountFragment(), ACCOUNT_FRAGMENT);
+
                     } else if (id == R.id.nav_sign_out) {
                         FirebaseAuth.getInstance().signOut();
 
@@ -393,17 +383,19 @@ public class MainActivity extends AppCompatActivity
                     if (id == R.id.nav_my_mall) {
                         invalidateOptionsMenu();
                         signInDialog.dismiss();
-                        gotoFragment("Guest Wish", new HomeFragment(), HOME_FRAGMENT);
+                        gotoFragment("Home", new HomeFragment(), HOME_FRAGMENT);
                         navigationView.getMenu().getItem(0).setChecked(true);
 
                     } else if (id == R.id.nav_my_wishlist) {
                         signInDialog.dismiss();
-                        gotoFragment("Home", new MyWishlistFragment(), WISHLIST_FRAGMENT);
-                        navigationView.getMenu().getItem(WISHLIST_FRAGMENT + 1).setChecked(true);
-                    } else if (id == R.id.nav_my_account || id == R.id.nav_my_cart || id == R.id.nav_my_rewards || id == R.id.nav_my_orders){
-                        signInDialog.show();
-
-                    } else {
+                        gotoFragment("Available", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                        navigationView.getMenu().getItem(1).setChecked(true);
+                    } else if (id == R.id.nav_my_account){
+                        signInDialog.dismiss();
+                        gotoFragment("About", new MyAccountFragment(), ACCOUNT_FRAGMENT);
+                        navigationView.getMenu().getItem(2).setChecked(true);
+                    }
+                    else {
                         signInDialog.dismiss();
                     }
 

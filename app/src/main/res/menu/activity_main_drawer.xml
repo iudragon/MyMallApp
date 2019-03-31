@@ -8,18 +8,18 @@
             android:id="@+id/nav_my_mall"
             android:icon="@drawable/ic_mall"
             android:title="My Mall" />
-        <item
-            android:id="@+id/nav_my_orders"
-            android:icon="@drawable/ic_shopping"
-            android:title="My Orders" />
-        <item
-            android:id="@+id/nav_my_rewards"
-            android:icon="@drawable/ic_card_giftcard"
-            android:title="My Rewards" />
-        <item
-            android:id="@+id/nav_my_cart"
-            android:icon="@drawable/ic_shopping_cart_black"
-            android:title="My Cart" />
+        <!--<item-->
+            <!--android:id="@+id/nav_my_orders"-->
+            <!--android:icon="@drawable/ic_shopping"-->
+            <!--android:title="My Orders" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_my_rewards"-->
+            <!--android:icon="@drawable/ic_card_giftcard"-->
+            <!--android:title="My Rewards" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_my_cart"-->
+            <!--android:icon="@drawable/ic_shopping_cart_black"-->
+            <!--android:title="My Cart" />-->
         <item
             android:id="@+id/nav_my_wishlist"
             android:icon="@drawable/ic_favorite"
