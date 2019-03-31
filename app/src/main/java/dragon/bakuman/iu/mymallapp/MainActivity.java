@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,10 +70,15 @@ public class MainActivity extends AppCompatActivity
 
     public static DrawerLayout drawer;
 
+
+    public static boolean disableCloseBtn = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         actionBarLogo = findViewById(R.id.actionbar_logo);
@@ -125,8 +131,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+
                 SignInFragment.disableCloseBtn = true;
                 SignUpFragment.disableCloseBtn = true;
+
 
                 signInDialog.dismiss();
                 setSignUpFragment = false;
@@ -140,6 +148,8 @@ public class MainActivity extends AppCompatActivity
 
                 SignUpFragment.disableCloseBtn = true;
                 SignInFragment.disableCloseBtn = true;
+
+
                 signInDialog.dismiss();
                 setSignUpFragment = true;
                 startActivity(registerIntent);
@@ -315,7 +325,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         drawer.closeDrawer(GravityCompat.START);
 
@@ -351,6 +361,7 @@ public class MainActivity extends AppCompatActivity
 
                     } else if (id == R.id.nav_my_wishlist) {
                         gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+
                     } else if (id == R.id.nav_my_account) {
                         gotoFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGMENT);
                     } else if (id == R.id.nav_sign_out) {
@@ -370,11 +381,24 @@ public class MainActivity extends AppCompatActivity
             return true;
 
         } else {
+            int id = menuItem.getItemId();
+            if (id == R.id.nav_my_wishlist) {
+                signInDialog.dismiss();
+                gotoFragment("Guest Wish", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+            } else if (id == R.id.nav_my_mall){
+                signInDialog.dismiss();
+                gotoFragment("Guest Wish", new HomeFragment(), HOME_FRAGMENT);
+            } else {
+                signInDialog.show();
 
-            signInDialog.show();
+
+            }
+
+
             return false;
-        }
 
+
+        }
 
     }
 
