@@ -25,6 +25,11 @@
             android:icon="@drawable/ic_favorite"
             android:title="My Wishlist" />
         <item
+            android:id="@+id/nav_my_speciallist"
+            android:icon="@drawable/ic_favorite"
+            android:title="My Special" />
+
+        <item
             android:id="@+id/nav_my_account"
             android:icon="@drawable/ic_person"
             android:title="My Account" />

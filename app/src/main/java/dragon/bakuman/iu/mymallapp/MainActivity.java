@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
     public static final int WISHLIST_FRAGMENT = 3;
     public static final int REWARDS_FRAGMENT = 4;
     public static final int ACCOUNT_FRAGMENT = 5;
+    public static final int SPECIAL_FRAGMENT = 5;
 
     public static Boolean showCart = false;
 
