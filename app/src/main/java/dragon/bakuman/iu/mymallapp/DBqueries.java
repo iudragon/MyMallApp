@@ -310,45 +310,46 @@ public class DBqueries {
         });
     }
 
-    public static void loadRatingList(final Context context) {
-
-        if (!ProductDetailsActivity.running_rating_query) {
-            ProductDetailsActivity.running_rating_query = true;
-
-            myRatedIds.clear();
-            myRating.clear();
-            firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_RATINGS").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-
-                        for (long x = 0; x < (long) task.getResult().get("list_size"); x++) {
-
-                            myRatedIds.add(task.getResult().get("product_ID_" + x).toString());
-                            myRating.add((long) task.getResult().get("rating_" + x));
-
-                            if (task.getResult().get("product_ID_" + x).toString().equals(ProductDetailsActivity.productID)) {
-
-                                ProductDetailsActivity.initialRating = Integer.parseInt(String.valueOf((long) task.getResult().get("rating_" + x))) - 1;
-
-                                if (ProductDetailsActivity.rateNowContainer != null) {
-
-                                    ProductDetailsActivity.setRating(ProductDetailsActivity.initialRating);
-                                }
-                            }
-                        }
-
-                    } else {
-                        String error = task.getException().getMessage();
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-
-                    }
-
-                    ProductDetailsActivity.running_rating_query = false;
-                }
-            });
-        }
-    }
+//    public static void loadRatingList(final Context context) {
+//
+//        if (!ProductDetailsActivity.running_rating_query) {
+//            ProductDetailsActivity.running_rating_query = true;
+//
+//            myRatedIds.clear();
+//            myRating.clear();
+//            firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_RATINGS").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+////                    if (task.isSuccessful()) {
+////
+////                        for (long x = 0; x < (long) task.getResult().get("list_size"); x++) {
+////
+////                            myRatedIds.add(task.getResult().get("product_ID_" + x).toString());
+////                            myRating.add((long) task.getResult().get("rating_" + x));
+////
+////                            if (task.getResult().get("product_ID_" + x).toString().equals(ProductDetailsActivity.productID)) {
+////
+//////                                ProductDetailsActivity.initialRating = Integer.parseInt(String.valueOf((long) task.getResult().get("rating_" + x))) - 1;
+////
+//////                                if (ProductDetailsActivity.rateNowContainer != null) {
+//////
+//////                                    ProductDetailsActivity.setRating(ProductDetailsActivity.initialRating);
+//////                                }
+////                            }
+////                        }
+////
+////                    }
+//                    else {
+//                        String error = task.getException().getMessage();
+//                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                    ProductDetailsActivity.running_rating_query = false;
+//                }
+//            });
+//        }
+//    }
 
     public static void loadCartList(final Context context, final Dialog dialog, final boolean loadProductData, final TextView badgeCount, final TextView cartTotalAmount) {
         cartList.clear();
