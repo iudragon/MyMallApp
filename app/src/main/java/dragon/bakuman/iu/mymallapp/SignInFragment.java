@@ -42,7 +42,7 @@ public class SignInFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private TextView dontHaveAnAccount;
+//    private TextView dontHaveAnAccount;
     private FrameLayout parentFrameLayout;
 
     private EditText email;
@@ -50,7 +50,7 @@ public class SignInFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView forgotPassword;
 
-    private ImageButton closeBtn;
+    private Button closeBtn;
     private Button signInBtn;
 
     private FirebaseAuth firebaseAuth;
@@ -66,7 +66,7 @@ public class SignInFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         parentFrameLayout = getActivity().findViewById(R.id.register_frameLayout);
-        dontHaveAnAccount = view.findViewById(R.id.tv_dont_have_an_account);
+//        dontHaveAnAccount = view.findViewById(R.id.tv_dont_have_an_account);
 
         email = view.findViewById(R.id.sign_in_email);
         password = view.findViewById(R.id.sign_in_password);
@@ -92,12 +92,12 @@ public class SignInFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setFragment(new SignUpFragment());
-            }
-        });
+//        dontHaveAnAccount.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setFragment(new SignUpFragment());
+//            }
+//        });
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override

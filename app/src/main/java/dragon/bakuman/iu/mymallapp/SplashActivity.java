@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        SystemClock.sleep(3000);
+//        SystemClock.sleep(3000);
 
 
     }
@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
 
             Intent registerIntent = new Intent(SplashActivity.this, RegisterActivity.class);
             startActivity(registerIntent);
+
             finish();
         } else {
             Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);

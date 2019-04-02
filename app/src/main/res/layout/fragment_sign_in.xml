@@ -13,39 +13,36 @@
         android:layout_height="match_parent">
 
 
-        <ImageButton
-            android:id="@+id/sign_in_close_btn"
-            android:layout_width="wrap_content"
+        <!--<ImageButton-->
+            <!--android:id="@+id/sign_in_close_btn"-->
+            <!--android:layout_width="wrap_content"-->
 
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:padding="16dp"
-            android:src="@drawable/ic_close"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:padding="16dp"-->
+            <!--android:src="@drawable/ic_close"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:src="@drawable/farmer"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.037" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/sign_in_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="140dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#70ffffff"
             android:ems="10"
@@ -54,6 +51,7 @@
             android:textColor="#ffffff"
             android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -62,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#70ffffff"
             android:ems="10"
@@ -71,6 +69,7 @@
             android:textColor="#ffffff"
             android:textColorHint="#70ffffff"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_email" />
 
@@ -78,7 +77,7 @@
             android:id="@+id/sign_in_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             android:text="Forgot Password?"
             android:textColor="#ffffff"
             app:layout_constraintStart_toStartOf="@+id/sign_in_password"
@@ -86,70 +85,69 @@
 
         <Button
             android:id="@+id/sign_in_btn"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/btnRed"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
             android:enabled="false"
             android:text="Sign In"
             android:textAllCaps="false"
-            android:textColor="#50ffffff"
+            android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_forgot_password" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Or"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:text="Or"-->
+            <!--android:textColor="#ffffff"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/tv_dont_have_an_account"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/sign_in_btn" />-->
 
-        <TextView
-            android:id="@+id/tv_dont_have_an_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
-            android:text="Don't have an account? Sign up"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        <!--<TextView-->
+            <!--android:id="@+id/tv_dont_have_an_account"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:text="Don't have an account? Sign up"-->
+            <!--android:textColor="#ffffff"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--tools:layout_editor_absoluteY="688dp" />-->
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:layout_marginEnd="8dp"
-            android:background="#ffffff"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+        <!--<View-->
+            <!--android:id="@+id/divider"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:background="#ffffff"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/textView2"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/textView2"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/textView2" />-->
 
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="100dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:background="#ffffff"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
+        <!--<View-->
+            <!--android:id="@+id/divider2"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:background="#ffffff"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/textView2"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/textView2"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/textView2" />-->
 
         <ProgressBar
             android:id="@+id/sign_in_progress_bar"
@@ -163,8 +161,32 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/sign_in_btn"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in_password" />
+
+        <Button
+            android:id="@+id/sign_in_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/slider_background"
+            android:backgroundTint="#6b01ff"
+            android:elevation="3dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp"
+            android:text="OPEN"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/sign_in_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     </android.support.constraint.ConstraintLayout>
 
