@@ -56,7 +56,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView cuttedPrice;
 
     private ImageView codIndicator;
-    private TextView tvCodIndicator;
+//    private TextView tvCodIndicator;
 
 
     private ViewPager productImagesViewPager;
@@ -172,7 +172,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productPrice = findViewById(R.id.product_price);
         cuttedPrice = findViewById(R.id.cutted_price);
 
-        tvCodIndicator = findViewById(R.id.tv_cod_indicator);
+//        tvCodIndicator = findViewById(R.id.tv_cod_indicator);
         codIndicator = findViewById(R.id.cod_indicator_imageview);
 
 //        rewardTitle = findViewById(R.id.reward_title);
@@ -257,10 +257,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
                                     codIndicator.setVisibility(View.VISIBLE);
-                                    tvCodIndicator.setVisibility(View.VISIBLE);
+//                                    tvCodIndicator.setVisibility(View.VISIBLE);
                                 } else {
                                     codIndicator.setVisibility(View.INVISIBLE);
-                                    tvCodIndicator.setVisibility(View.INVISIBLE);
+//                                    tvCodIndicator.setVisibility(View.INVISIBLE);
                                 }
 
 //                                rewardTitle.setText((long) documentSnapshot.get("free_coupons") + documentSnapshot.get("free_coupon_title").toString());
