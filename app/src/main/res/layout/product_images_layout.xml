@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_to_wishlist_btn"
         app:rippleColor="@color/colorAccent"
-        app:srcCompat="@drawable/ic_card_giftcard" />
+        app:srcCompat="@drawable/ic_star_black" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_to_wishlist_btn"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/colorAccent"
-        app:srcCompat="@drawable/ic_favorite" />
+        app:srcCompat="@drawable/ic_local_dining" />
 
     <TextView
         android:id="@+id/product_title"

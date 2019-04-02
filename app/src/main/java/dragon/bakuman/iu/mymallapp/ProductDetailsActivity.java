@@ -1062,60 +1062,60 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //            return String.valueOf(totalStars / (Long.parseLong(totalRatingsFigure.getText().toString()) + 1)).substring(0, 3);
 //        }
 //    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search_and_cart_icon, menu);
-
-
-//        cartItem = menu.findItem(R.id.main_cart_icon);
-
-        cartItem.setActionView(R.layout.badge_layout);
-
-        ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
-        badgeIcon.setImageResource(R.drawable.ic_shopping_cart_white);
-
-        badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
-
-
-//        if (currentUser != null) {
-//            if (DBqueries.cartList.size() == 0) {
 //
-//                DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+////        getMenuInflater().inflate(R.menu.search_and_cart_icon, menu);
 //
-//            } else {
 //
-//                badgeCount.setVisibility(View.VISIBLE);
+////        cartItem = menu.findItem(R.id.main_cart_icon);
 //
-//                if (DBqueries.cartList.size() < 99) {
+////        cartItem.setActionView(R.layout.badge_layout);
+////
+////        ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
+////        badgeIcon.setImageResource(R.drawable.ic_shopping_cart_white);
+////
+////        badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
 //
-//                    badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+//
+////        if (currentUser != null) {
+////            if (DBqueries.cartList.size() == 0) {
+////
+////                DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
+////
+////            } else {
+////
+////                badgeCount.setVisibility(View.VISIBLE);
+////
+////                if (DBqueries.cartList.size() < 99) {
+////
+////                    badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+////                } else {
+////                    badgeCount.setText("99");
+////
+////                }
+////            }
+////        }
+//
+//        cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (currentUser == null) {
+//
+//                    signInDialog.show();
 //                } else {
-//                    badgeCount.setText("99");
+//
+//                    Intent cartIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                    showCart = true;
+//                    startActivity(cartIntent);
 //
 //                }
 //            }
-//        }
-
-        cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currentUser == null) {
-
-                    signInDialog.show();
-                } else {
-
-                    Intent cartIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
-                    showCart = true;
-                    startActivity(cartIntent);
-
-                }
-            }
-        });
-
-        return true;
-    }
+//        });
+//
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
