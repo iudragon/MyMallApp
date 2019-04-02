@@ -274,6 +274,8 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.main_search_icon) {
 
+           gotoFragment("Available",new MyWishlistFragment(),WISHLIST_FRAGMENT);
+
             Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.main_notification_icon) {
