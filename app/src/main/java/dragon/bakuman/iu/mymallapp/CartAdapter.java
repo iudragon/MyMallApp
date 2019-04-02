@@ -457,7 +457,7 @@ public class CartAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     if (!ProductDetailsActivity.running_cart_query) {
                         ProductDetailsActivity.running_cart_query = true;
-                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount);
+//                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount);
                     }
                 }
             });

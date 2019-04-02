@@ -51,15 +51,15 @@
             android:text="Sign in"
             android:textColor="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/sign_up_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:stateListAnimator="@null"
-            android:text="Sign up"
-            android:textColor="@color/colorPrimary" />
+        <!--<Button-->
+            <!--android:id="@+id/sign_up_btn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:stateListAnimator="@null"-->
+            <!--android:text="Sign up"-->
+            <!--android:textColor="@color/colorPrimary" />-->
 
 
     </LinearLayout>
@@ -73,14 +73,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout9" />
 
-    <View
-        android:id="@+id/divider17"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="#ddf221"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout9" />
+    <!--<View-->
+        <!--android:id="@+id/divider17"-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:background="#ddf221"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/linearLayout9"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/linearLayout9" />-->
 
 </android.support.constraint.ConstraintLayout>

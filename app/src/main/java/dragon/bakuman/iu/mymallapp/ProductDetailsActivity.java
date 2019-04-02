@@ -323,11 +323,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //                                        DBqueries.loadRatingList(ProductDetailsActivity.this);
 //                                    }
 
-                                    if (DBqueries.cartList.size() == 0) {
-
-                                        DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
-
-                                    }
+//                                    if (DBqueries.cartList.size() == 0) {
+//
+//                                        DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
+//
+//                                    }
 
                                     if (DBqueries.wishlist.size() == 0) {
 
@@ -887,7 +887,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         Button dialogSignInBtn = signInDialog.findViewById(R.id.sign_in_btn);
-        Button dialogSignUpBtn = signInDialog.findViewById(R.id.sign_up_btn);
+//        Button dialogSignUpBtn = signInDialog.findViewById(R.id.sign_up_btn);
         final Intent registerIntent = new Intent(ProductDetailsActivity.this, RegisterActivity.class);
 
         dialogSignInBtn.setOnClickListener(new View.OnClickListener() {
@@ -903,17 +903,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
-        dialogSignUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SignUpFragment.disableCloseBtn = true;
-                SignInFragment.disableCloseBtn = true;
-                signInDialog.dismiss();
-                setSignUpFragment = true;
-                startActivity(registerIntent);
-            }
-        });
+//        dialogSignUpBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SignUpFragment.disableCloseBtn = true;
+//                SignInFragment.disableCloseBtn = true;
+//                signInDialog.dismiss();
+//                setSignUpFragment = true;
+//                startActivity(registerIntent);
+//            }
+//        });
 
         ///// sign in dialog
 

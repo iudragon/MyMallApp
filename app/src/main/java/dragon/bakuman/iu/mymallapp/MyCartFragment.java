@@ -113,22 +113,22 @@ public class MyCartFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        cartAdapter.notifyDataSetChanged();
-
-        if (DBqueries.cartItemModelList.size() == 0) {
-
-            DBqueries.cartList.clear();
-
-            DBqueries.loadCartList(getContext(), loadingDialog, true, new TextView(getContext()), totalAmount);
-        } else {
-            if (DBqueries.cartItemModelList.get(DBqueries.cartItemModelList.size() - 1).getType() == CartItemModel.TOTAL_AMOUNT) {
-
-                LinearLayout parent = (LinearLayout) totalAmount.getParent().getParent();
-                parent.setVisibility(View.VISIBLE);
-            }
-            loadingDialog.dismiss();
-        }
+//
+//        cartAdapter.notifyDataSetChanged();
+//
+//        if (DBqueries.cartItemModelList.size() == 0) {
+//
+//            DBqueries.cartList.clear();
+//
+//            DBqueries.loadCartList(getContext(), loadingDialog, true, new TextView(getContext()), totalAmount);
+//        } else {
+//            if (DBqueries.cartItemModelList.get(DBqueries.cartItemModelList.size() - 1).getType() == CartItemModel.TOTAL_AMOUNT) {
+//
+//                LinearLayout parent = (LinearLayout) totalAmount.getParent().getParent();
+//                parent.setVisibility(View.VISIBLE);
+//            }
+//            loadingDialog.dismiss();
+//        }
 
 
     }

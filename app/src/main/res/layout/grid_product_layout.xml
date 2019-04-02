@@ -37,13 +37,14 @@
     <android.support.v7.widget.GridLayout
         android:id="@+id/grid_layout"
         android:layout_width="0dp"
-        android:background="#ffffff"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="#ffffff"
         app:columnCount="2"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,27 +66,35 @@
             layout="@layout/horizontal_scroll_item_layout"
             app:layout_columnWeight="1" />
 
+        <include
+            layout="@layout/horizontal_scroll_item_layout"
+            app:layout_columnWeight="1" />
+
+        <include
+            layout="@layout/horizontal_scroll_item_layout"
+            app:layout_columnWeight="1" />
+
 
     </android.support.v7.widget.GridLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/grid_layout"
-        app:layout_constraintEnd_toEndOf="@+id/grid_layout"
-        app:layout_constraintStart_toStartOf="@+id/grid_layout"
-        app:layout_constraintTop_toTopOf="@+id/grid_layout" />
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progressBar"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/grid_layout"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/grid_layout"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/grid_layout"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/grid_layout" />-->
 
-    <View
-        android:id="@+id/divider13"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/grid_layout"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/grid_layout" />
+    <!--<View-->
+        <!--android:id="@+id/divider13"-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/grid_layout"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/progressBar"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/progressBar"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/grid_layout" />-->
 
 </android.support.constraint.ConstraintLayout>

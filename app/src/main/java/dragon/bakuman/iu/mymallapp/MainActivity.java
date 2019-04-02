@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
         signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         Button dialogSignInBtn = signInDialog.findViewById(R.id.sign_in_btn);
-        Button dialogSignUpBtn = signInDialog.findViewById(R.id.sign_up_btn);
+//        Button dialogSignUpBtn = signInDialog.findViewById(R.id.sign_up_btn);
         final Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
 
         dialogSignInBtn.setOnClickListener(new View.OnClickListener() {
@@ -143,19 +143,19 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        dialogSignUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                SignUpFragment.disableCloseBtn = true;
-                SignInFragment.disableCloseBtn = true;
-
-
-                signInDialog.dismiss();
-                setSignUpFragment = true;
-                startActivity(registerIntent);
-            }
-        });
+//        dialogSignUpBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                SignUpFragment.disableCloseBtn = true;
+//                SignInFragment.disableCloseBtn = true;
+//
+//
+//                signInDialog.dismiss();
+//                setSignUpFragment = true;
+//                startActivity(registerIntent);
+//            }
+//        });
 
 
     }
@@ -229,21 +229,21 @@ public class MainActivity extends AppCompatActivity
 
             if (currentUser != null) {
 
-                if (DBqueries.cartList.size() == 0) {
-                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount, new TextView(MainActivity.this));
+//                if (DBqueries.cartList.size() == 0) {
+//                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount, new TextView(MainActivity.this));
 
-                } else {
-
-                    badgeCount.setVisibility(View.VISIBLE);
-
-                    if (DBqueries.cartList.size() < 99) {
-
-                        badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
-                    } else {
-                        badgeCount.setText("99");
-
-                    }
-                }
+//                } else {
+//
+//                    badgeCount.setVisibility(View.VISIBLE);
+//
+//                    if (DBqueries.cartList.size() < 99) {
+//
+//                        badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+//                    } else {
+//                        badgeCount.setText("99");
+//
+//                    }
+//                }
             }
 
 //            cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
@@ -274,14 +274,14 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.main_search_icon) {
 
-           gotoFragment("Available",new MyWishlistFragment(),WISHLIST_FRAGMENT);
+           gotoFragment(getString(R.string.available_to_eat),new MyWishlistFragment(),WISHLIST_FRAGMENT);
             navigationView.getMenu().getItem(1).setChecked(true);
 
             Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.main_notification_icon) {
 
-            gotoFragment("Today's Special", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
+            gotoFragment(getString(R.string.special_of_the_day), new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
             navigationView.getMenu().getItem(2).setChecked(true);
 
             return true;
@@ -363,10 +363,10 @@ public class MainActivity extends AppCompatActivity
                         setFragment(new HomeFragment(), HOME_FRAGMENT);
 
                     }  else if (id == R.id.nav_my_wishlist) {
-                        gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                        gotoFragment(getString(R.string.available_to_eat), new MyWishlistFragment(), WISHLIST_FRAGMENT);
 
                     }else if (id == R.id.nav_my_speciallist) {
-                        gotoFragment("My Speciallist", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
+                        gotoFragment(getString(R.string.special_of_the_day), new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
 
                     }else if (id == R.id.nav_my_account) {
                         gotoFragment("About", new MyAccountFragment(), ACCOUNT_FRAGMENT);
@@ -403,11 +403,11 @@ public class MainActivity extends AppCompatActivity
 
                     } else if (id == R.id.nav_my_wishlist) {
                         signInDialog.dismiss();
-                        gotoFragment("Available", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                        gotoFragment(getString(R.string.available_to_eat), new MyWishlistFragment(), WISHLIST_FRAGMENT);
                         navigationView.getMenu().getItem(1).setChecked(true);
                     } else if (id == R.id.nav_my_speciallist) {
                         signInDialog.dismiss();
-                        gotoFragment("Available", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
+                        gotoFragment(getString(R.string.special_of_the_day), new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
                         navigationView.getMenu().getItem(2).setChecked(true);
                     } else if (id == R.id.nav_my_account){
                         signInDialog.dismiss();

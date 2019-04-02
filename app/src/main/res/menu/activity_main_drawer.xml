@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_my_mall"
             android:icon="@drawable/ic_mall"
-            android:title="My Mall" />
+            android:title="Explore" />
         <!--<item-->
             <!--android:id="@+id/nav_my_orders"-->
             <!--android:icon="@drawable/ic_shopping"-->
@@ -23,16 +23,16 @@
         <item
             android:id="@+id/nav_my_wishlist"
             android:icon="@drawable/ic_local_dining"
-            android:title="Available to eat" />
+            android:title="@string/available_to_eat" />
         <item
             android:id="@+id/nav_my_speciallist"
             android:icon="@drawable/ic_star_black"
-            android:title="Today's Special" />
+            android:title="@string/special_of_the_day" />
 
         <item
             android:id="@+id/nav_my_account"
             android:icon="@drawable/ic_person"
-            android:title="My Account" />
+            android:title="About" />
     </group>
 
     <item

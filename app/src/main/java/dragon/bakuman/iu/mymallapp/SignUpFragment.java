@@ -83,7 +83,7 @@ public class SignUpFragment extends Fragment {
         confirmpassword = view.findViewById(R.id.sign_up_confirm_password);
 
         closeBtn = view.findViewById(R.id.sign_up_close_btn);
-        signUpBtn = view.findViewById(R.id.sign_up_btn);
+//        signUpBtn = view.findViewById(R.id.sign_up_btn);
         progressBar = view.findViewById(R.id.sign_up_progress_bar);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -131,7 +131,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                checkInputs();
+//                checkInputs();
 
             }
 
@@ -149,7 +149,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                checkInputs();
+//                checkInputs();
 
             }
 
@@ -167,7 +167,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                checkInputs();
+//                checkInputs();
 
             }
 
@@ -185,7 +185,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                checkInputs();
+//                checkInputs();
 
             }
 
@@ -196,12 +196,12 @@ public class SignUpFragment extends Fragment {
         });
 
 
-        signUpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkEmailAndPassword();
-            }
-        });
+//        signUpBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                checkEmailAndPassword();
+//            }
+//        });
     }
 
     private void checkEmailAndPassword() {
@@ -217,8 +217,8 @@ public class SignUpFragment extends Fragment {
             if (password.getText().toString().equals(confirmpassword.getText().toString())) {
 
                 progressBar.setVisibility(View.VISIBLE);
-                signUpBtn.setEnabled(false);
-                signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+//                signUpBtn.setEnabled(false);
+//                signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
 
                 firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -284,8 +284,8 @@ public class SignUpFragment extends Fragment {
                                                     } else {
 
                                                         progressBar.setVisibility(View.INVISIBLE);
-                                                        signUpBtn.setEnabled(true);
-                                                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+//                                                        signUpBtn.setEnabled(true);
+//                                                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
                                                         String error = task.getException().getMessage();
                                                         Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                                                     }
@@ -307,8 +307,8 @@ public class SignUpFragment extends Fragment {
 
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
-                            signUpBtn.setEnabled(true);
-                            signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+//                            signUpBtn.setEnabled(true);
+//                            signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
                             String error = task.getException().getMessage();
                             Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
 
@@ -331,46 +331,46 @@ public class SignUpFragment extends Fragment {
         }
 
     }
-
-    private void checkInputs() {
-
-        if (!TextUtils.isEmpty(email.getText())) {
-
-
-            if (!TextUtils.isEmpty(fullname.getText())) {
-
-                if (!TextUtils.isEmpty(password.getText()) && password.length() >= 8) {
-
-                    if (!TextUtils.isEmpty(confirmpassword.getText())) {
-
-                        signUpBtn.setEnabled(true);
-                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
-
-                    } else {
-                        signUpBtn.setEnabled(false);
-                        signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
-                    }
-
-
-                } else {
-                    signUpBtn.setEnabled(false);
-                    signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
-                }
-
-            } else {
-                signUpBtn.setEnabled(false);
-                signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
-            }
-
-
-        } else {
-
-            signUpBtn.setEnabled(false);
-            signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
-
-        }
-
-    }
+//
+//    private void checkInputs() {
+//
+//        if (!TextUtils.isEmpty(email.getText())) {
+//
+//
+//            if (!TextUtils.isEmpty(fullname.getText())) {
+//
+//                if (!TextUtils.isEmpty(password.getText()) && password.length() >= 8) {
+//
+//                    if (!TextUtils.isEmpty(confirmpassword.getText())) {
+//
+////                        signUpBtn.setEnabled(true);
+////                        signUpBtn.setTextColor(getResources().getColor(R.color.colorWhite));
+//
+//                    } else {
+//                        signUpBtn.setEnabled(false);
+//                        signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+//                    }
+//
+//
+//                } else {
+//                    signUpBtn.setEnabled(false);
+//                    signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+//                }
+//
+//            } else {
+//                signUpBtn.setEnabled(false);
+//                signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+//            }
+//
+//
+//        } else {
+//
+//            signUpBtn.setEnabled(false);
+//            signUpBtn.setTextColor(Color.argb(50, 255, 255, 255));
+//
+//        }
+//
+//    }
 
     private void setFragment(Fragment fragment) {
 

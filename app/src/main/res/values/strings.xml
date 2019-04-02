@@ -11,6 +11,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="available_to_eat">Available to eat</string>
+    <string name="special_of_the_day">Special of the Day</string>
+
     <string-array name="india_states">
         <item>Andaman and Nicobar Islands</item>
         <item>Andhra Pradesh</item>

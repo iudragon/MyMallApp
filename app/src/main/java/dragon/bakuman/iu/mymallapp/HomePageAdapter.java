@@ -435,7 +435,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             gridLayoutTitle.setText(title);
 
-            for (int x = 0; x < 4; x++) {
+            for (int x = 0; x < 6; x++) {
                 ImageView productImage = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_image);
                 TextView productTitle = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_title);
                 TextView productDescription = gridProductLayout.getChildAt(x).findViewById(R.id.h_s_product_description);
