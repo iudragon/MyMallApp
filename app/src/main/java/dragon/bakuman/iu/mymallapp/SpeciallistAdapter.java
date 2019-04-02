@@ -89,7 +89,7 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
         private TextView cuttedPrice;
 //        private TextView paymentMethod;
         private TextView rating;
-        private TextView totalRatings;
+//        private TextView totalRatings;
         private View priceCut;
         private ImageButton deleteBtn;
 
@@ -99,8 +99,8 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
             productTitle = itemView.findViewById(R.id.product_title);
 //            freeCoupons = itemView.findViewById(R.id.free_coupon);
 //            couponIcon = itemView.findViewById(R.id.coupon_icon);
-            rating = itemView.findViewById(R.id.tv_product_rating_miniview);
-            totalRatings = itemView.findViewById(R.id.total_ratings);
+//            rating = itemView.findViewById(R.id.tv_product_rating_miniview);
+//            totalRatings = itemView.findViewById(R.id.total_ratings);
             priceCut = itemView.findViewById(R.id.price_cut);
             productPrice = itemView.findViewById(R.id.product_price);
             cuttedPrice = itemView.findViewById(R.id.cutted_price);
@@ -126,18 +126,18 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
 //                freeCoupons.setVisibility(View.INVISIBLE);
             }
 
-            LinearLayout linearLayout = (LinearLayout) rating.getParent();
+//            LinearLayout linearLayout = (LinearLayout) rating.getParent();
             if (inStock) {
 
 
-                rating.setVisibility(View.VISIBLE);
-                totalRatings.setVisibility(View.VISIBLE);
+//                rating.setVisibility(View.VISIBLE);
+//                totalRatings.setVisibility(View.VISIBLE);
                 productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorBlack));
                 cuttedPrice.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.VISIBLE);
+//                linearLayout.setVisibility(View.VISIBLE);
 
-                rating.setText(averageRate);
-                totalRatings.setText("(" + totalRatingsNo + ") ratings");
+//                rating.setText(averageRate);
+//                totalRatings.setText("(" + totalRatingsNo + ") ratings");
                 productPrice.setText("Rs. " + price + "/-");
                 cuttedPrice.setText("Rs. " + cuttedPricevValue + "/-");
 
@@ -149,10 +149,10 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
                 }
             } else {
 
-                linearLayout.setVisibility(View.INVISIBLE);
+//                linearLayout.setVisibility(View.INVISIBLE);
 
-                rating.setVisibility(View.INVISIBLE);
-                totalRatings.setVisibility(View.INVISIBLE);
+//                rating.setVisibility(View.INVISIBLE);
+//                totalRatings.setVisibility(View.INVISIBLE);
                 productPrice.setText("Out of Stock");
                 productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorAccent));
                 cuttedPrice.setVisibility(View.INVISIBLE);
