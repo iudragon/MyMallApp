@@ -60,7 +60,8 @@ public class HomeFragment extends Fragment {
 
     private ImageView noInternetConnection;
 
-    private Button retryButton;
+    public Button retryButton;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment {
         homePageRecyclerView = view.findViewById(R.id.home_page_recyclerview);
 
         retryButton = view.findViewById(R.id.retry_button);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
