@@ -83,11 +83,11 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
 
         private ImageView productImage;
         private TextView productTitle;
-        private TextView freeCoupons;
-        private ImageView couponIcon;
+//        private TextView freeCoupons;
+//        private ImageView couponIcon;
         private TextView productPrice;
         private TextView cuttedPrice;
-        private TextView paymentMethod;
+//        private TextView paymentMethod;
         private TextView rating;
         private TextView totalRatings;
         private View priceCut;
@@ -97,14 +97,14 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
             super(itemView);
             productImage = itemView.findViewById(R.id.product_image);
             productTitle = itemView.findViewById(R.id.product_title);
-            freeCoupons = itemView.findViewById(R.id.free_coupon);
-            couponIcon = itemView.findViewById(R.id.coupon_icon);
+//            freeCoupons = itemView.findViewById(R.id.free_coupon);
+//            couponIcon = itemView.findViewById(R.id.coupon_icon);
             rating = itemView.findViewById(R.id.tv_product_rating_miniview);
             totalRatings = itemView.findViewById(R.id.total_ratings);
             priceCut = itemView.findViewById(R.id.price_cut);
             productPrice = itemView.findViewById(R.id.product_price);
             cuttedPrice = itemView.findViewById(R.id.cutted_price);
-            paymentMethod = itemView.findViewById(R.id.payment_method);
+//            paymentMethod = itemView.findViewById(R.id.payment_method);
             deleteBtn = itemView.findViewById(R.id.delete_button);
 
         }
@@ -115,15 +115,15 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
 
             productTitle.setText(title);
             if (freeCouponsNo != 0 && inStock) {
-                couponIcon.setVisibility(View.VISIBLE);
+//                couponIcon.setVisibility(View.VISIBLE);
                 if (freeCouponsNo == 1) {
-                    freeCoupons.setText("Free " + freeCouponsNo + " Coupon");
+//                    freeCoupons.setText("Free " + freeCouponsNo + " Coupon");
                 } else {
-                    freeCoupons.setText("Free " + freeCouponsNo + " Coupons");
+//                    freeCoupons.setText("Free " + freeCouponsNo + " Coupons");
                 }
             } else {
-                couponIcon.setVisibility(View.INVISIBLE);
-                freeCoupons.setVisibility(View.INVISIBLE);
+//                couponIcon.setVisibility(View.INVISIBLE);
+//                freeCoupons.setVisibility(View.INVISIBLE);
             }
 
             LinearLayout linearLayout = (LinearLayout) rating.getParent();
@@ -142,10 +142,10 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
                 cuttedPrice.setText("Rs. " + cuttedPricevValue + "/-");
 
                 if (COD) {
-                    paymentMethod.setVisibility(View.VISIBLE);
+//                    paymentMethod.setVisibility(View.VISIBLE);
                 } else {
 
-                    paymentMethod.setVisibility(View.INVISIBLE);
+//                    paymentMethod.setVisibility(View.INVISIBLE);
                 }
             } else {
 
@@ -157,7 +157,7 @@ public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.
                 productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorAccent));
                 cuttedPrice.setVisibility(View.INVISIBLE);
 
-                paymentMethod.setVisibility(View.INVISIBLE);
+//                paymentMethod.setVisibility(View.INVISIBLE);
 
             }
 

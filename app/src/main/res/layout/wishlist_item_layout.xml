@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_marginBottom="1dp"
@@ -32,26 +33,6 @@
         app:layout_constraintStart_toEndOf="@+id/product_image"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/coupon_icon"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:tint="#f22fe2"
-        app:layout_constraintBottom_toBottomOf="@+id/free_coupon"
-        app:layout_constraintStart_toStartOf="@+id/product_title"
-        app:layout_constraintTop_toTopOf="@+id/free_coupon"
-        app:srcCompat="@drawable/ic_card_giftcard" />
-
-    <TextView
-        android:id="@+id/free_coupon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Free coupon"
-        android:textColor="#f22fe2"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/coupon_icon"
-        app:layout_constraintTop_toBottomOf="@+id/product_title" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
@@ -63,7 +44,7 @@
         android:orientation="horizontal"
         android:padding="1dp"
         app:layout_constraintStart_toEndOf="@+id/product_image"
-        app:layout_constraintTop_toBottomOf="@+id/free_coupon">
+        app:layout_constraintTop_toBottomOf="@+id/product_title">
 
         <TextView
             android:id="@+id/tv_product_rating_miniview"
@@ -72,8 +53,8 @@
             android:layout_marginStart="3dp"
             android:layout_marginEnd="2dp"
             android:text="4.5"
-            android:textSize="12sp"
             android:textColor="#ffffff"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -120,16 +101,6 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/product_price"
         app:layout_constraintStart_toEndOf="@+id/product_price" />
-
-    <TextView
-        android:id="@+id/payment_method"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Cash on Delivery available"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/product_price"
-        app:layout_constraintTop_toBottomOf="@+id/product_price" />
 
     <ImageButton
         android:id="@+id/delete_button"
