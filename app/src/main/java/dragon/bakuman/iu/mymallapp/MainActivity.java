@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     public static final int WISHLIST_FRAGMENT = 3;
     public static final int REWARDS_FRAGMENT = 4;
     public static final int ACCOUNT_FRAGMENT = 5;
-    public static final int SPECIAL_FRAGMENT = 5;
+    public static final int SPECIALLIST_FRAGMENT = 6;
 
     public static Boolean showCart = false;
 
@@ -354,6 +354,9 @@ public class MainActivity extends AppCompatActivity
                     }  else if (id == R.id.nav_my_wishlist) {
                         gotoFragment("My Wishlist", new MyWishlistFragment(), WISHLIST_FRAGMENT);
 
+                    }else if (id == R.id.nav_my_speciallist) {
+                        gotoFragment("My Speciallist", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
+
                     }else if (id == R.id.nav_my_account) {
                         gotoFragment("About", new MyAccountFragment(), ACCOUNT_FRAGMENT);
 
@@ -390,6 +393,10 @@ public class MainActivity extends AppCompatActivity
                     } else if (id == R.id.nav_my_wishlist) {
                         signInDialog.dismiss();
                         gotoFragment("Available", new MyWishlistFragment(), WISHLIST_FRAGMENT);
+                        navigationView.getMenu().getItem(1).setChecked(true);
+                    } else if (id == R.id.nav_my_speciallist) {
+                        signInDialog.dismiss();
+                        gotoFragment("Available", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
                         navigationView.getMenu().getItem(1).setChecked(true);
                     } else if (id == R.id.nav_my_account){
                         signInDialog.dismiss();

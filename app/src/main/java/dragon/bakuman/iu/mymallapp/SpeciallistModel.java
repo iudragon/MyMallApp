@@ -1,6 +1,6 @@
 package dragon.bakuman.iu.mymallapp;
 
-public class SpecialModel {
+public class SpeciallistModel {
 
     private String productId;
     private String productImage;
@@ -13,7 +13,7 @@ public class SpecialModel {
     private boolean COD;
     private boolean inStock;
 
-    public SpecialModel(String productId, String productImage, String productTitle, long freeCoupons, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD, boolean inStock) {
+    public SpeciallistModel(String productId, String productImage, String productTitle, long freeCoupons, String rating, long totalRatings, String productPrice, String cuttedPrice, boolean COD, boolean inStock) {
         this.productId = productId;
         this.productImage = productImage;
         this.productTitle = productTitle;

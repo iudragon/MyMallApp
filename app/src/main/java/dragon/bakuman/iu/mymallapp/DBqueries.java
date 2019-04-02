@@ -38,8 +38,10 @@ public class DBqueries {
     public static List<String> loadedCategoriesNames = new ArrayList<>();
 
     public static List<String> wishlist = new ArrayList<>();
+    public static List<String> speciallist = new ArrayList<>();
 
     public static List<WishlistModel> wishlistModelList = new ArrayList<>();
+    public static List<SpeciallistModel> speciallistModelList = new ArrayList<>();
 
     public static List<String> myRatedIds = new ArrayList<>();
 
@@ -260,6 +262,108 @@ public class DBqueries {
         });
     }
 
+    //// SPECIAL
+
+
+    public static void loadSpeciallist(final Context context, final Dialog dialog, final boolean loadProductData) {
+
+        speciallist.clear();
+
+        firebaseFirestore.collection("USERS").document("CGA8B8nzNUV130vg6EPGjFa6IHo2").collection("USER_DATA").document("MY_SPECIALLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (long x = 0; x < (long) task.getResult().get("list_size"); x++) {
+
+                        speciallist.add(task.getResult().get("product_ID_" + x).toString());
+
+                        if (DBqueries.speciallist.contains(ProductDetailsActivity.productID)) {
+
+                            ProductDetailsActivity.ALREADY_ADDED_TO_SPECIALLIST = true;
+
+                            if (ProductDetailsActivity.addToSpeciallistBtn != null) {
+
+                                ProductDetailsActivity.addToSpeciallistBtn.setSupportImageTintList(context.getResources().getColorStateList(R.color.colorAccent));
+
+                            }
+
+
+                        } else {
+
+                            if (ProductDetailsActivity.addToSpeciallistBtn != null) {
+
+
+                                ProductDetailsActivity.addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.colorPrimary)));
+
+                            }
+
+                            ProductDetailsActivity.ALREADY_ADDED_TO_SPECIALLIST = false;
+                        }
+
+                        if (loadProductData) {
+
+                            speciallistModelList.clear();
+
+                            final String productId = task.getResult().get("product_ID_" + x).toString();
+
+                            firebaseFirestore.collection("PRODUCTS").document(productId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+
+                                        final DocumentSnapshot documentSnapshot = task.getResult();
+
+                                        FirebaseFirestore.getInstance().collection("PRODUCTS").document(productId).collection("QUANTITY").orderBy("time", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful()) {
+
+                                                    if (task.getResult().getDocuments().size() < (long) documentSnapshot.get("stock_quantity")) {
+
+                                                        speciallistModelList.add(new SpeciallistModel(productId, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("average_rating").toString(), (long) documentSnapshot.get("total_ratings"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (boolean) documentSnapshot.get("COD"), true));
+
+
+                                                    } else {
+
+                                                        speciallistModelList.add(new SpeciallistModel(productId, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("average_rating").toString(), (long) documentSnapshot.get("total_ratings"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (boolean) documentSnapshot.get("COD"), false));
+
+
+                                                    }
+
+                                                    MySpeciallistFragment.speciallistAdapter.notifyDataSetChanged();
+
+
+                                                } else {
+                                                    String error = task.getException().getMessage();
+                                                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+
+
+                                    } else {
+
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                    }
+
+                } else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+
+                }
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+    //// SPECIAL
+
     public static void removeFromWishlist(final int index, final Context context) {
 
         final String removeProductId = wishlist.get(index);
@@ -309,6 +413,62 @@ public class DBqueries {
             }
         });
     }
+
+    //// SPECIAL
+
+    public static void removeFromSpeciallist(final int index, final Context context) {
+
+        final String removeProductId = speciallist.get(index);
+
+        speciallist.remove(index);
+        Map<String, Object> updateSpeciallist = new HashMap<>();
+
+        for (int x = 0; x < speciallist.size(); x++) {
+
+            updateSpeciallist.put("product_ID_" + x, speciallist.get(x));
+        }
+
+        updateSpeciallist.put("list_size", (long) speciallist.size());
+
+        firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_SPECIALLIST").set(updateSpeciallist).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()) {
+                    if (speciallistModelList.size() != 0) {
+
+                        speciallistModelList.remove(index);
+
+                        MySpeciallistFragment.speciallistAdapter.notifyDataSetChanged();
+                    }
+
+                    ProductDetailsActivity.ALREADY_ADDED_TO_SPECIALLIST = false;
+
+                    Toast.makeText(context, "Removed successfully", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    if (ProductDetailsActivity.addToSpeciallistBtn != null) {
+
+                        ProductDetailsActivity.addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.btnRed)));
+                    }
+
+                    speciallist.add(index, removeProductId);
+
+                    String error = task.getException().getMessage();
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                }
+
+
+                ProductDetailsActivity.running_speciallist_query = false;
+
+            }
+        });
+    }
+
+    //// SPECIAL
+
+
 
 //    public static void loadRatingList(final Context context) {
 //
@@ -603,7 +763,9 @@ public class DBqueries {
         lists.clear();
         loadedCategoriesNames.clear();
         wishlist.clear();
+        speciallist.clear();
         wishlistModelList.clear();
+        speciallistModelList.clear();
         cartList.clear();
         cartItemModelList.clear();
 

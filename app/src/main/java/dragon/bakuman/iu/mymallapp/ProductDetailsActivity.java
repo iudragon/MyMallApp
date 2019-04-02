@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -22,7 +21,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +44,7 @@ import static dragon.bakuman.iu.mymallapp.RegisterActivity.setSignUpFragment;
 public class ProductDetailsActivity extends AppCompatActivity {
 
     public static boolean running_wishlist_query = false;
+    public static boolean running_speciallist_query = false;
     public static boolean running_rating_query = false;
     public static boolean running_cart_query = false;
     public static Activity productDetailsActivity;
@@ -65,7 +64,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
     public static boolean ALREADY_ADDED_TO_WISHLIST = false;
+    public static boolean ALREADY_ADDED_TO_SPECIALLIST = false;
     public static FloatingActionButton addToWishlistBtn;
+    public static FloatingActionButton addToSpeciallistBtn;
 
     ///// product description
 
@@ -153,6 +154,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productImagesViewPager = findViewById(R.id.product_images_viewpager);
         viewPagerIndicator = findViewById(R.id.viewpager_indicator);
         addToWishlistBtn = findViewById(R.id.add_to_wishlist_btn);
+        addToSpeciallistBtn = findViewById(R.id.add_to_speciallist_btn);
 
         productDetailsViewPager = findViewById(R.id.product_details_viewpager);
         productDetailsTabLayout = findViewById(R.id.product_details_tablayout);
@@ -335,6 +337,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                         loadingDialog.dismiss();
                                     }
 
+                                    if (DBqueries.speciallist.size() == 0) {
+
+                                        DBqueries.loadSpeciallist(ProductDetailsActivity.this, loadingDialog, false);
+
+                                    } else {
+                                        loadingDialog.dismiss();
+                                    }
+
 
                                 } else {
                                     loadingDialog.dismiss();
@@ -363,6 +373,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 } else {
                                     addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
                                     ALREADY_ADDED_TO_WISHLIST = false;
+                                }
+
+                                if (DBqueries.speciallist.contains(productID)) {
+
+                                    ALREADY_ADDED_TO_SPECIALLIST = true;
+                                    addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorAccent));
+                                } else {
+                                    addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                                    ALREADY_ADDED_TO_SPECIALLIST = false;
                                 }
 
 
@@ -527,6 +546,74 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             }
         });
+
+        //// SPECIAL
+
+        addToSpeciallistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (currentUser == null) {
+
+                    signInDialog.show();
+                } else {
+
+                    if (!running_speciallist_query) {
+
+                        running_speciallist_query = true;
+
+                        if (ALREADY_ADDED_TO_SPECIALLIST) {
+
+                            int index = DBqueries.speciallist.indexOf(productID);
+
+                            DBqueries.removeFromSpeciallist(index, ProductDetailsActivity.this);
+
+                            addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
+                        } else {
+                            addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnRed)));
+
+                            Map<String, Object> addProduct = new HashMap<>();
+                            addProduct.put("product_ID_" + String.valueOf(DBqueries.speciallist.size()), productID);
+                            addProduct.put("list_size", (long) (DBqueries.speciallist.size() + 1));
+                            firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_SPECIALLIST")
+
+                                    .update(addProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+
+
+                                        if (DBqueries.speciallistModelList.size() != 0) {
+
+                                            DBqueries.speciallistModelList.add(new SpeciallistModel(productID, documentSnapshot.get("product_image_1").toString(), documentSnapshot.get("product_title").toString(), (long) documentSnapshot.get("free_coupons"), documentSnapshot.get("average_rating").toString(), (long) documentSnapshot.get("total_ratings"), documentSnapshot.get("product_price").toString(), documentSnapshot.get("cutted_price").toString(), (boolean) documentSnapshot.get("COD"), inStock));
+
+                                        }
+
+                                        ALREADY_ADDED_TO_SPECIALLIST = true;
+
+                                        addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorAccent));
+                                        DBqueries.speciallist.add(productID);
+                                        Toast.makeText(ProductDetailsActivity.this, "Added to speciallist success", Toast.LENGTH_SHORT).show();
+
+                                    } else {
+                                        addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorPrimary));
+                                        String error = task.getException().getMessage();
+                                        Toast.makeText(ProductDetailsActivity.this, error, Toast.LENGTH_SHORT).show();
+                                    }
+                                    running_speciallist_query = false;
+                                }
+                            });
+
+                        }
+                    }
+
+                }
+
+            }
+        });
+
+        //// SPECIAL
 
 
         productDetailsViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(productDetailsTabLayout));
@@ -864,6 +951,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 loadingDialog.dismiss();
             }
 
+            //// SPECIAL
+
+            if (DBqueries.speciallist.size() == 0) {
+
+                DBqueries.loadSpeciallist(ProductDetailsActivity.this, loadingDialog, false);
+
+
+            } else {
+                loadingDialog.dismiss();
+            }
+
+            //// SPECIAL
+
+
         } else {
             loadingDialog.dismiss();
         }
@@ -894,6 +995,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
             ALREADY_ADDED_TO_WISHLIST = false;
         }
+
+        //// SPECIAL
+
+        if (DBqueries.speciallist.contains(productID)) {
+
+            ALREADY_ADDED_TO_SPECIALLIST = true;
+            addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorAccent));
+        } else {
+
+            addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
+            ALREADY_ADDED_TO_SPECIALLIST = false;
+        }
+
+        //// SPECIAL
+
 
         invalidateOptionsMenu();
 

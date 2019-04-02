@@ -21,9 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHolder> {
+public class SpeciallistAdapter extends RecyclerView.Adapter<SpeciallistAdapter.ViewHolder> {
 
-    private List<SpecialModel> specialModelList;
+    private List<SpeciallistModel> speciallistModelList;
 
     private Boolean speciallist;
 
@@ -32,8 +32,8 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
     private FirebaseUser currentUser;
 
 
-    public SpecialAdapter(List<SpecialModel> specialModelList, Boolean speciallist) {
-        this.specialModelList = specialModelList;
+    public SpeciallistAdapter(List<SpeciallistModel> speciallistModelList, Boolean speciallist) {
+        this.speciallistModelList = speciallistModelList;
         this.speciallist = speciallist;
     }
 
@@ -44,7 +44,7 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.special_item_layout, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.speciallist_item_layout, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -52,16 +52,16 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        String productId = specialModelList.get(position).getProductId();
-        String resource = specialModelList.get(position).getProductImage();
-        String title = specialModelList.get(position).getProductTitle();
-        long freeCoupons = specialModelList.get(position).getFreeCoupons();
-        String rating = specialModelList.get(position).getRating();
-        long totalRatings = specialModelList.get(position).getTotalRatings();
-        String productPrice = specialModelList.get(position).getProductPrice();
-        String cuttedPrice = specialModelList.get(position).getCuttedPrice();
-        boolean paymentMethod = specialModelList.get(position).isCOD();
-        boolean inStock = specialModelList.get(position).isInStock();
+        String productId = speciallistModelList.get(position).getProductId();
+        String resource = speciallistModelList.get(position).getProductImage();
+        String title = speciallistModelList.get(position).getProductTitle();
+        long freeCoupons = speciallistModelList.get(position).getFreeCoupons();
+        String rating = speciallistModelList.get(position).getRating();
+        long totalRatings = speciallistModelList.get(position).getTotalRatings();
+        String productPrice = speciallistModelList.get(position).getProductPrice();
+        String cuttedPrice = speciallistModelList.get(position).getCuttedPrice();
+        boolean paymentMethod = speciallistModelList.get(position).isCOD();
+        boolean inStock = speciallistModelList.get(position).isInStock();
 
         viewHolder.setData(productId, resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position, inStock);
 
@@ -76,7 +76,7 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return specialModelList.size();
+        return speciallistModelList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -162,7 +162,7 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
             }
 
 
-            if (special) {
+            if (speciallist) {
                 if (currentUser == null){
                     deleteBtn.setVisibility(View.GONE);
                 } else if (currentUser != null){
@@ -181,10 +181,10 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
 
-                    if (!ProductDetailsActivity.running_special_query) {
+                    if (!ProductDetailsActivity.running_speciallist_query) {
 
-                        ProductDetailsActivity.running_special_query = true;
-                        DBqueries.removeFromSpecial(index, itemView.getContext());
+                        ProductDetailsActivity.running_speciallist_query = true;
+                        DBqueries.removeFromSpeciallist(index, itemView.getContext());
                     }
                 }
             });

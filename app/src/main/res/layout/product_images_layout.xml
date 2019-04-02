@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffffff"
@@ -13,7 +14,9 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/viewpager_indicator"
@@ -25,6 +28,20 @@
         app:tabBackground="@drawable/dot_selector"
         app:tabIndicatorHeight="0dp"
         app:tabRippleColor="@null" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_to_speciallist_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#ffffff"
+        android:clickable="true"
+        android:tint="#C9ABAB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_to_wishlist_btn"
+        app:rippleColor="@color/colorAccent"
+        app:srcCompat="@drawable/ic_card_giftcard" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_to_wishlist_btn"
