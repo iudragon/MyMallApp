@@ -22,12 +22,12 @@
             <!--android:title="My Cart" />-->
         <item
             android:id="@+id/nav_my_wishlist"
-            android:icon="@drawable/ic_favorite"
-            android:title="My Wishlist" />
+            android:icon="@drawable/ic_local_dining"
+            android:title="Available to eat" />
         <item
             android:id="@+id/nav_my_speciallist"
-            android:icon="@drawable/ic_favorite"
-            android:title="My Special" />
+            android:icon="@drawable/ic_star_black"
+            android:title="Today's Special" />
 
         <item
             android:id="@+id/nav_my_account"
