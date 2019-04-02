@@ -397,11 +397,11 @@ public class MainActivity extends AppCompatActivity
                     } else if (id == R.id.nav_my_speciallist) {
                         signInDialog.dismiss();
                         gotoFragment("Available", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
-                        navigationView.getMenu().getItem(1).setChecked(true);
+                        navigationView.getMenu().getItem(2).setChecked(true);
                     } else if (id == R.id.nav_my_account){
                         signInDialog.dismiss();
                         gotoFragment("About", new MyAccountFragment(), ACCOUNT_FRAGMENT);
-                        navigationView.getMenu().getItem(2).setChecked(true);
+                        navigationView.getMenu().getItem(3).setChecked(true);
                     }
                     else {
                         signInDialog.dismiss();

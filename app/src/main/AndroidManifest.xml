@@ -13,19 +13,36 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OTPverificationActivity"></activity>
-        <activity android:name=".ViewAllActivity" />
-        <activity android:name=".MyAddressesActivity" />
+        <activity android:name=".OTPverificationActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".ViewAllActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".MyAddressesActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".AddAddressActivity"
-            android:theme="@style/RedProgressbar" />
-        <activity android:name=".DeliveryActivity" />
-        <activity android:name=".OrderDetailsActivity" />
-        <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".CategoryActivity" />
+            android:theme="@style/RedProgressbar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".DeliveryActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".OrderDetailsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ProductDetailsActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".CategoryActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
