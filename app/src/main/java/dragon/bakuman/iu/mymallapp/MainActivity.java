@@ -277,7 +277,6 @@ public class MainActivity extends AppCompatActivity
            gotoFragment(getString(R.string.available_to_eat),new MyWishlistFragment(),WISHLIST_FRAGMENT);
             navigationView.getMenu().getItem(1).setChecked(true);
 
-            Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.main_notification_icon) {
 
