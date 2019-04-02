@@ -166,7 +166,7 @@ public class SignInFragment extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
                 signInBtn.setEnabled(false);
-                signInBtn.setTextColor(Color.argb(255, 255, 255, 255));
+                signInBtn.setTextColor(Color.argb(50, 120, 120, 120));
 
                 firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -178,7 +178,7 @@ public class SignInFragment extends Fragment {
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
                             signInBtn.setEnabled(true);
-                            signInBtn.setTextColor(Color.rgb(255, 255, 255));
+                            signInBtn.setTextColor(Color.rgb(0, 0, 0));
 
                             String error = task.getException().getMessage();
                             Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
@@ -204,18 +204,18 @@ public class SignInFragment extends Fragment {
             if (!TextUtils.isEmpty(password.getText())) {
 
                 signInBtn.setEnabled(true);
-                signInBtn.setTextColor(Color.rgb(255, 255, 255));
+                signInBtn.setTextColor(Color.rgb(0, 0, 0));
 
             } else {
 
                 signInBtn.setEnabled(false);
-                signInBtn.setTextColor(Color.argb(255, 255, 255, 255));
+                signInBtn.setTextColor(Color.argb(50, 120, 120, 120));
             }
 
 
         } else {
             signInBtn.setEnabled(false);
-            signInBtn.setTextColor(Color.argb(255, 255, 255, 255));
+            signInBtn.setTextColor(Color.argb(50, 120, 120, 120));
 
         }
 
