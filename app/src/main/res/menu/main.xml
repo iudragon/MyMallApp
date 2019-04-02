@@ -4,19 +4,19 @@
     <item
         android:id="@+id/main_search_icon"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/ic_local_dining_white"
         android:title="Search"
         app:showAsAction="always" />
     <item
         android:id="@+id/main_notification_icon"
         android:orderInCategory="100"
         android:title="Notification"
-        android:icon="@drawable/ic_notifications"
+        android:icon="@drawable/ic_star_black_white"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/main_cart_icon"
-        android:orderInCategory="100"
-        android:title="Cart"
-        android:icon="@drawable/ic_shopping_cart_white"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/main_cart_icon"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Cart"-->
+        <!--android:icon="@drawable/ic_shopping_cart_white"-->
+        <!--app:showAsAction="always" />-->
 </menu>

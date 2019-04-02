@@ -218,14 +218,14 @@ public class MainActivity extends AppCompatActivity
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getMenuInflater().inflate(R.menu.main, menu);
 
-            MenuItem cartItem = menu.findItem(R.id.main_cart_icon);
+//            MenuItem cartItem = menu.findItem(R.id.main_cart_icon);
 
-            cartItem.setActionView(R.layout.badge_layout);
-
-            ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
-            badgeIcon.setImageResource(R.drawable.ic_shopping_cart_white);
-
-            badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
+//            cartItem.setActionView(R.layout.badge_layout);
+//
+//            ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
+//            badgeIcon.setImageResource(R.drawable.ic_shopping_cart_white);
+//
+//            badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
 
             if (currentUser != null) {
 
@@ -246,18 +246,18 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (currentUser == null) {
-                        signInDialog.show();
-
-                    } else {
-
-                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
-                    }
-                }
-            });
+//            cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (currentUser == null) {
+//                        signInDialog.show();
+//
+//                    } else {
+//
+//                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
+//                    }
+//                }
+//            });
 
         }
         return true;
@@ -275,30 +275,35 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.main_search_icon) {
 
            gotoFragment("Available",new MyWishlistFragment(),WISHLIST_FRAGMENT);
+            navigationView.getMenu().getItem(1).setChecked(true);
 
             Toast.makeText(this, "LOL", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.main_notification_icon) {
-            return true;
-        } else if (id == R.id.main_cart_icon) {
 
-            if (currentUser == null) {
-                signInDialog.show();
-
-            } else {
-
-                gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
-            }
+            gotoFragment("Today's Special", new MySpeciallistFragment(), SPECIALLIST_FRAGMENT);
+            navigationView.getMenu().getItem(2).setChecked(true);
 
             return true;
-        } else if (id == android.R.id.home) {
+//        } else if (id == R.id.main_cart_icon) {
+//
+//            if (currentUser == null) {
+//                signInDialog.show();
+//
+//            } else {
+//
+//                gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
+//            }
+//
+//            return true;
+//        } else if (id == android.R.id.home) {
 
-            if (showCart) {
-                mainActivity = null;
-                showCart = false;
-                finish();
-                return true;
-            }
+//            if (showCart) {
+//                mainActivity = null;
+//                showCart = false;
+//                finish();
+//                return true;
+//            }
         }
 
         return super.onOptionsItemSelected(item);

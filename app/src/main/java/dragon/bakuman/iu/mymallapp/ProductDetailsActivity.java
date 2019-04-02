@@ -1069,7 +1069,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.search_and_cart_icon, menu);
 
 
-        cartItem = menu.findItem(R.id.main_cart_icon);
+//        cartItem = menu.findItem(R.id.main_cart_icon);
 
         cartItem.setActionView(R.layout.badge_layout);
 
@@ -1079,24 +1079,24 @@ public class ProductDetailsActivity extends AppCompatActivity {
         badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
 
 
-        if (currentUser != null) {
-            if (DBqueries.cartList.size() == 0) {
-
-                DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
-
-            } else {
-
-                badgeCount.setVisibility(View.VISIBLE);
-
-                if (DBqueries.cartList.size() < 99) {
-
-                    badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
-                } else {
-                    badgeCount.setText("99");
-
-                }
-            }
-        }
+//        if (currentUser != null) {
+//            if (DBqueries.cartList.size() == 0) {
+//
+//                DBqueries.loadCartList(ProductDetailsActivity.this, loadingDialog, false, badgeCount, new TextView(ProductDetailsActivity.this));
+//
+//            } else {
+//
+//                badgeCount.setVisibility(View.VISIBLE);
+//
+//                if (DBqueries.cartList.size() < 99) {
+//
+//                    badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+//                } else {
+//                    badgeCount.setText("99");
+//
+//                }
+//            }
+//        }
 
         cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1131,19 +1131,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.main_search_icon) {
             return true;
-        } else if (id == R.id.main_cart_icon) {
-
-            if (currentUser == null) {
-
-                signInDialog.show();
-            } else {
-
-                Intent cartIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
-                showCart = true;
-                startActivity(cartIntent);
-
-                return true;
-            }
+//        } else if (id == R.id.main_cart_icon) {
+//
+//            if (currentUser == null) {
+//
+//                signInDialog.show();
+//            } else {
+//
+//                Intent cartIntent = new Intent(ProductDetailsActivity.this, MainActivity.class);
+//                showCart = true;
+//                startActivity(cartIntent);
+//
+//                return true;
+//            }
         }
 
         return super.onOptionsItemSelected(item);
