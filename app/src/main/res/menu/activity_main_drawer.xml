@@ -37,7 +37,7 @@
 
     <item
         android:id="@+id/nav_sign_out"
-        android:icon="@drawable/ic_add_circle"
+        android:icon="@drawable/ic_remove_circle_outline"
         android:title="Sign Out" />
 
 

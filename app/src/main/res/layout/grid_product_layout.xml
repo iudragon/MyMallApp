@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/colorWhite"
+        android:background="@drawable/slider_background"
         android:text="View All"
         android:textColor="#6c5ce7"
         android:textSize="12sp"
