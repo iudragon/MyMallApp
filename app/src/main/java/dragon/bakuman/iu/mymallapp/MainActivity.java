@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         }
         if (resetMainActivity) {
             resetMainActivity = false;
-            actionBarLogo.setVisibility(View.VISIBLE);
+            actionBarLogo.setVisibility(View.GONE);
             setFragment(new HomeFragment(), HOME_FRAGMENT);
             navigationView.getMenu().getItem(0).setChecked(true);
 
@@ -201,7 +201,8 @@ public class MainActivity extends AppCompatActivity
                     showCart = false;
                     finish();
                 } else {
-                    actionBarLogo.setVisibility(View.VISIBLE);
+
+                    actionBarLogo.setVisibility(View.GONE);
                     invalidateOptionsMenu();
                     setFragment(new HomeFragment(), HOME_FRAGMENT);
                     navigationView.getMenu().getItem(0).setChecked(true);
@@ -313,7 +314,7 @@ public class MainActivity extends AppCompatActivity
     private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
 
 
-        actionBarLogo.setVisibility(View.GONE);
+        actionBarLogo.setVisibility(View.GONE); //// CHANGE FROM GONE TO VISIBLE
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle(title);
 
@@ -355,7 +356,7 @@ public class MainActivity extends AppCompatActivity
                     if (id == R.id.nav_my_mall) {
 
 
-                        actionBarLogo.setVisibility(View.VISIBLE);
+                        actionBarLogo.setVisibility(View.GONE);
 
                         invalidateOptionsMenu();
 

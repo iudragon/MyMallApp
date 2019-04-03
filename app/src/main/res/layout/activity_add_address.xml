@@ -45,7 +45,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                app:srcCompat="@drawable/farmer"
+                app:srcCompat="@drawable/cookingonfire"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="344dp" />
 
