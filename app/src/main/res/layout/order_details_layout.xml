@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
     android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:background="#ffffff"
     android:elevation="3dp">
 
@@ -16,7 +16,8 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cookingonfire" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/developercontrib" />
 
     <TextView
         android:id="@+id/product_title"
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Pixel 222"
+        android:text="Developer Tools"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Rs. 49999/-"
+        android:text="Technology used"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -159,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Ordered"
+        android:text="Firebase"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/ordered_indicator"
@@ -171,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Monday, 12th Jan 2019 - 00:00:00"
+        android:text="Firebase Authentication, Coud Firestore and Storage"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/ordered_title"
         app:layout_constraintStart_toEndOf="@+id/ordered_title"
@@ -182,7 +183,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Your order has been place"
+        android:text="https://firebase.google.com/"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/ordered_title"
@@ -193,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Packed"
+        android:text="Android Studio"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/packed_indicator"
@@ -205,7 +206,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Monday, 12th Jan 2019 - 00:00:00"
+        android:text="IDE for Android App Development"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/packed_title"
         app:layout_constraintStart_toEndOf="@+id/packed_title"
@@ -216,7 +217,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Your order has been packed"
+        android:text="https://developer.android.com/studio"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/packed_title"
@@ -227,7 +228,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Shipping"
+        android:text="Language"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/shipping_indicator"
@@ -239,7 +240,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Monday, 12th Jan 2019 - 00:00:00"
+        android:text="Java"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/shipping_title"
         app:layout_constraintStart_toEndOf="@+id/shipping_title"
@@ -250,7 +251,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Your order has been shipped."
+        android:text="https://www.java.com/download"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/shipping_title"
@@ -261,7 +262,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="delivered"
+        android:text="Github"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/delivered_indicator"
@@ -273,7 +274,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Monday, 12th Jan 2019 - 00:00:00"
+        android:text="Version control using Git"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/delivered_title"
         app:layout_constraintStart_toEndOf="@+id/delivered_title"
@@ -284,80 +285,80 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Your order has been delivered"
+        android:text="https://github.com/"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/delivered_title"
         app:layout_constraintTop_toBottomOf="@+id/delivered_title" />
 
-    <LinearLayout
-        android:id="@+id/rate_now_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/rate_now_container"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/textView31">-->
 
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:tint="#8F8989"
-            app:srcCompat="@drawable/ic_favorite" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView9"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:tint="#8F8989"-->
+            <!--app:srcCompat="@drawable/ic_favorite" />-->
 
-        <ImageView
-            android:id="@+id/imageView99"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:tint="#8F8989"
-            app:srcCompat="@drawable/ic_favorite" />
-
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:tint="#8F8989"
-            app:srcCompat="@drawable/ic_favorite" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView99"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:tint="#8F8989"-->
+            <!--app:srcCompat="@drawable/ic_favorite" />-->
 
 
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:tint="#8F8989"
-            app:srcCompat="@drawable/ic_favorite" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView10"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:tint="#8F8989"-->
+            <!--app:srcCompat="@drawable/ic_favorite" />-->
 
 
-        <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:tint="#8F8989"
-            app:srcCompat="@drawable/ic_favorite" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView11"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:tint="#8F8989"-->
+            <!--app:srcCompat="@drawable/ic_favorite" />-->
 
-    </LinearLayout>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView12"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:tint="#8F8989"-->
+            <!--app:srcCompat="@drawable/ic_favorite" />-->
+
+    <!--</LinearLayout>-->
 
     <View
         android:id="@+id/divider10"
@@ -369,16 +370,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/delivered_body" />
 
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Your ratings"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+    <!--<TextView-->
+        <!--android:id="@+id/textView31"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="Your ratings"-->
+        <!--android:textSize="10sp"-->
+        <!--android:textStyle="bold"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/divider10" />-->
 
 </android.support.constraint.ConstraintLayout>
