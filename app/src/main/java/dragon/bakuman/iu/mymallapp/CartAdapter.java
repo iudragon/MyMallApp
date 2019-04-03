@@ -452,15 +452,15 @@ public class CartAdapter extends RecyclerView.Adapter {
                 deleteBtn.setVisibility(View.GONE);
             }
 
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!ProductDetailsActivity.running_cart_query) {
-                        ProductDetailsActivity.running_cart_query = true;
-//                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount);
-                    }
-                }
-            });
+//            deleteBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    if (!ProductDetailsActivity.running_cart_query) {
+//                        ProductDetailsActivity.running_cart_query = true;
+////                        DBqueries.removeFromCart(position, itemView.getContext(), cartTotalAmount);
+//                    }
+//                }
+//            });
         }
     }
 

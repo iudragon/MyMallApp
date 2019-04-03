@@ -46,7 +46,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public static boolean running_wishlist_query = false;
     public static boolean running_speciallist_query = false;
     public static boolean running_rating_query = false;
-    public static boolean running_cart_query = false;
+//    public static boolean running_cart_query = false;
     public static Activity productDetailsActivity;
 
     private TextView productTitle;
@@ -92,7 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView rewardTitle;
     private TextView rewardBody;
 
-    public static boolean ALREADY_ADDED_TO_CART = false;
+//    public static boolean ALREADY_ADDED_TO_CART = false;
 
 
     ///// ratings layout
@@ -359,12 +359,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //                                    setRating(initialRating);
 //                                }
 
-                                if (DBqueries.cartList.contains(productID)) {
-
-                                    ALREADY_ADDED_TO_CART = true;
-                                } else {
-                                    ALREADY_ADDED_TO_CART = false;
-                                }
+//                                if (DBqueries.cartList.contains(productID)) {
+//
+//                                    ALREADY_ADDED_TO_CART = true;
+//                                } else {
+//                                    ALREADY_ADDED_TO_CART = false;
+//                                }
 
                                 if (DBqueries.wishlist.contains(productID)) {
 
@@ -978,12 +978,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 //            setRating(initialRating);
 //        }
 
-        if (DBqueries.cartList.contains(productID)) {
-
-            ALREADY_ADDED_TO_CART = true;
-        } else {
-            ALREADY_ADDED_TO_CART = false;
-        }
+//        if (DBqueries.cartList.contains(productID)) {
+//
+//            ALREADY_ADDED_TO_CART = true;
+//        } else {
+//            ALREADY_ADDED_TO_CART = false;
+//        }
 
         if (DBqueries.wishlist.contains(productID)) {
 
