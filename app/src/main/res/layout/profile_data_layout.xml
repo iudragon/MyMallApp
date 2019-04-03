@@ -9,7 +9,7 @@
         android:id="@+id/linearLayout6"
         android:layout_width="0dp"
         android:layout_height="210dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="G-DRAGON"
+            android:text="GECA Canteen"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
@@ -60,22 +60,10 @@
             android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="profilerdragon@gmail.com"
+            android:text="canteengeca@gmail.com"
             android:textAlignment="center"
             android:textColor="#000000" />
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/settings_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:clickable="true"
-        android:tint="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout7"
-        app:srcCompat="@drawable/ic_favorite" />
 
 
 </android.support.constraint.ConstraintLayout>
