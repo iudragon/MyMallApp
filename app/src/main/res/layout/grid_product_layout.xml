@@ -8,7 +8,7 @@
     android:background="@drawable/slider_background"
     android:elevation="3dp">
 
-    <TextViewZ
+    <TextView
         android:id="@+id/grid_product_layout_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
