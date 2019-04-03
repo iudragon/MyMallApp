@@ -55,7 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView productPrice;
     private TextView cuttedPrice;
 
-    private ImageView codIndicator;
+//    private ImageView codIndicator;
 //    private TextView tvCodIndicator;
 
 
@@ -173,7 +173,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cuttedPrice = findViewById(R.id.cutted_price);
 
 //        tvCodIndicator = findViewById(R.id.tv_cod_indicator);
-        codIndicator = findViewById(R.id.cod_indicator_imageview);
+//        codIndicator = findViewById(R.id.cod_indicator_imageview);
 
 //        rewardTitle = findViewById(R.id.reward_title);
 //        rewardBody = findViewById(R.id.reward_body);
@@ -256,10 +256,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 if ((boolean) documentSnapshot.get("COD")) {
 
 
-                                    codIndicator.setVisibility(View.VISIBLE);
+//                                    codIndicator.setVisibility(View.VISIBLE);
 //                                    tvCodIndicator.setVisibility(View.VISIBLE);
                                 } else {
-                                    codIndicator.setVisibility(View.INVISIBLE);
+//                                    codIndicator.setVisibility(View.INVISIBLE);
 //                                    tvCodIndicator.setVisibility(View.INVISIBLE);
                                 }
 

@@ -71,52 +71,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewpager_indicator" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/slider_background"
-        android:backgroundTint="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:padding="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_title">
-
-        <TextView
-            android:id="@+id/tv_product_rating_miniview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
-            android:text="4.5"
-            android:textColor="#ffffff"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
-            android:src="@drawable/ic_favorite"
-            android:tint="#ffffff" />
-
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/total_ratings_miniview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="total ratings"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
-
     <TextView
         android:id="@+id/product_price"
         android:layout_width="wrap_content"
@@ -128,36 +82,26 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
     <TextView
         android:id="@+id/cutted_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Rs. 59999 /-"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/product_price"
         app:layout_constraintStart_toEndOf="@+id/product_price" />
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#80000000"
-        app:layout_constraintBottom_toBottomOf="@+id/cutted_price"
-        app:layout_constraintEnd_toEndOf="@+id/cutted_price"
-        app:layout_constraintStart_toStartOf="@+id/cutted_price"
-        app:layout_constraintTop_toTopOf="@+id/cutted_price" />
-
-    <ImageView
-        android:id="@+id/cod_indicator_imageview"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/divider3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewpager_indicator"
-        app:srcCompat="@drawable/connect" />
+    <!--<View-->
+        <!--android:id="@+id/divider3"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#80000000"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/cutted_price"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/cutted_price"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/cutted_price"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/cutted_price" />-->
 
     <!--<TextView-->
         <!--android:id="@+id/tv_cod_indicator"-->
