@@ -14,7 +14,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
     </android.support.v4.view.ViewPager>
 
@@ -94,58 +94,58 @@
         app:layout_constraintStart_toEndOf="@+id/product_price" />
 
     <!--<View-->
-        <!--android:id="@+id/divider3"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:background="#80000000"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/cutted_price"-->
-        <!--app:layout_constraintEnd_toEndOf="@+id/cutted_price"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/cutted_price"-->
-        <!--app:layout_constraintTop_toTopOf="@+id/cutted_price" />-->
+    <!--android:id="@+id/divider3"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="#80000000"-->
+    <!--app:layout_constraintBottom_toBottomOf="@+id/cutted_price"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/cutted_price"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/cutted_price"-->
+    <!--app:layout_constraintTop_toTopOf="@+id/cutted_price" />-->
 
     <!--<TextView-->
-        <!--android:id="@+id/tv_cod_indicator"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:text="COD available"-->
+    <!--android:id="@+id/tv_cod_indicator"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:text="COD available"-->
 
-        <!--android:textSize="12sp"-->
-        <!--app:layout_constraintEnd_toEndOf="@+id/cod_indicator_imageview"-->
-        <!--app:layout_constraintStart_toStartOf="@+id/cod_indicator_imageview"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/cod_indicator_imageview" />-->
+    <!--android:textSize="12sp"-->
+    <!--app:layout_constraintEnd_toEndOf="@+id/cod_indicator_imageview"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/cod_indicator_imageview"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/cod_indicator_imageview" />-->
 
     <!--<LinearLayout-->
-        <!--android:id="@+id/coupn_redemption_layout"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:gravity="right"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="16dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/product_price">-->
+    <!--android:id="@+id/coupn_redemption_layout"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--android:gravity="right"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:padding="16dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/product_price">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/tv_coupon_redemption"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Check Price after coupon redemption"-->
-            <!--android:textAlignment="center"-->
-            <!--android:textColor="#ffffff" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_coupon_redemption"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:text="Check Price after coupon redemption"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textColor="#ffffff" />-->
 
-        <!--<Button-->
-            <!--android:id="@+id/coupon_redemption_btn"-->
-            <!--android:layout_width="75dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:background="@drawable/border_background"-->
-            <!--android:text="Redeem"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textSize="12sp" />-->
+    <!--<Button-->
+    <!--android:id="@+id/coupon_redemption_btn"-->
+    <!--android:layout_width="75dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:background="@drawable/border_background"-->
+    <!--android:text="Redeem"-->
+    <!--android:textColor="#ffffff"-->
+    <!--android:textSize="12sp" />-->
 
 
     <!--</LinearLayout>-->
