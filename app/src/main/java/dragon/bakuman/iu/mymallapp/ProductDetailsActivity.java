@@ -46,7 +46,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     public static boolean running_wishlist_query = false;
     public static boolean running_speciallist_query = false;
     public static boolean running_rating_query = false;
-//    public static boolean running_cart_query = false;
+    //    public static boolean running_cart_query = false;
     public static Activity productDetailsActivity;
 
     private TextView productTitle;
@@ -496,11 +496,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         running_wishlist_query = true;
 
-                        if (ALREADY_ADDED_TO_WISHLIST) {
+                        if (ALREADY_ADDED_TO_WISHLIST || DBqueries.wishlist.contains(productID)) {
 
                             int index = DBqueries.wishlist.indexOf(productID);
 
                             DBqueries.removeFromWishlist(index, ProductDetailsActivity.this);
+                            //        Toast.makeText(ProductDetailsActivity.this, "in if id="+productID.toString(), Toast.LENGTH_SHORT).show();
 
                             addToWishlistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
@@ -509,6 +510,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                             Map<String, Object> addProduct = new HashMap<>();
                             addProduct.put("product_ID_" + String.valueOf(DBqueries.wishlist.size()), productID);
+                            //               Toast.makeText(ProductDetailsActivity.this, "in else id="+productID.toString(), Toast.LENGTH_SHORT).show();
                             addProduct.put("list_size", (long) (DBqueries.wishlist.size() + 1));
                             firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_WISHLIST")
 
@@ -562,7 +564,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         running_speciallist_query = true;
 
-                        if (ALREADY_ADDED_TO_SPECIALLIST) {
+                        if (ALREADY_ADDED_TO_SPECIALLIST || DBqueries.speciallist.contains(productID)) {
 
                             int index = DBqueries.speciallist.indexOf(productID);
 
