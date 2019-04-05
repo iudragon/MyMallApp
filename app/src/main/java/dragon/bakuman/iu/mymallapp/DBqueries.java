@@ -279,6 +279,8 @@ public class DBqueries {
 
                         if (DBqueries.speciallist.contains(ProductDetailsActivity.productID)) {
 
+
+
                             ProductDetailsActivity.ALREADY_ADDED_TO_SPECIALLIST = true;
 
                             if (ProductDetailsActivity.addToSpeciallistBtn != null) {
