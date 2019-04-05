@@ -168,6 +168,8 @@ public class MainActivity extends AppCompatActivity
 
         if (currentUser == null) {
 
+
+
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(false);
         } else {
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
@@ -230,35 +232,7 @@ public class MainActivity extends AppCompatActivity
 
             if (currentUser != null) {
 
-//                if (DBqueries.cartList.size() == 0) {
-//                    DBqueries.loadCartList(MainActivity.this, new Dialog(MainActivity.this), false, badgeCount, new TextView(MainActivity.this));
-
-//                } else {
-//
-//                    badgeCount.setVisibility(View.VISIBLE);
-//
-//                    if (DBqueries.cartList.size() < 99) {
-//
-//                        badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
-//                    } else {
-//                        badgeCount.setText("99");
-//
-//                    }
-//                }
             }
-
-//            cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (currentUser == null) {
-//                        signInDialog.show();
-//
-//                    } else {
-//
-//                        gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
-//                    }
-//                }
-//            });
 
         }
         return true;
@@ -285,31 +259,11 @@ public class MainActivity extends AppCompatActivity
             navigationView.getMenu().getItem(2).setChecked(true);
 
             return true;
-//        } else if (id == R.id.main_cart_icon) {
-//
-//            if (currentUser == null) {
-//                signInDialog.show();
-//
-//            } else {
-//
-//                gotoFragment("My Cart", new MyCartFragment(), CART_FRAGMENT);
-//            }
-//
-//            return true;
-//        } else if (id == android.R.id.home) {
 
-//            if (showCart) {
-//                mainActivity = null;
-//                showCart = false;
-//                finish();
-//                return true;
-//            }
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private void gotoFragment(String title, Fragment fragment, int fragmentNo) {
 
