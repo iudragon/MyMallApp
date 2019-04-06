@@ -169,7 +169,7 @@ public class DBqueries {
 
         wishlist.clear();
 
-        firebaseFirestore.collection("USERS").document("CGA8B8nzNUV130vg6EPGjFa6IHo2").collection("USER_DATA").document("MY_WISHLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("USERS").document("pyFEsRmGjJVWejrOFagS0yEzJ1x1").collection("USER_DATA").document("MY_WISHLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -269,7 +269,7 @@ public class DBqueries {
 
         speciallist.clear();
 
-        firebaseFirestore.collection("USERS").document("CGA8B8nzNUV130vg6EPGjFa6IHo2").collection("USER_DATA").document("MY_SPECIALLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("USERS").document("pyFEsRmGjJVWejrOFagS0yEzJ1x1").collection("USER_DATA").document("MY_SPECIALLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
