@@ -179,7 +179,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productOnlyDescriptionBody = findViewById(R.id.product_details_body);
 
 
-
         ///// loading dialog
 
         loadingDialog = new Dialog(ProductDetailsActivity.this);
@@ -228,13 +227,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 productPrice.setText("Rs. " + documentSnapshot.get("product_price").toString() + "/-");
 
                                 cuttedPrice.setText("Rs. " + documentSnapshot.get("cutted_price").toString() + "/-");
-
-
-                                if ((boolean) documentSnapshot.get("COD")) {
-
-
-                                }
-
 
                                 if ((boolean) documentSnapshot.get("use_tab_layout")) {
                                     productDetailsTabsContainer.setVisibility(View.VISIBLE);
@@ -330,7 +322,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
                                     inStock = true;
-
 
 
                                 } else {
@@ -432,6 +423,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+//                Toast.makeText(ProductDetailsActivity.this, firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_WISHLIST"), Toast.LENGTH_SHORT).show();
+
+
                 if (currentUser == null) {
 
                     signInDialog.show();
@@ -450,11 +444,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
 
-
                         } else {
                             addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnRed)));
 
-                            Map<String, Object> addProduct = new HashMap<>();
+                            final Map<String, Object> addProduct = new HashMap<>();
                             addProduct.put("product_ID_" + String.valueOf(DBqueries.speciallist.size()), productID);
                             addProduct.put("list_size", (long) (DBqueries.speciallist.size() + 1));
                             firebaseFirestore.collection("USERS").document(currentUser.getUid()).collection("USER_DATA").document("MY_SPECIALLIST")
@@ -464,7 +457,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
 
-                                        sendChannel1();
+//                                        Toast.makeText(ProductDetailsActivity.this, String.valueOf(addProduct.size()), Toast.LENGTH_SHORT).show();
+
+                                            sendChannel1();
 
                                         if (DBqueries.speciallistModelList.size() != 0) {
 
@@ -476,7 +471,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                                         addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorAccent));
                                         DBqueries.speciallist.add(productID);
-                                        Toast.makeText(ProductDetailsActivity.this, "Added to speciallist success", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(ProductDetailsActivity.this, "Added to speciallist success", Toast.LENGTH_SHORT).show();
+
+
 
                                     } else {
                                         addToSpeciallistBtn.setSupportImageTintList(getResources().getColorStateList(R.color.colorPrimary));
@@ -520,8 +517,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(ProductDetailsActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -550,7 +545,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     @Override
@@ -558,8 +552,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onStart();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
 
 
         if (currentUser != null) {
@@ -657,22 +649,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void sendChannel1(){
+    private void sendChannel1() {
 
 
-            Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                    .setSmallIcon(R.drawable.githublogo)
-                    .setContentTitle(documentSnapshot.get("product_title").toString() + "/-")
-                    .setContentText("Special of the day!")
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .build();
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.githublogo)
+                .setContentTitle(documentSnapshot.get("product_title").toString() + "/-")
+                .setContentText("Special of the day!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
 
-            notificationManager.notify(1, notification);
+        notificationManager.notify(1, notification);
 
     }
 
-    private void sendChannel2(){
+    private void sendChannel2() {
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                 .setSmallIcon(R.drawable.connect)

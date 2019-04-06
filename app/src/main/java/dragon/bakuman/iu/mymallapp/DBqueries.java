@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,7 +32,7 @@ public class DBqueries {
 
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
-    public static List<CategoryModel> categoryModelList = new ArrayList<>();
+
 
     public static List<List<HomePageModel>> lists = new ArrayList<>();
 
@@ -59,7 +60,6 @@ public class DBqueries {
 
     public static void loadCategories(final RecyclerView categoryRecyclerView, final Context context) {
 
-        categoryModelList.clear();
 
         firebaseFirestore.collection("CATEGORIES").orderBy("index").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -68,15 +68,11 @@ public class DBqueries {
 
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
 
-                        categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
+
 
                     }
 
-                    CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModelList);
 
-                    categoryRecyclerView.setAdapter(categoryAdapter);
-
-                    categoryAdapter.notifyDataSetChanged();
 
                 } else {
 
@@ -269,6 +265,8 @@ public class DBqueries {
 
         speciallist.clear();
 
+
+
         firebaseFirestore.collection("USERS").document("pyFEsRmGjJVWejrOFagS0yEzJ1x1").collection("USER_DATA").document("MY_SPECIALLIST").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -279,8 +277,6 @@ public class DBqueries {
 
                         if (DBqueries.speciallist.contains(ProductDetailsActivity.productID)) {
 
-
-
                             ProductDetailsActivity.ALREADY_ADDED_TO_SPECIALLIST = true;
 
                             if (ProductDetailsActivity.addToSpeciallistBtn != null) {
@@ -288,7 +284,6 @@ public class DBqueries {
                                 ProductDetailsActivity.addToSpeciallistBtn.setSupportImageTintList(context.getResources().getColorStateList(R.color.colorAccent));
 
                             }
-
 
                         } else {
 
@@ -375,10 +370,18 @@ public class DBqueries {
 
         for (int x = 0; x < wishlist.size(); x++) {
 
+            Toast.makeText(context, "WISHLIST SIZE FOR: " + wishlist.size(), Toast.LENGTH_SHORT).show();
+
             updateWishlist.put("product_ID_" + x, wishlist.get(x));
         }
 
         updateWishlist.put("list_size", (long) wishlist.size());
+
+        Toast.makeText(context, "WISHLIST SIZE AFTER: " + wishlist.size(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "WML LST: " + wishlistModelList.size(), Toast.LENGTH_SHORT).show();
+
+        Log.d("DBQ", "WISHLISTSIZEAFTER " + wishlist.size());
+        Log.d("DBQ", "WISHLISTMODELIST " + wishlistModelList.size());
 
         firebaseFirestore.collection("USERS").document(FirebaseAuth.getInstance().getUid()).collection("USER_DATA").document("MY_WISHLIST").set(updateWishlist).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -386,6 +389,8 @@ public class DBqueries {
 
                 if (task.isSuccessful()) {
                     if (wishlistModelList.size() != 0) {
+
+
 
                         wishlistModelList.remove(index);
 
@@ -476,7 +481,6 @@ public class DBqueries {
 
     public static void clearData() {
 
-        categoryModelList.clear();
         lists.clear();
         loadedCategoriesNames.clear();
         wishlist.clear();

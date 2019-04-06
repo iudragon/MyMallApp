@@ -14,55 +14,34 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OTPverificationActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".ViewAllActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".MyAddressesActivity"
-            android:screenOrientation="portrait"
-            />
+
         <activity
-            android:name=".AddAddressActivity"
-            android:theme="@style/RedProgressbar"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".OrderDetailsActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".ProductDetailsActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".CategoryActivity"
-            android:screenOrientation="portrait"
-            />
+            android:name=".ViewAllActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CategoryActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
-
-        </activity>
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"

@@ -360,13 +360,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
             }
 
-            HorizontalProductScrollAdapter horizontalProductScrollAdapter = new HorizontalProductScrollAdapter(horizontalProductScrollModelList);
+
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(itemView.getContext());
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             horizontalRecyclerView.setLayoutManager(linearLayoutManager);
 
-            horizontalRecyclerView.setAdapter(horizontalProductScrollAdapter);
-            horizontalProductScrollAdapter.notifyDataSetChanged();
+
 
         }
 
