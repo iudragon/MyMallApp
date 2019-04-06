@@ -108,11 +108,11 @@ public class DBqueries {
 
                                     lists.get(index).add(new HomePageModel(0, sliderModelList));
 
-                                } else if ((long) documentSnapshot.get("view_type") == 1) {
-                                    lists.get(index).add(new HomePageModel(1, documentSnapshot.get("strip_ad_banner").toString(), documentSnapshot.get("background").toString()));
+                                }
 
 
-                                } else if ((long) documentSnapshot.get("view_type") == 2) {
+
+                                else if ((long) documentSnapshot.get("view_type") == 2) {
 
                                     List<WishlistModel> viewAllProductlist = new ArrayList<>();
                                     List<HorizontalProductScrollModel> horizontalProductScrollModelList = new ArrayList<>();

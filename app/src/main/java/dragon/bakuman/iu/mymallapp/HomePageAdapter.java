@@ -49,9 +49,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             case 0:
                 return HomePageModel.BANNER_SLIDER;
 
-            case 1:
 
-                return HomePageModel.STRIP_AD_BANNER;
 
             case 2:
 
@@ -80,11 +78,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
                 return new BannerSliderViewHolder(bannerSliderView);
 
-            case HomePageModel.STRIP_AD_BANNER:
 
-                View stripAdView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.strip_ad_layout, viewGroup, false);
-
-                return new StripAdBannerViewHoler(stripAdView);
 
 
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
@@ -122,13 +116,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
                 break;
 
-            case HomePageModel.STRIP_AD_BANNER:
-
-                String resource = homePageModelList.get(position).getResource();
-                String color = homePageModelList.get(position).getBackgroundColor();
-
-                ((StripAdBannerViewHoler) viewHolder).setStripAd(resource, color);
-                break;
 
             case HomePageModel.HORIZONTAL_PRODUCT_VIEW:
 
@@ -324,31 +311,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     }
 
 
-    public class StripAdBannerViewHoler extends RecyclerView.ViewHolder {
-
-        private ImageView stripAdImage;
-        private ConstraintLayout stripAdContainer;
-
-        public StripAdBannerViewHoler(@NonNull View itemView) {
-            super(itemView);
-
-
-            stripAdImage = itemView.findViewById(R.id.strip_ad_image);
-            stripAdContainer = itemView.findViewById(R.id.strip_ad_container);
-
-        }
-
-
-        private void setStripAd(String resource, String color) {
-
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericon)).into(stripAdImage);
-
-            stripAdContainer.setBackgroundColor(Color.parseColor(color));
-
-        }
-
-
-    }
 
     public class HorizontalProductViewHolder extends RecyclerView.ViewHolder {
 
