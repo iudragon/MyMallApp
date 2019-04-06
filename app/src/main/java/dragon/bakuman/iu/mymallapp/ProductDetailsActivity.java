@@ -168,47 +168,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productDetailsViewPager = findViewById(R.id.product_details_viewpager);
         productDetailsTabLayout = findViewById(R.id.product_details_tablayout);
 
-//        buyNowBtn = findViewById(R.id.buy_now_btn);
-
-//        couponRedeemBtn = findViewById(R.id.coupon_redemption_btn);
-
         productTitle = findViewById(R.id.product_title);
-
-//        averageRatingMiniView = findViewById(R.id.tv_product_rating_miniview);
-
-//        totalRatingMiniView = findViewById(R.id.total_ratings_miniview);
 
         productPrice = findViewById(R.id.product_price);
         cuttedPrice = findViewById(R.id.cutted_price);
-
-//        tvCodIndicator = findViewById(R.id.tv_cod_indicator);
-//        codIndicator = findViewById(R.id.cod_indicator_imageview);
-
-//        rewardTitle = findViewById(R.id.reward_title);
-//        rewardBody = findViewById(R.id.reward_body);
-
 
         productDetailsTabsContainer = findViewById(R.id.product_details_tab_container);
         productDetailsOnlyContainer = findViewById(R.id.product_details_container);
 
         productOnlyDescriptionBody = findViewById(R.id.product_details_body);
 
-//        totalRatings = findViewById(R.id.total_ratings);
-//
-//        ratingsNoContainer = findViewById(R.id.ratings_numbers_container);
-//
-//        totalRatingsFigure = findViewById(R.id.total_ratings_figure);
-//
-//        ratingsProgressBarContainer = findViewById(R.id.ratings_progressbar_container);
 
-
-//        averageRating = findViewById(R.id.average_rating);
-
-//        addToCartBtn = findViewById(R.id.add_to_cart_btn);
-
-//        couponRedemptionLayout = findViewById(R.id.coupn_redemption_layout);
-
-//        initialRating = -1;
 
         ///// loading dialog
 
@@ -253,9 +223,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 productImagesViewPager.setAdapter(productImagesAdapter);
 
                                 productTitle.setText(documentSnapshot.get("product_title").toString());
-//                                averageRatingMiniView.setText(documentSnapshot.get("average_rating").toString());
 //
-//                                totalRatingMiniView.setText("(" + documentSnapshot.get("total_ratings") + ")ratings");
 
                                 productPrice.setText("Rs. " + documentSnapshot.get("product_price").toString() + "/-");
 
@@ -265,17 +233,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                 if ((boolean) documentSnapshot.get("COD")) {
 
 
-//                                    codIndicator.setVisibility(View.VISIBLE);
-//                                    tvCodIndicator.setVisibility(View.VISIBLE);
-                                } else {
-//                                    codIndicator.setVisibility(View.INVISIBLE);
-//                                    tvCodIndicator.setVisibility(View.INVISIBLE);
                                 }
 
-//                                rewardTitle.setText((long) documentSnapshot.get("free_coupons") + documentSnapshot.get("free_coupon_title").toString());
-//
-//
-//                                rewardBody.setText(documentSnapshot.get("free_coupon_body").toString());
 
                                 if ((boolean) documentSnapshot.get("use_tab_layout")) {
                                     productDetailsTabsContainer.setVisibility(View.VISIBLE);
@@ -302,25 +261,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                     productOnlyDescriptionBody.setText(documentSnapshot.get("product_description").toString());
                                 }
 
-
-//                                totalRatings.setText((long) documentSnapshot.get("total_ratings") + " ratings");
-//                                for (int x = 0; x < 5; x++) {
-//
-//                                    TextView rating = (TextView) ratingsNoContainer.getChildAt(x);
-//                                    rating.setText(String.valueOf((long) documentSnapshot.get((5 - x) + "_star")));
-//
-//                                    ProgressBar progressBar = (ProgressBar) ratingsProgressBarContainer.getChildAt(x);
-//
-//                                    int maxProgress = Integer.parseInt(String.valueOf((long) documentSnapshot.get("total_ratings")));
-//
-//                                    progressBar.setMax(maxProgress);
-//                                    progressBar.setProgress(Integer.parseInt(String.valueOf((long) documentSnapshot.get((5 - x) + "_star"))));
-//
-//                                }
-
-//                                totalRatingsFigure.setText(String.valueOf((long) documentSnapshot.get("total_ratings")));
-//
-//                                averageRating.setText(documentSnapshot.get("average_rating").toString());
 
                                 productDetailsViewPager.setAdapter(new ProductDetailsAdapter(getSupportFragmentManager(), productDetailsTabLayout.getTabCount(), productDescription, productOtherDetails, productSpecificationModelList));
 
