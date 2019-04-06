@@ -55,7 +55,6 @@ public class OTPverificationActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (otp.getText().toString().equals(String.valueOf(OTP_number))) {
 
-                            DeliveryActivity.codOrderConfirmed = true;
                             finish();
 
                         } else {

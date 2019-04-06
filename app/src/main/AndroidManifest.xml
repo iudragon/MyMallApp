@@ -32,9 +32,6 @@
             android:theme="@style/RedProgressbar"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".DeliveryActivity"
-            android:screenOrientation="portrait"
-            />
         <activity android:name=".OrderDetailsActivity"
             android:screenOrientation="portrait"
             />
