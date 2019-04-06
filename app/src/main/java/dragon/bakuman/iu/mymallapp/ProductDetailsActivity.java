@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,8 +23,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,8 @@ import static dragon.bakuman.iu.mymallapp.MainActivity.showCart;
 import static dragon.bakuman.iu.mymallapp.RegisterActivity.setSignUpFragment;
 
 public class ProductDetailsActivity extends AppCompatActivity {
+
+    private Switch switch1;
 
     public static boolean running_wishlist_query = false;
     public static boolean running_speciallist_query = false;
@@ -147,10 +152,38 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private NotificationManagerCompat notificationManager;
 
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+
+        if (sharedPref.loadNightModeState() == true) {
+            setTheme(R.style.DarkTheme);
+        } else {
+
+            setTheme(R.style.AppTheme);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
+
+        switch1 = findViewById(R.id.switch1);
+        if (sharedPref.loadNightModeState() == true) {
+            switch1.setChecked(true);
+        }
+
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    sharedPref.setNightModeState(true);
+
+                } else {
+                    sharedPref.setNightModeState(false);
+                }
+            }
+        });
 
         notificationManager = NotificationManagerCompat.from(this);
 
@@ -392,7 +425,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                     inStock = true;
 
 
-
                                 } else {
 
                                     inStock = false;
@@ -510,7 +542,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                             addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
 
-
                         } else {
                             addToSpeciallistBtn.setSupportImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnRed)));
 
@@ -580,8 +611,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(ProductDetailsActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -610,7 +639,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     @Override
@@ -618,8 +646,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onStart();
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
 
 
         if (currentUser != null) {
@@ -717,22 +743,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void sendChannel1(){
+    private void sendChannel1() {
 
 
-            Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                    .setSmallIcon(R.drawable.githublogo)
-                    .setContentTitle(documentSnapshot.get("product_title").toString() + "/-")
-                    .setContentText("Special of the day!")
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                    .build();
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.githublogo)
+                .setContentTitle(documentSnapshot.get("product_title").toString() + "/-")
+                .setContentText("Special of the day!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
 
-            notificationManager.notify(1, notification);
+        notificationManager.notify(1, notification);
 
     }
 
-    private void sendChannel2(){
+    private void sendChannel2() {
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                 .setSmallIcon(R.drawable.connect)
@@ -743,5 +769,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         notificationManager.notify(2, notification);
 
+    }
+
+    public void restartApp() {
+        Intent i = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+        startActivity(i);
+        finish();
     }
 }
