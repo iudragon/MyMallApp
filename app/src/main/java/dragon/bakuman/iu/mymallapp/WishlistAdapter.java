@@ -53,15 +53,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
         String productId = wishlistModelList.get(position).getProductId();
         String resource = wishlistModelList.get(position).getProductImage();
         String title = wishlistModelList.get(position).getProductTitle();
-        long freeCoupons = wishlistModelList.get(position).getFreeCoupons();
-        String rating = wishlistModelList.get(position).getRating();
-        long totalRatings = wishlistModelList.get(position).getTotalRatings();
+
         String productPrice = wishlistModelList.get(position).getProductPrice();
         String cuttedPrice = wishlistModelList.get(position).getCuttedPrice();
-        boolean paymentMethod = wishlistModelList.get(position).isCOD();
-        boolean inStock = wishlistModelList.get(position).isInStock();
 
-        viewHolder.setData(productId, resource, title, freeCoupons, rating, totalRatings, productPrice, cuttedPrice, paymentMethod, position, inStock);
+        viewHolder.setData(productId, resource, title, productPrice, cuttedPrice, position);
 
         if (lastPosition < position) {
 
@@ -81,11 +77,11 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         private ImageView productImage;
         private TextView productTitle;
-//        private TextView freeCoupons;
+        //        private TextView freeCoupons;
 //        private ImageView couponIcon;
         private TextView productPrice;
         private TextView cuttedPrice;
-//        private TextView paymentMethod;
+        //        private TextView paymentMethod;
 //        private TextView rating;
 //        private TextView totalRatings;
         private View priceCut;
@@ -107,48 +103,20 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.ViewHo
 
         }
 
-        private void setData(final String productId, String resource, String title, long freeCouponsNo, String averageRate, long totalRatingsNo, String price, String cuttedPricevValue, boolean COD, final int index, boolean inStock) {
+        private void setData(final String productId, String resource, String title, String price, String cuttedPricevValue, final int index) {
 
             Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.placeholdericonmini)).into(productImage);
 
             productTitle.setText(title);
-
-
-//                LinearLayout linearLayout = (LinearLayout) rating.getParent();
-            if (inStock) {
-
-
-//                rating.setVisibility(View.VISIBLE);
-//                totalRatings.setVisibility(View.VISIBLE);
-                productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorBlack));
-                cuttedPrice.setVisibility(View.VISIBLE);
-//                linearLayout.setVisibility(View.VISIBLE);
-
-//                rating.setText(averageRate);
-//                totalRatings.setText("(" + totalRatingsNo + ") ratings");
-                productPrice.setText("Rs. " + price + "/-");
-                cuttedPrice.setText("Rs. " + cuttedPricevValue + "/-");
-
-
-            } else {
-
-//                linearLayout.setVisibility(View.INVISIBLE);
-
-//                rating.setVisibility(View.INVISIBLE);
-//                totalRatings.setVisibility(View.INVISIBLE);
-                productPrice.setText("Out of Stock");
-                productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorAccent));
-                cuttedPrice.setVisibility(View.INVISIBLE);
-
-//                paymentMethod.setVisibility(View.INVISIBLE);
-
-            }
-
+            productPrice.setTextColor(itemView.getContext().getResources().getColor(R.color.colorBlack));
+            cuttedPrice.setVisibility(View.VISIBLE);
+            productPrice.setText("Rs. " + price + "/-");
+            cuttedPrice.setText("Rs. " + cuttedPricevValue + "/-");
 
             if (wishlist) {
-                if (currentUser == null){
+                if (currentUser == null) {
                     deleteBtn.setVisibility(View.GONE);
-                } else if (currentUser != null){
+                } else if (currentUser != null) {
                     deleteBtn.setVisibility(View.VISIBLE);
 
                 }
