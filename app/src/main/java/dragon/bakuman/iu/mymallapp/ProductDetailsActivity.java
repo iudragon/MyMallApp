@@ -17,12 +17,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +41,6 @@ import java.util.Map;
 
 import static dragon.bakuman.iu.mymallapp.App.CHANNEL_1_ID;
 import static dragon.bakuman.iu.mymallapp.App.CHANNEL_2_ID;
-import static dragon.bakuman.iu.mymallapp.MainActivity.showCart;
 import static dragon.bakuman.iu.mymallapp.RegisterActivity.setSignUpFragment;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -362,7 +359,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         running_wishlist_query = true;
 
-                        if (ALREADY_ADDED_TO_WISHLIST || DBqueries.wishlist.contains(productID)) {
+                        if (DBqueries.wishlist.contains(productID)) {
 
                             int index = DBqueries.wishlist.indexOf(productID);
 
@@ -435,7 +432,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
                         running_speciallist_query = true;
 
-                        if (ALREADY_ADDED_TO_SPECIALLIST || DBqueries.speciallist.contains(productID)) {
+                        if (DBqueries.speciallist.contains(productID)) {
 
                             int index = DBqueries.speciallist.indexOf(productID);
 
