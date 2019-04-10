@@ -1,4 +1,4 @@
-package dragon.bakuman.iu.mymallapp;
+package dragon.bakuman.iu.tmallapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("dragon.bakuman.iu.mymallapp", appContext.getPackageName());
+        assertEquals("dragon.bakuman.iu.tmallapp", appContext.getPackageName());
     }
 }

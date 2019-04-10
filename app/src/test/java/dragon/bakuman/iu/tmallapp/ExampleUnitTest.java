@@ -1,4 +1,4 @@
-package dragon.bakuman.iu.mymallapp;
+package dragon.bakuman.iu.tmallapp;
 
 import org.junit.Test;
 

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "747441946741",
+    "firebase_url": "https://tmallapp-ef70a.firebaseio.com",
+    "project_id": "tmallapp-ef70a",
+    "storage_bucket": "tmallapp-ef70a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747441946741:android:49d30d5b100ac1a2",
+        "android_client_info": {
+          "package_name": "dragon.bakuman.iu.tmallapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747441946741-doed4l672v298bt22kbn8phada5fptaf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dragon.bakuman.iu.tmallapp",
+            "certificate_hash": "cd4aec4bbc49b01b6792f92a44cc1334bc6dad99"
+          }
+        },
+        {
+          "client_id": "747441946741-nqoa77c321h0mcj854qljig3e2f3p86h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6BupLGL8T0hoHfUP1WeVYwwEUMAQ_Fm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747441946741-nqoa77c321h0mcj854qljig3e2f3p86h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

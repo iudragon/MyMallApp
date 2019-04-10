@@ -1,4 +1,4 @@
- package dragon.bakuman.iu.mymallapp;
+ package dragon.bakuman.iu.tmallapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

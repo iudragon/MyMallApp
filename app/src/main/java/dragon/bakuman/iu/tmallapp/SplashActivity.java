@@ -1,4 +1,4 @@
-package dragon.bakuman.iu.mymallapp;
+package dragon.bakuman.iu.tmallapp;
 
 import android.content.Intent;
 import android.os.SystemClock;
