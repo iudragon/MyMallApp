@@ -1,4 +1,4 @@
- {
+{
   "project_info": {
     "project_number": "778250730693",
     "firebase_url": "https://mymallapp.firebaseio.com",
@@ -33,20 +33,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "778250730693-jgivrh8sckj64fube9its3u53bcq0dbs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
